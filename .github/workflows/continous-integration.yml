@@ -1,9 +1,6 @@
 name: Origo SDK python
 
-on:
-  push:
-    paths:
-      - "!README.md"     
+on: [push, pull_request]
 
 jobs:
   build:
