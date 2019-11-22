@@ -1,4 +1,4 @@
-name: Origo SDK python
+name: Run Tests
 
 on: [push, pull_request]
 
