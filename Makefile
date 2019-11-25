@@ -1,5 +1,5 @@
 .PHONY: all
-all: clean test build bump-patch publish-module
+all: clean test bump-patch build publish-module
 
 .PHONY: init
 init:
