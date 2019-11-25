@@ -28,12 +28,12 @@ ORIGO_CONFIG["prod"] = {
     "cacheCredentials": True,
     "datasetUrl": "https://api.data.oslo.systems/metadata/datasets",
     "downloadUrl": "https://api.data.oslo.systems/data-exporter",
-    "eventCollectorUrl": "https://api.data-dev.oslo.systems/event-collector",
+    "eventCollectorUrl": "https://api.data.oslo.systems/event-collector",
     "keycloakRealm": "api-catalog",
     "keycloakServerUrl": "https://login.oslo.kommune.no/auth",
     "pipelineUrl": "https://api.data.oslo.systems/pipeline",
     "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-dev",
-    "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
+    "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
 }
 
