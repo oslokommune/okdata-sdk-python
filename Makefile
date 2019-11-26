@@ -34,6 +34,7 @@ clean:
 .PHONY: bump-patch
 bump-patch:
 	bumpversion patch
+	git push
 
 .PHONY: build
 build:
