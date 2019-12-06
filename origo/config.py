@@ -43,18 +43,21 @@ ORIGO_ENVIRONMENTS = ["dev", "prod"]
 
 
 class Config:
-    def __init__(self, type=None, env=None):
-        env = self.resolve_environment(env)
-        log.info(f"SDK:Using environment: {env}")
-        if type is not None:
-            self.config = self.create_config_type(type, env)
+    def __init__(self, type=None, env=None, config=None):
+        if config:
+            self.config = config
         else:
-            self.config = self.create_config(env)
-        if self.config is False:
-            raise ConfigurationError(
-                "No configuration found... I have tried everything!"
-            )
-        self.config["env"] = env
+            env = self.resolve_environment(env)
+            log.info(f"SDK:Using environment: {env}")
+            if type is not None:
+                self.config = self.create_config_type(type, env)
+            else:
+                self.config = self.create_config(env)
+            if self.config is False:
+                raise ConfigurationError(
+                    "No configuration found... I have tried everything!"
+                )
+            self.config["env"] = env
 
     def resolve_environment(self, env):
         # only load from environment if nothing is passed to constructor

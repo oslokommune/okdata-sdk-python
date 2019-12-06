@@ -23,6 +23,11 @@ class TestConfig:
         except ConfigurationError:
             assert True
 
+    def test_custom_config(self):
+        custom_config = {"foo": "omg this cake tastes so good", "bar": "give me cheese"}
+        config = Config(config=custom_config)
+        assert config.config == custom_config
+
 
 class TestEnvironmentConfig:
     def test_resolve_environment(self):
