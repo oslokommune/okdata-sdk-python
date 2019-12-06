@@ -32,7 +32,7 @@ clean:
 
 
 .PHONY: bump-patch
-bump-patch:
+bump-patch: is-git-clean
 	bumpversion patch
 
 .PHONY: build
