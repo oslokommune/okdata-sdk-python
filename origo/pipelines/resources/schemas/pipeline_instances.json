@@ -1,0 +1,62 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "id",
+    "datasetUri",
+    "pipelineArn",
+    "schemaId",
+    "transformation",
+    "useLatestEdition"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The Id Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "datasetUri": {
+      "$id": "#/properties/datasetUri",
+      "type": "string",
+      "title": "The Dataseturi Schema",
+      "default": "",
+      "pattern": "^output/([-a-zA-Z0-9]*/([0-9]*))$"
+    },
+    "pipelineArn": {
+      "$id": "#/properties/pipelineArn",
+      "type": "string",
+      "title": "The Pipelinearn Schema",
+      "default": "",
+      "examples": [
+        "arn:aws:states:eu-west-1:988529151833:stateMachine:dataplatform-data-processing"
+      ],
+      "pattern": "^arn:aws:states:eu-west-1:[0-9]{12}:stateMachine:[-a-z]*$"
+    },
+    "schemaId": {
+      "$id": "#/properties/schemaId",
+      "type": "string",
+      "title": "The Schemaid Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "transformation": {
+      "$id": "#/properties/transformation",
+      "type": "object",
+      "title": "The Transformation Schema"
+    },
+    "useLatestEdition": {
+      "$id": "#/properties/useLatestEdition",
+      "type": "boolean",
+      "title": "The Uselatestedition Schema",
+      "default": false,
+      "examples": [
+        true
+      ]
+    }
+  }
+}
