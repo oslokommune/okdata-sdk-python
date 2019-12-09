@@ -19,6 +19,7 @@ setuptools.setup(
         "PrettyTable",
         "python-keycloak-client",
         "PyJWT",
+        "jsonschema",
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",

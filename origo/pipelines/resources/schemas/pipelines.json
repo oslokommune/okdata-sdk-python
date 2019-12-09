@@ -1,0 +1,36 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "Pipeline Schema",
+  "required": [
+    "arn",
+    "template",
+    "transformation_schema"
+  ],
+  "properties": {
+    "arn": {
+      "$id": "#/properties/arn",
+      "type": "string",
+      "title": "The Arn Schema",
+      "default": "",
+      "examples": [
+        "arn:aws:states:eu-west-1:988529151833:stateMachine:test-pipeline-excel-to-csv"
+      ],
+      "pattern": "^arn:aws:states:eu-west-1:[0-9]{12}:stateMachine:[-a-z]*$"
+    },
+    "template": {
+      "$id": "#/properties/template",
+      "type": "string",
+      "title": "The Template Schema",
+      "default": ""
+    },
+    "transformation_schema": {
+      "$id": "#/properties/transformation_schema",
+      "type": "string",
+      "title": "The Transformation_schema Schema",
+      "default": ""
+    }
+  }
+}
