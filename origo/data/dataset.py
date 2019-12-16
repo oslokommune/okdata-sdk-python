@@ -117,3 +117,10 @@ class Dataset(SDK):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions"
         return self.get(url).json()
+
+    #### GET STATUS FROM status-api ####
+    ### TODO endre url for status #####
+    def get_status(self, uuid):
+        ##statusUrl = self.config.get("statusUrl")
+        url = f"https://fxisnhtbag.execute-api.eu-west-1.amazonaws.com/dev/status/{uuid}"
+        return self.get(url).json()
