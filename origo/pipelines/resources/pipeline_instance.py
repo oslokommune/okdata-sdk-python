@@ -25,7 +25,7 @@ class PipelineInstance(PipelineBase):
         useLatestEdition: bool Whether or not to create a new edition or use the latest edition when running the pipeline.
     """
 
-    __resource_name__ = "pipeline_instances"
+    __resource_name__ = "pipeline-instances"
 
     @property
     def id(self):
