@@ -38,6 +38,11 @@ def ok_pipeline():
     return create_pipeline_request()
 
 
+@pytest.fixture()
+def ok_pipeline_instance():
+    return create_pipeline_instance_request()
+
+
 @pytest.fixture(autouse=True)
 def mock_well_known(requests_mock):
     requests_mock.register_uri(
@@ -88,6 +93,19 @@ def mock_delete_pipeline(requests_mock):
         "DELETE",
         url=f"{pipeline_url}/pipelines/{arn}",
         text=f"Deleted pipeline {arn}",
+        status_code=200,
+    )
+
+
+@pytest.fixture()
+def mock_delete_pipeline_instance(requests_mock):
+    pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
+    response = create_pipeline_instance_request()
+    arn = json.loads(response)["id"]
+    return requests_mock.register_uri(
+        "DELETE",
+        url=f"{pipeline_url}/pipeline_instances/{arn}",
+        text=f"Deleted pipeline instance {arn}",
         status_code=200,
     )
 

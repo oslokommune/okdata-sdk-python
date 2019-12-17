@@ -147,7 +147,7 @@ class PipelineBase:
         Returns: A list of pipeline resource instances
         """
         base_url = sdk.config.get("pipelineUrl")
-        url = f"{base_url}/{cls.__resource_name__}/{id}"
+        url = f"{base_url}/{cls.__resource_name__}"
         return sdk.get(url=url).json()
 
     def update(self):
