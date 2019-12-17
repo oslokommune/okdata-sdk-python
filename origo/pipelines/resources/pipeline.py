@@ -49,7 +49,7 @@ class Pipeline(PipelineBase):
 
     def list_instances(self):
         base_url = self.sdk.config.get("pipelineUrl")
-        url = f"{base_url}/pipeline_instances"
+        url = f"{base_url}/{PipelineInstance.__resource_name__}"
         try:
             result: List[dict] = self.sdk.get(
                 url, params={"pipeline-arn": self.arn}

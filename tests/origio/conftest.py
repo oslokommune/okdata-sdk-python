@@ -104,7 +104,7 @@ def mock_delete_pipeline_instance(requests_mock):
     arn = json.loads(response)["id"]
     return requests_mock.register_uri(
         "DELETE",
-        url=f"{pipeline_url}/pipeline_instances/{arn}",
+        url=f"{pipeline_url}/pipeline-instances/{arn}",
         text=f"Deleted pipeline instance {arn}",
         status_code=200,
     )
@@ -153,7 +153,7 @@ def mock_list_instances(sdk, requests_mock):
     )
     return requests_mock.register_uri(
         "GET",
-        url=f"{pipeline_url}/pipeline_instances?{url_encoded_arn}",
+        url=f"{pipeline_url}/pipeline-instances?{url_encoded_arn}",
         text=response,
         status_code=200,
     )
@@ -165,7 +165,7 @@ def mock_create_pipeline_instance(requests_mock):
     response = create_pipeline_instance_reponse()
     return requests_mock.register_uri(
         "POST",
-        url=f"{pipeline_url}/pipeline_instances",
+        url=f"{pipeline_url}/pipeline-instances",
         text=response,
         status_code=201,
     )
@@ -178,7 +178,7 @@ def mock_get_pipeline_instance(requests_mock):
     id = "pipeline-instance-id"
     return requests_mock.register_uri(
         "GET",
-        url=f"{pipeline_url}/pipeline_instances/{id}",
+        url=f"{pipeline_url}/pipeline-instances/{id}",
         text=response,
         status_code=201,
     )
