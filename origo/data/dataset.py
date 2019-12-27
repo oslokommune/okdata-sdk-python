@@ -29,9 +29,7 @@ class Dataset(SDK):
             if isinstance(filter, str):
                 tmp = []
                 for el in ret:
-                    if "title" in el and re.match(
-                        filter, el["title"], re.IGNORECASE
-                    ):
+                    if "title" in el and re.match(filter, el["title"], re.IGNORECASE):
                         tmp.append(el)
                 ret = tmp
         return ret

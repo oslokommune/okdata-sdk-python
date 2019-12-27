@@ -80,7 +80,7 @@ def mock_create_pipeline(requests_mock):
     pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
     response = create_pipeline_reponse()
     return requests_mock.register_uri(
-        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=201,
+        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=201
     )
 
 
@@ -116,7 +116,7 @@ def mock_get_pipeline(requests_mock):
     response = create_pipeline_request()
     arn = json.loads(response)["arn"]
     return requests_mock.register_uri(
-        "GET", url=f"{pipeline_url}/pipelines/{arn}", text=response, status_code=200,
+        "GET", url=f"{pipeline_url}/pipelines/{arn}", text=response, status_code=200
     )
 
 
@@ -125,7 +125,7 @@ def mock_create_pipeline_500(requests_mock):
     pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
     response = create_pipeline_reponse()
     return requests_mock.register_uri(
-        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=500,
+        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=500
     )
 
 
@@ -134,7 +134,7 @@ def mock_create_pipeline_404(requests_mock):
     pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
     response = create_pipeline_reponse()
     return requests_mock.register_uri(
-        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=404,
+        "POST", url=f"{pipeline_url}/pipelines", text=response, status_code=404
     )
 
 
@@ -164,10 +164,7 @@ def mock_create_pipeline_instance(requests_mock):
     pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
     response = create_pipeline_instance_reponse()
     return requests_mock.register_uri(
-        "POST",
-        url=f"{pipeline_url}/pipeline-instances",
-        text=response,
-        status_code=201,
+        "POST", url=f"{pipeline_url}/pipeline-instances", text=response, status_code=201
     )
 
 

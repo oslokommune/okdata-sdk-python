@@ -39,23 +39,22 @@ class TestDataset:
 
     def test_getDatasets_filter_no_result(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
-        response = json.dumps([{"Id": "foo-bar", "publisher": "someone"}])
+        response = json.dumps(
+            [{"Id": "foo-bar", "title": "deichman", "publisher": "someone"}]
+        )
         matcher = re.compile("datasets")
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
-        list = ds.get_datasets({"publisher": "eide"})
+        list = ds.get_datasets("eide")
         assert len(list) == 0
 
     def test_getDatasets_filter(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
         response = json.dumps(
-            [
-                {"Id": "foo-bar", "publisher": "eide"},
-                {"Id": "foo-bar2", "publisher": "someone"},
-            ]
+            [{"Id": "foo-bar", "title": "eide"}, {"Id": "foo-bar2", "title": "someone"}]
         )
         matcher = re.compile("datasets")
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
-        list = ds.get_datasets({"publisher": "eide"})
+        list = ds.get_datasets("eide")
         assert len(list) == 1
 
     def test_getDataset(self, requests_mock):
