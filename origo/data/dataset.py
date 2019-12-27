@@ -25,13 +25,12 @@ class Dataset(SDK):
         log.info(f"SDK:Get datasets from: {url}")
         result = self.get(url)
         ret = result.json()
-        # TODO: expose this in origo command with like "origo datasets --filter=['sdk-test']"
         if filter is not None:
-            if "publisher" in filter:
+            if isinstance(filter, str):
                 tmp = []
                 for el in ret:
-                    if "publisher" in el and re.match(
-                        filter["publisher"], el["publisher"], re.IGNORECASE
+                    if "title" in el and re.match(
+                        filter, el["title"], re.IGNORECASE
                     ):
                         tmp.append(el)
                 ret = tmp
