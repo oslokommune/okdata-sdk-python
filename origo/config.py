@@ -32,7 +32,7 @@ ORIGO_CONFIG["prod"] = {
     "keycloakRealm": "api-catalog",
     "keycloakServerUrl": "https://login.oslo.kommune.no/auth",
     "pipelineUrl": "https://api.data.oslo.systems/pipeline",
-    "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-dev",
+    "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-prod",
     "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
 }
