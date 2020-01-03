@@ -41,7 +41,7 @@ class SDK(object):
         elif (
             result.status_code >= 400 and result.status_code not in bad_requests_exclude
         ):
-            log.info(f"SDK:Raising Bad Request")
+            log.info(f"SDK:Raising Bad Request: {result.json()}")
             if result.status_code in [401, 403]:
                 raise ApiAuthenticateError(f"Bad Credentials: {result.status_code}")
             result.raise_for_status()
