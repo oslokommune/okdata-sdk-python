@@ -76,6 +76,7 @@ class Dataset(SDK):
             f"SDK:Creating dataset edition for: {datasetid} from: {url} with payload: {data}"
         )
         result = self.post(url, data)
+        log.info(f"SDK:API reported back: {result.json()}")
         if result.status_code == 409:
             edition = data["edition"]
             raise DataExistsError(
@@ -114,3 +115,17 @@ class Dataset(SDK):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions"
         return self.get(url).json()
+
+    def create_distribution(self, datasetid, versionid, editionid, data):
+        datasetUrl = self.config.get("datasetUrl")
+        url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions"
+        log.info(
+            f"SDK:Creating dataset distribution for: {datasetid} from: {url} with payload: {data}"
+        )
+        result = self.post(url, data)
+        body = result.json()
+        distributionid = body["Id"].split("/")[3]
+        log.info(
+            f"SDK:Created dataset distribution: {distributionid} on {datasetid}/{versionid}/{editionid}"
+        )
+        return body
