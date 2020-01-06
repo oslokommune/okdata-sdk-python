@@ -125,5 +125,7 @@ class Dataset(SDK):
         result = self.post(url, data)
         body = result.json()
         distributionid = body["Id"].split("/")[3]
-        log.info(f"SDK:Created dataset distribution: {distributionid} on {datasetid}/{versionid}/{editionid}")
+        log.info(
+            f"SDK:Created dataset distribution: {distributionid} on {datasetid}/{versionid}/{editionid}"
+        )
         return body
