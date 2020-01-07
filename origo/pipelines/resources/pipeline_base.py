@@ -64,7 +64,7 @@ class PipelineBase:
         url = f"{base_url}/{self.__resource_name__}"
 
         try:
-            return self.sdk.post(url=url, data=self.__str__()).text.strip(), None
+            return self.sdk.post(url=url, data=self.__dict__).text.strip(), None
         except HTTPError as he:
             return None, he
 

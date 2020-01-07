@@ -21,6 +21,16 @@ setuptools.setup(
         "PyJWT",
         "jsonschema",
     ],
+    data_files=[
+        (
+            "schema",
+            [
+                "origo/pipelines/resources/schemas/pipelines.json",
+                "origo/pipelines/resources/schemas/pipeline-instances.json",
+            ],
+        )
+    ],
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
