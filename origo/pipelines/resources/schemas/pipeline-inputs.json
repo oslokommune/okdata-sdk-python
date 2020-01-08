@@ -1,0 +1,34 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "pipelineInstanceId",
+    "datasetUri",
+    "stage"
+  ],
+  "properties": {
+    "pipelineInstanceId": {
+      "$id": "#/properties/pipelineInstanceId",
+      "type": "string",
+      "title": "The Pipeline Instance Id Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "datasetUri": {
+      "$id": "#/properties/datasetUri",
+      "type": "string",
+      "title": "The Dataseturi Schema",
+      "default": "",
+      "pattern": "^input/([-a-zA-Z0-9]*/([0-9]*))$"
+    },
+    "stage": {
+      "$id": "#/properties/stage",
+      "type": "string",
+      "title": "The Stage Schema",
+      "enum": ["raw", "incoming", "intermediate", "processed"]
+    }
+  }
+}
