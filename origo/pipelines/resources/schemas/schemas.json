@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "Schema",
+  "required": [
+    "id",
+    "schema"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The Id Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "schema": {
+      "$id": "#/properties/schema",
+      "type": "string",
+      "title": "The Schema Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    }
+  }
+}
