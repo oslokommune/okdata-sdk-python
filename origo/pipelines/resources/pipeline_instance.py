@@ -80,7 +80,7 @@ class PipelineInstance(PipelineBase):
 
     def get_input(self, dataset, version):
         url = self.sdk.config.get("pipelineUrl")
-        result = self.sdk.delete(
+        result = self.sdk.get(
             url=f"{url}/{self.__resource_name__}/{self.id}/inputs/{dataset}/{version}"
         ).text.strip("'")
         return PipelineInput.from_dict(self.sdk, result)
