@@ -2,6 +2,7 @@ from typing import Type, List
 
 from origo.pipelines.resources.pipeline import Pipeline
 from origo.pipelines.resources.pipeline_base import PipelineBase
+from origo.pipelines.resources.pipeline_input import PipelineInput
 from origo.pipelines.resources.pipeline_instance import PipelineInstance
 from origo.sdk import SDK
 
@@ -32,6 +33,18 @@ class PipelineApiClient(SDK):
     def get_pipeline_instance(self, id: str) -> PipelineInstance:
         return self.fetch(PipelineInstance, id)
 
+    def get_pipeline_input(
+        self, pipelineInstanceId: str, dataset: str, version: str
+    ) -> List[PipelineInput]:
+        return PipelineInstance(
+            self, pipelineInstanceId, "", "", "", "", False
+        ).get_input(dataset, version)
+
+    def get_pipeline_inputs(self, pipelineInstanceId: str) -> List[PipelineInput]:
+        return PipelineInstance(
+            self, pipelineInstanceId, "", "", "", "", False
+        ).get_inputs()
+
     def create_pipeline(self, data: dict):
         created, error = Pipeline.from_dict(self, data).create()
         if error:
@@ -44,8 +57,24 @@ class PipelineApiClient(SDK):
             raise error
         return created
 
+    def create_pipeline_input(self, data: dict):
+        created, error = PipelineInput.from_dict(self, data).create()
+        if error:
+            raise error
+        return created
+
     def delete_pipeline(self, arn: str):
         return Pipeline._delete(self, arn)
 
     def delete_pipeline_instance(self, id: str):
         return PipelineInstance._delete(self, id)
+
+    def delete_pipeline_input(
+        self, pipelineInstanceId: str, dataset: str, version: str
+    ):
+        return PipelineInput(
+            self,
+            pipelineInstanceId=pipelineInstanceId,
+            datasetUri=f"input/{dataset}/{version}",
+            stage="",
+        ).delete()

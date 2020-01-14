@@ -33,6 +33,14 @@ def create_pipeline_instance_request():
     return read_pipeline_file("pipeline_instance/request.json")
 
 
+def create_pipeline_input_response():
+    return read_pipeline_file("pipeline_input/response.json")
+
+
+def create_pipeline_input_request():
+    return read_pipeline_file("pipeline_input/request.json")
+
+
 @pytest.fixture()
 def ok_pipeline():
     return create_pipeline_request()
@@ -178,4 +186,43 @@ def mock_get_pipeline_instance(requests_mock):
         url=f"{pipeline_url}/pipeline-instances/{id}",
         text=response,
         status_code=201,
+    )
+
+
+@pytest.fixture()
+def mock_create_pipeline_input(requests_mock):
+    pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
+    response = create_pipeline_input_response()
+    return requests_mock.register_uri(
+        "POST",
+        url=f"{pipeline_url}/pipeline-instances/pipeline-instance-id/inputs",
+        text=response,
+        status_code=201,
+    )
+
+
+@pytest.fixture()
+def mock_get_pipeline_inputs(requests_mock):
+    pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
+    response = f"[{create_pipeline_input_request()}]"
+    id = "pipeline-instance-id"
+    return requests_mock.register_uri(
+        "GET",
+        url=f"{pipeline_url}/pipeline-instances/{id}/inputs",
+        text=response,
+        status_code=200,
+    )
+
+
+@pytest.fixture()
+def mock_delete_pipeline_input(requests_mock):
+    pipeline_url = ORIGO_CONFIG["dev"]["pipelineUrl"]
+    response = create_pipeline_input_request()
+    instance_id = json.loads(response)["pipelineInstanceId"]
+    _, dataset, version = json.loads(response)["datasetUri"].split("/")
+    return requests_mock.register_uri(
+        "DELETE",
+        url=f"{pipeline_url}/pipeline-instances/{instance_id}/inputs/{dataset}/{version}",
+        text=f"Deleted pipeline input {instance_id}",
+        status_code=200,
     )

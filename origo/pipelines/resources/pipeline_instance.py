@@ -2,6 +2,7 @@ import json
 from dataclasses import dataclass
 
 from origo.pipelines.resources.pipeline_base import PipelineBase
+from origo.pipelines.resources.pipeline_input import PipelineInput
 from origo.sdk import SDK
 
 
@@ -68,3 +69,18 @@ class PipelineInstance(PipelineBase):
 
     def delete(self):
         return self._delete(self.sdk, self.id)
+
+    def get_inputs(self):
+        url = self.sdk.config.get("pipelineUrl")
+        result = self.sdk.get(
+            url=f"{url}/{self.__resource_name__}/{self.id}/inputs"
+        ).json()
+        inputs = [PipelineInput.from_dict(self.sdk, input) for input in result]
+        return inputs
+
+    def get_input(self, dataset, version):
+        url = self.sdk.config.get("pipelineUrl")
+        result = self.sdk.get(
+            url=f"{url}/{self.__resource_name__}/{self.id}/inputs/{dataset}/{version}"
+        ).text.strip("'")
+        return PipelineInput.from_dict(self.sdk, result)
