@@ -1,8 +1,4 @@
-# Usage
-
-See the origo-cli repo for implementation and usage of the SDK
-
-## Configuration
+# Configuration
 
 When calling any classes interacting with the Origo API and there are no Config params passed to the constructor, a config object will be
 automaticly created for you based on environment variables
@@ -46,3 +42,85 @@ For `client credentials` please contact the data platform team. `dataplattform[a
 ### TODO: Named profiles
 If environment variables are not available, the system will try to load from a default profile: Located in ~/.origo/configuration
 
+# Usage
+
+## Create a new dataset with version and edition
+```python
+from origo.data.dataset import Dataset
+from origo.config import Config
+
+origo_config = Config()
+
+# If necessary you can override default values
+origo_config.config["cacheCredentials"] = False
+
+# Create a new dataset
+dataset = Dataset(config=origo_config)
+
+dataset_metadata = {
+    "title": "Precise Descriptive Title",
+    "description": "Describe your dataset here",
+    "keywords": ["some-keyword"],
+    "accessRights": "public",
+    "confidentiality": "green",
+    "objective": "Exemplify how to create a new dataset",
+    "contactPoint": {
+        "name": "Your name",
+        "email": "your_email@domain.com",
+        "phone": "999555111"
+    },
+    "publisher": "name of organization or person responsible for publishing the data",
+    "processing_stage": "raw"
+}
+
+new_dataset = dataset.create_dataset(data=dataset_metadata)
+
+# new_dataset:
+# { 'Id': 'precise-descriptive-title',
+#   'Type': 'Dataset',
+#   '_links': {'self': {'href': '/datasets/precise-descriptive-title'}},
+#   'accessRights': 'public',
+#   'confidentiality': 'green',
+#   'contactPoint': { 'email': 'your_email@domain.com',
+#                     'name': 'Your name',
+#                     'phone': '999555111'},
+#   'description': 'Describe your dataset here',
+#   'keywords': ['some-keyword'],
+#   'objective': 'Exemplify how to create a new dataset',
+#   'processing_stage': 'raw',
+#   'publisher': 'name of organization or person responsible for publishing the '
+#                'data',
+#   'title': 'Precise Descriptive Title'}
+
+
+# create version for new dataset:
+version_data = {"version": "1"}
+new_version = dataset.create_version(new_dataset["Id"], data=version_data)
+
+# new_version:
+# { 'Id': 'precise-descriptive-title/1',
+#   'Type': 'Version',
+#   '_links': { 'self': { 'href': '/datasets/precise-descriptive-title/versions/1'}},
+#   'version': '1'}
+
+# create edition for new_dataset/new_version:
+import datetime
+
+# Note! edition-field must be ISO 8601 with utc offset
+edition_data = {
+    "edition": str(datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()),
+    "description": "My edition description",
+    "startTime": "2019-01-01",
+    "endTime": "2019-12-31"
+}
+new_edition = dataset.create_edition(new_dataset["Id"], new_version["version"], data=edition_data)
+
+# new_edition
+# { 'Id': 'precise-descriptive-title/1/20200115T130439',
+#   'Type': 'Edition',
+#   '_links': { 'self': { 'href': '/datasets/precise-descriptive-title/versions/1/editions/20200115T130439'}},
+#   'description': 'My edition description',
+#   'edition': '2020-01-15T13:04:39.041778+00:00',
+#   'endTime': '2019-12-31',
+#   'startTime': '2019-01-01'}
+```
