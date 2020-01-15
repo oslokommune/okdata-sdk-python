@@ -44,6 +44,30 @@ If environment variables are not available, the system will try to load from a d
 
 # Usage
 
+## Upload data
+
+```python
+from origo.data.upload import Upload
+from origo.config import Config
+
+origo_config = Config()
+
+# If necessary you can override default values
+origo_config.config["cacheCredentials"] = False
+
+data_uploader = Upload(config=origo_config)
+
+# Upload file 'data.json' to dataset-id/version/edition
+dataset_id = "your-dataset-id"
+version = "version"
+edition = "20200115T130439"
+
+filename = "data.json"
+
+# Note! filename must be pointing to an existing file on your disk
+upload_success = data_uploader.upload(filename, dataset_id, version, edition)
+```
+
 ## Create a new dataset with version and edition
 ```python
 from origo.data.dataset import Dataset
