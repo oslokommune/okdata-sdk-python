@@ -46,6 +46,11 @@ If environment variables are not available, the system will try to load from a d
 
 ## Upload data
 
+When uploading data you need to refer to an existing dataset that you own, a version and an edition. 
+If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
+or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
+
+
 ```python
 from origo.data.upload import Upload
 from origo.config import Config
@@ -67,6 +72,17 @@ filename = "data.json"
 # Note! filename must be pointing to an existing file on your disk
 upload_success = data_uploader.upload(filename, dataset_id, version, edition)
 ```
+
+## Sending events
+
+Before you can start sending events you need to have defined a dataset and a version.
+This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
+or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
+You not need to define an edition in order to send events. However you need to set up
+an event-stream. As for now you have to contact Team Dataplattform at Origo in order
+to set up an event-stream.
+
+
 
 ## Create a new dataset with version and edition
 ```python
