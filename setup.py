@@ -11,7 +11,7 @@ setuptools.setup(
     description="SDK for origo",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.oslo.kommune.no/origo-dataplatform/origo-sdk-python",
+    url="https://github.com/oslokommune/origo-sdk-python",
     packages=setuptools.find_packages(".", exclude=["tests*"]),
     install_requires=[
         "requests",
