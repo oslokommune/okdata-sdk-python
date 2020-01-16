@@ -27,9 +27,7 @@ class Schema(PipelineBase):
     def type(self):
         return "schema"
 
-    def __init__(
-        self, sdk: SDK, id: str, schema: str,
-    ):
+    def __init__(self, sdk: SDK, id: str, schema: str, type: str = "schema"):
         self.sdk = sdk
         self._id = id
         self.schema = schema

@@ -15,7 +15,7 @@ class PipelineInstance(PipelineBase):
     Attributes:
         sdk: An instance of the SDK
         id: unique id for this resource
-        datasetUri: Must conform to the following pattern: `ouput/{dataset_id}/{version}`.
+        datasetUri: Must conform to the following pattern: `output/{dataset_id}/{version}`.
             Defines what dataset + version this pipeline instance should result in. e.g. Running the pipeline instance
             should create a new edition in this dataset + version combination.
         pipelineArn: What Pipeline should be used.
