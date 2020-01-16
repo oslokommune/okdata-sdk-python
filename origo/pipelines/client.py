@@ -4,6 +4,7 @@ from origo.pipelines.resources.pipeline import Pipeline
 from origo.pipelines.resources.pipeline_base import PipelineBase
 from origo.pipelines.resources.pipeline_input import PipelineInput
 from origo.pipelines.resources.pipeline_instance import PipelineInstance
+from origo.pipelines.resources.schema import Schema
 from origo.sdk import SDK
 
 
@@ -27,11 +28,17 @@ class PipelineApiClient(SDK):
     def get_pipeline_instances(self) -> List[PipelineInstance]:
         return self.list(PipelineInstance)
 
+    def get_schemas(self) -> List[Schema]:
+        return self.list(Schema)
+
     def get_pipeline(self, arn: str) -> Pipeline:
         return self.fetch(Pipeline, arn)
 
     def get_pipeline_instance(self, id: str) -> PipelineInstance:
         return self.fetch(PipelineInstance, id)
+
+    def get_schema(self, id: str) -> Schema:
+        return self.fetch(Schema, id)
 
     def get_pipeline_input(
         self, pipelineInstanceId: str, dataset: str, version: str
@@ -63,11 +70,20 @@ class PipelineApiClient(SDK):
             raise error
         return created
 
+    def create_schema(self, data: dict):
+        created, error = Schema.from_dict(self, data).create()
+        if error:
+            raise error
+        return created
+
     def delete_pipeline(self, arn: str):
         return Pipeline._delete(self, arn)
 
     def delete_pipeline_instance(self, id: str):
         return PipelineInstance._delete(self, id)
+
+    def delete_schema(self, id: str):
+        return Schema._delete(self, id)
 
     def delete_pipeline_input(
         self, pipelineInstanceId: str, dataset: str, version: str
