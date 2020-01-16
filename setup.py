@@ -27,6 +27,8 @@ setuptools.setup(
             [
                 "origo/pipelines/resources/schemas/pipelines.json",
                 "origo/pipelines/resources/schemas/pipeline-instances.json",
+                "origo/pipelines/resources/schemas/pipeline-inputs.json",
+                "origo/pipelines/resources/schemas/schemas.json",
             ],
         )
     ],
