@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="origo-sdk-python",
-    version="0.0.13",
+    version="0.0.14",
     author="Oslo Origo",
     author_email="dataplattform@oslo.kommune.no",
     description="SDK for origo",
