@@ -82,6 +82,33 @@ You not need to define an edition in order to send events. However you need to s
 an event-stream. As for now you have to contact Team Dataplattform at Origo in order
 to set up an event-stream.
 
+```python
+from origo.event.post_event import PostEvent
+from origo.config import Config
+
+origo_config = Config()
+
+# If necessary you can override default config values
+origo_config.config["cacheCredentials"] = True
+
+event_poster = PostEvent(config=origo_config)
+
+dataset_id = "some-dataset-id"
+version = "1"
+event = {"foo": "bar"}
+
+res = event_poster.post_event(event, dataset_id, version)
+# res:
+# {'message': 'Ok'}
+
+# Method also supports list of dictionaries
+event_list = [{"foo": "bar"}, {"foo": "bar"}]
+
+res2 = event_poster.post_event(event_list, dataset_id, version)
+# res2:
+# {'message': 'Ok'}
+
+```
 
 
 ## Create a new dataset with version and edition
