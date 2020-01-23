@@ -1,5 +1,4 @@
 import json
-from requests.exceptions import HTTPError
 import pytest
 
 from origo.event.event_stream_client import EventStreamClient

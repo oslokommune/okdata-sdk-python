@@ -1,5 +1,4 @@
 import logging
-from requests.exceptions import HTTPError
 from origo.sdk import SDK
 
 log = logging.getLogger()
