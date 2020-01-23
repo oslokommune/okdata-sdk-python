@@ -7,7 +7,7 @@ log = logging.getLogger()
 
 class EventStreamClient(SDK):
     def __init__(self, config=None, auth=None, env=None):
-        self.__name__ = "post_event"
+        self.__name__ = "event_stream_client"
         super().__init__(config, auth, env)
         self.stream_manager_url = self.config.get("streamManagerUrl")
 
