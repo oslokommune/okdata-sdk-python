@@ -19,6 +19,7 @@ ORIGO_CONFIG["dev"] = {
     "keycloakServerUrl": "https://login-test.oslo.kommune.no/auth",
     "pipelineUrl": "https://api.data-dev.oslo.systems/pipeline",
     "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-dev",
+    "streamManagerUrl": "https://api.data-dev.oslo.systems/stream-manager",
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
 }
@@ -33,6 +34,7 @@ ORIGO_CONFIG["prod"] = {
     "keycloakServerUrl": "https://login.oslo.kommune.no/auth",
     "pipelineUrl": "https://api.data.oslo.systems/pipeline",
     "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-prod",
+    "streamManagerUrl": "https://api.data.oslo.systems/stream-manager",
     "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
 }
