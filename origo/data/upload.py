@@ -23,7 +23,9 @@ class Upload(SDK):
         s3SignedData = self.create_s3_signed_data(
             fileName, datasetid, versionid, editionid
         )
+
         s3Data = {}
+
         if "message" in s3SignedData:
             # TODO: very specific error raised by the Lambda function, remove later
             raise ApiAuthenticateError(s3SignedData["message"])
@@ -33,7 +35,14 @@ class Upload(SDK):
 
         files = {"file": open(fileName, "rb")}
         result = requests.post(url, data=s3Data, files=files)
-        return result.status_code == 204
+
+        if result.status_code == 204 and "status_response" in s3SignedData:
+            log.info(f"Retrieved status-ID: {s3SignedData['status_response']}")
+            return s3SignedData['status_response']
+        elif result.status_code == 204:
+            log.info(
+                f"Was unable to retrieve a status-ID for the process, but the upload was successful.")
+            return False
 
     def create_s3_signed_data(self, fileName, datasetid, versionid, editionid):
         edition = f"{datasetid}/{versionid}/{editionid}"
