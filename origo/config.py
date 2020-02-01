@@ -14,6 +14,7 @@ ORIGO_CONFIG["dev"] = {
     "cacheCredentials": False,
     "datasetUrl": "https://api.data-dev.oslo.systems/metadata/datasets",
     "downloadUrl": "https://api.data-dev.oslo.systems/data-exporter",
+    "elasticsearchQueryUrl": "https://ogjds1na4e.execute-api.eu-west-1.amazonaws.com/dev",
     "eventCollectorUrl": "https://api.data-dev.oslo.systems/event-collector",
     "keycloakRealm": "api-catalog",
     "keycloakServerUrl": "https://login-test.oslo.kommune.no/auth",
