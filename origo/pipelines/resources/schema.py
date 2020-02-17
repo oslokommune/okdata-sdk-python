@@ -34,11 +34,7 @@ class Schema(PipelineBase):
 
     @property
     def __dict__(self):
-        return {
-            "id": self.id,
-            "schema": self.schema,
-            "type": self.type,
-        }
+        return {"id": self.id, "schema": self.schema, "type": self.type}
 
     def __repr__(self):
         return json.dumps(self.__dict__)

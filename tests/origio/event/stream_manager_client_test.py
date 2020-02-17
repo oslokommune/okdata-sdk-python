@@ -55,7 +55,7 @@ def mock_create_event_stream_request(requests_mock):
 @pytest.fixture(scope="function")
 def mock_get_event_stream_info_request(requests_mock):
     requests_mock.register_uri(
-        "GET", event_stream_url, text=json.dumps(event_stream_info), status_code=200,
+        "GET", event_stream_url, text=json.dumps(event_stream_info), status_code=200
     )
 
 

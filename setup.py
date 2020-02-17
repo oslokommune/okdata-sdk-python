@@ -17,7 +17,7 @@ setuptools.setup(
         "requests",
         "urllib3",
         "PrettyTable",
-        "python-keycloak-client",
+        "python-keycloak",
         "PyJWT",
         "jsonschema",
     ],

@@ -21,6 +21,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 config = Config()
+token_endpoint = "https://login.oslo.kommune.no/auth/realms/api-catalog/protocol/openid-connect/token"
 
 
 @pytest.fixture(scope="function")
@@ -37,7 +38,7 @@ class TestAuthenticate:
         auth.file_cache.credentials_cache_enabled = False
 
         response = json.dumps(client_credentials_response)
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         auth.login()
@@ -52,7 +53,7 @@ class TestAuthenticate:
         auth.file_cache.credentials_cache_enabled = True
 
         response = json.dumps(client_credentials_response)
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         auth.login()
@@ -91,7 +92,7 @@ class TestAuthenticate:
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
 
         response = json.dumps(client_credentials_response)
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         auth.login()
@@ -113,7 +114,7 @@ class TestAuthenticate:
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
 
         response = json.dumps(client_credentials_response)
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         auth.login()
@@ -137,7 +138,7 @@ class TestAuthenticate:
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
 
         response = json.dumps(client_credentials_response)
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         auth.login()
@@ -153,7 +154,7 @@ class TestAuthenticate:
         response = json.dumps(
             {"error": "authenitcation error", "error_description": "No such client"}
         )
-        matcher = re.compile(auth.token_provider.client.get_url("token_endpoint"))
+        matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=204)
 
         try:

@@ -17,8 +17,8 @@ prettytable==0.7.2
 pyasn1==0.4.7             # via rsa
 pyjwt==1.7.1
 pyrsistent==0.15.6        # via jsonschema
-python-jose==3.0.1        # via python-keycloak-client
-python-keycloak-client==0.2.2
+python-jose==3.0.1        # via python-keycloak
+python-keycloak==0.18.0
 requests==2.22.0
 rsa==4.0                  # via python-jose
 six==1.12.0               # via jsonschema, pyrsistent, python-jose
