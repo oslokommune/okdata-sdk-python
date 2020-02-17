@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from keycloak.realm import KeycloakRealm
+from keycloak.keycloak_openid import KeycloakOpenID
 
 from origo.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
 
@@ -19,16 +19,15 @@ class ClientCredentialsProvider(TokenProvider):
         if not (self.client_id and self.client_secret):
             raise TokenProviderNotInitialized
 
-        realm = KeycloakRealm(
-            server_url=self.config.config.get("keycloakServerUrl"),
+        self.client = KeycloakOpenID(
+            server_url=self.config.config.get("keycloakServerUrl") + "/",
             realm_name=self.config.config.get("keycloakRealm"),
-        )
-        self.client = realm.open_id_connect(
-            client_id=self.client_id, client_secret=self.client_secret
+            client_id=self.client_id,
+            client_secret_key=self.client_secret,
         )
 
     def refresh_token(self, refresh_token):
         return self.client.refresh_token(refresh_token=refresh_token)
 
     def new_token(self):
-        return self.client.client_credentials()
+        return self.client.token(grant_type=["client_credentials"])
