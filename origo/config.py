@@ -23,6 +23,7 @@ ORIGO_CONFIG["dev"] = {
     "streamManagerUrl": "https://api.data-dev.oslo.systems/stream-manager",
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
+    "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status/",
 }
 ORIGO_CONFIG["prod"] = {
     "client_id": None,
@@ -39,6 +40,7 @@ ORIGO_CONFIG["prod"] = {
     "streamManagerUrl": "https://api.data.oslo.systems/stream-manager",
     "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
+    "statusApiUrl": "https://api.data.oslo.systems/status-api/status/",
 }
 
 ORIGO_DEFAULT_ENVIRONMENT = "dev"
@@ -100,14 +102,14 @@ class Config:
 
 
 class EnvironmentConfig:
-    def resolve_environment(env):
+    def resolve_environment(self, env):
         if not env:
             env = ORIGO_DEFAULT_ENVIRONMENT
         if env not in ORIGO_CONFIG:
             env = ORIGO_DEFAULT_ENVIRONMENT
         return env
 
-    def create(env):
+    def create(self, env):
         log.info(f"SDK:Creating EnvironmentConfig for {env}")
         env = EnvironmentConfig.resolve_environment(env)
         conf = ORIGO_CONFIG[env]
@@ -128,6 +130,6 @@ class EnvironmentConfig:
 
 
 class ConfigurationConfig:
-    def create(env):
+    def create(self, env):
         log.info(f"SDK:Creating ConfigurationConfig for {env}")
         return False
