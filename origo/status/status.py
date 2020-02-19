@@ -15,8 +15,7 @@ class Status(SDK):
         url = self.config.get("statusApiUrl")
         log.info(f"Retrieving status for UUID={uuid} from: {url}")
         response = requests.get(url + uuid)
-        print(f"response.status_code: {response.status_code}")
-        if response.status_code == 200 and response.json():
+        if response.status_code == 200:
             return response.json()
         else:
             log.info(
