@@ -18,9 +18,10 @@ class Status(SDK):
         url = self.config.get("statusApiUrl")
         log.info(f"Retrieving status for UUID={uuid} from: {url}")
 
-        response = requests.get(url)
+        response = requests.get(url + uuid)
 
         if response.status_code == 200:
-            return response.content
+            return response.text
         else:
-            log.info(f"Was unable to retrieve status for UUID={uuid} from: {url}")
+            log.info(
+                f"Was unable to retrieve status for UUID={uuid} from: {url}")
