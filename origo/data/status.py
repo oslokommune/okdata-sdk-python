@@ -5,7 +5,6 @@ import os
 from origo.sdk import SDK
 from origo.exceptions import ApiAuthenticateError
 
-
 log = logging.getLogger()
 
 
