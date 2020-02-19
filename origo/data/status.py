@@ -20,5 +20,4 @@ class Status(SDK):
         if response.status_code == 200:
             return response.text
         else:
-            log.info(
-                f"Was unable to retrieve status for UUID={uuid} from: {url}")
+            log.info(f"Was unable to retrieve status for UUID={uuid} from: {url}")
