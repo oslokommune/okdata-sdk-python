@@ -102,14 +102,14 @@ class Config:
 
 
 class EnvironmentConfig:
-    def resolve_environment(self, env):
+    def resolve_environment(env):
         if not env:
             env = ORIGO_DEFAULT_ENVIRONMENT
         if env not in ORIGO_CONFIG:
             env = ORIGO_DEFAULT_ENVIRONMENT
         return env
 
-    def create(self, env):
+    def create(env):
         log.info(f"SDK:Creating EnvironmentConfig for {env}")
         env = EnvironmentConfig.resolve_environment(env)
         conf = ORIGO_CONFIG[env]
@@ -130,6 +130,6 @@ class EnvironmentConfig:
 
 
 class ConfigurationConfig:
-    def create(self, env):
+    def create(env):
         log.info(f"SDK:Creating ConfigurationConfig for {env}")
         return False
