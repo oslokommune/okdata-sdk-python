@@ -1,10 +1,10 @@
 import json
 import re
+from requests.exceptions import HTTPError
 
 from origo.data.dataset import Dataset
 from origo.auth.auth import Authenticate
 from origo.config import Config
-from origo.exceptions import DataExistsError
 from origo.file_cache import FileCache
 
 config = Config()
@@ -83,7 +83,8 @@ class TestVersion:
         try:
             ds.create_version("test-dataset-createdataset-exists", {"version": "1"})
             assert False
-        except DataExistsError:
+        except HTTPError as e:
+            assert e.response.status_code == 409
             assert True
 
     def test_getDatasetVersions(self, requests_mock):
