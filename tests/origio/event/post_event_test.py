@@ -24,10 +24,12 @@ class TestPostEvent:
         post_event = PostEvent(config=config, auth=auth_default)
         dataset_id, version_id = "test", "1"
         event = {"yo": "bro"}
-        exp_url = f"{post_event.event_collector_url}/event/{dataset_id}/{version_id}"
+        expected_url = (
+            f"{post_event.event_collector_url}/event/{dataset_id}/{version_id}"
+        )
         requests_mock.register_uri(
             "POST",
-            exp_url,
+            expected_url,
             text=json.dumps(event_collector_ok_response),
             status_code=200,
         )
@@ -39,10 +41,12 @@ class TestPostEvent:
         post_event = PostEvent(config=config, auth=auth_default)
         dataset_id, version_id = "test", "1"
         event_list = [{"yo": "bro"}, {"zup": "dawg"}]
-        exp_url = f"{post_event.event_collector_url}/events/{dataset_id}/{version_id}"
+        expected_url = (
+            f"{post_event.event_collector_url}/events/{dataset_id}/{version_id}"
+        )
         requests_mock.register_uri(
             "POST",
-            exp_url,
+            expected_url,
             text=json.dumps(event_collector_ok_response),
             status_code=200,
         )

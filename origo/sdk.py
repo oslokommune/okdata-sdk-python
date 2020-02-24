@@ -4,7 +4,6 @@ import json
 
 from origo.config import Config
 from origo.auth.auth import Authenticate
-from origo.exceptions import ApiAuthenticateError
 
 log = logging.getLogger()
 
@@ -30,43 +29,21 @@ class SDK(object):
         return headers
 
     def post(self, url, data, **kwargs):
-        headers = self.headers()
         log.info(f"SDK:Posting resource to url: {url}")
-        result = requests.post(url, data=json.dumps(data), headers=headers, **kwargs)
-        # TODO: ensure we deal with status_code correctly here
-        bad_requests_exclude = [409]
-        if result.status_code >= 500:
-            log.info(f"SDK:Raising Internal error")
-            result.raise_for_status()
-        elif (
-            result.status_code >= 400 and result.status_code not in bad_requests_exclude
-        ):
-            log.info(f"SDK:Raising Bad Request: {result.json()}")
-            if result.status_code in [401, 403]:
-                raise ApiAuthenticateError(f"Bad Credentials: {result.status_code}")
-            result.raise_for_status()
+        result = requests.post(
+            url, data=json.dumps(data), headers=self.headers(), **kwargs
+        )
+        result.raise_for_status()
         return result
 
     def get(self, url, **kwargs):
-        headers = self.headers()
         log.info(f"SDK:Getting resource from url: {url}")
-        result = requests.get(url, headers=headers, **kwargs)
-        if result.status_code == 401:
-            msg = result.json()
-            log.info(f"Could not authenticate client, raising error: {msg}")
-            raise ApiAuthenticateError(
-                f"Could not authenticate client to get datasets: {msg}"
-            )
+        result = requests.get(url, headers=self.headers(), **kwargs)
+        result.raise_for_status()
         return result
 
     def delete(self, url, **kwargs):
-        headers = self.headers()
         log.info(f"SDK:Deleting resource from url: {url}")
-        result = requests.delete(url, headers=headers, **kwargs)
-        if result.status_code == 401:
-            msg = result.json()
-            log.info(f"Could not authenticate client, raising error: {msg}")
-            raise ApiAuthenticateError(
-                f"Could not authenticate client to get datasets: {msg}"
-            )
+        result = requests.delete(url, headers=self.headers(), **kwargs)
+        result.raise_for_status()
         return result

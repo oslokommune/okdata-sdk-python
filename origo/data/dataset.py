@@ -2,7 +2,6 @@ import logging
 import re
 
 from origo.sdk import SDK
-from origo.exceptions import DataExistsError
 
 log = logging.getLogger()
 
@@ -47,11 +46,7 @@ class Dataset(SDK):
             f"SDK:Creating version for {datasetid} from: {url}, with payload: {data}"
         )
         result = self.post(url, data)
-        if result.status_code == 409:
-            version = data["version"]
-            raise DataExistsError(
-                f"Version: {version} on datasetId {datasetid} already exists"
-            )
+
         body = result.json()
         datasetVersion = body["Id"].split("/")[1]
         log.info(f"SDK:Created dataset version: {datasetVersion}")
@@ -77,11 +72,6 @@ class Dataset(SDK):
         )
         result = self.post(url, data)
         log.info(f"SDK:API reported back: {result.json()}")
-        if result.status_code == 409:
-            edition = data["edition"]
-            raise DataExistsError(
-                f"Edition: {edition} on datasetId {datasetid} version: {versionid} already exists"
-            )
         body = result.json()
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Created dataset edition: {editionid} on {datasetid}/{versionid}")

@@ -1,9 +1,6 @@
+from requests.exceptions import HTTPError
 import pytest
-from origo.elasticsearch.queries import (
-    ElasticsearchQueries,
-    NotDatasetOwnerError,
-    InternalError,
-)
+from origo.elasticsearch.queries import ElasticsearchQueries
 
 
 def test_event_stat(requests_mock):
@@ -22,10 +19,10 @@ def test_not_owner(requests_mock):
     requests_mock.get(
         f"{sdk.elasticsearch_query_url}/my_dataset/events",
         status_code=403,
-        json={"last_day": "Yup"},
+        json={"message": "Forbidden"},
     )
 
-    with pytest.raises(NotDatasetOwnerError):
+    with pytest.raises(HTTPError):
         sdk.event_stat("my_dataset")
 
 
@@ -38,5 +35,5 @@ def test_other_statuses(requests_mock, status_code):
         json={"last_day": "Yup"},
     )
 
-    with pytest.raises(InternalError):
+    with pytest.raises(HTTPError):
         sdk.event_stat("my_dataset")
