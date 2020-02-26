@@ -16,6 +16,4 @@ class Status(SDK):
         response = self.get(f"{url}/{uuid}")
         if response.status_code == 200:
             return response.json()
-        else:
-            log.info(f"Was unable to retrieve status for UUID={uuid} from: {url}")
-            response.raise_for_status()
+        response.raise_for_status()
