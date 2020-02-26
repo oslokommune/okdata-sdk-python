@@ -23,6 +23,7 @@ ORIGO_CONFIG["dev"] = {
     "streamManagerUrl": "https://api.data-dev.oslo.systems/stream-manager",
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
+    "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
 }
 ORIGO_CONFIG["prod"] = {
     "client_id": None,
@@ -39,6 +40,7 @@ ORIGO_CONFIG["prod"] = {
     "streamManagerUrl": "https://api.data.oslo.systems/stream-manager",
     "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
+    "statusApiUrl": "https://api.data.oslo.systems/status-api/status",
 }
 
 ORIGO_DEFAULT_ENVIRONMENT = "dev"
