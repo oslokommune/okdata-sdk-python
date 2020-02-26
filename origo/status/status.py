@@ -1,4 +1,3 @@
-import requests
 import logging
 
 from origo.sdk import SDK
@@ -14,9 +13,9 @@ class Status(SDK):
     def get_status(self, uuid):
         url = self.config.get("statusApiUrl")
         log.info(f"Retrieving status for UUID={uuid} from: {url}")
-        response = requests.get(url + uuid)
+        response = self.get(f"{url}/{uuid}")
         if response.status_code == 200:
             return response.json()
         else:
             log.info(f"Was unable to retrieve status for UUID={uuid} from: {url}")
-            raise KeyError(response.status_code, uuid)
+            response.raise_for_status()
