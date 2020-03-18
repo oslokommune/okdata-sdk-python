@@ -3,7 +3,7 @@
     "datasetUri": "output/pipeline-instance-id/1",
     "pipelineArn": "arn:aws:states:eu-west-1:123456789101:stateMachine:test-pipeline-excel-to-csv",
     "schemaId": "pipeline-instance-id",
-    "transformation": {
+    "taskConfig": {
         "json_transformer": {}
     },
     "useLatestEdition": true

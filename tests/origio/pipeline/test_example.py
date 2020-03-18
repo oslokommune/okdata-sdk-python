@@ -60,7 +60,7 @@ def test_bootstrap_script(
         id="uuid?",
         datasetUri="boligpriser",
         schemaId="coming soon",
-        transformation="transformation goes here",
+        taskConfig="transformation goes here",
         pipelineArn=pipeline.arn,
         useLatestEdition=True,
     )

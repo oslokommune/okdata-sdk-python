@@ -31,4 +31,15 @@ def test_get_pipeline_instance(mock_get_pipeline_instance):
     client = PipelineApiClient()
     instance = client.fetch(PipelineInstance, "pipeline-instance-id")
     expected = json.loads(create_pipeline_instance_request())
-    assert instance.transformation == expected["transformation"]
+    assert instance.taskConfig == expected["taskConfig"]
+
+
+def test_pipeline_instance_with_optional_transformation():
+    client = PipelineApiClient()
+    raw = json.loads(create_pipeline_instance_request())
+    raw["transformation"] = {"some transformation": "here"}
+    instance = PipelineInstance.from_json(client, json.dumps(raw))
+    validated, error = instance.validate()
+    assert validated
+    assert error is None
+    assert raw["transformation"] == instance.transformation
