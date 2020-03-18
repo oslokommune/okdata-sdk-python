@@ -9,7 +9,7 @@
     "datasetUri",
     "pipelineArn",
     "schemaId",
-    "transformation",
+    "taskConfig",
     "useLatestEdition"
   ],
   "properties": {
@@ -45,6 +45,11 @@
       "pattern": "^(.*)$"
     },
     "transformation": {
+      "$id": "#/properties/transformation",
+      "type": "object",
+      "title": "The Transformation Schema"
+    },
+    "taskCofig": {
       "$id": "#/properties/transformation",
       "type": "object",
       "title": "The Transformation Schema"

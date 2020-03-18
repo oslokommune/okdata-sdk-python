@@ -39,8 +39,9 @@ class PipelineInstance(PipelineBase):
         datasetUri: str,
         pipelineArn: str,
         schemaId: str,
-        transformation: object,
+        taskConfig: object,
         useLatestEdition: bool,
+        transformation: object = None,
     ):
         self.sdk = sdk
         self._id = id
@@ -48,18 +49,22 @@ class PipelineInstance(PipelineBase):
         self.pipelineArn = pipelineArn
         self.schemaId = schemaId
         self.transformation = transformation
+        self.taskConfig = taskConfig
         self.useLatestEdition = useLatestEdition
 
     @property
     def __dict__(self):
-        return {
+        dictionary = {
             "id": self.id,
             "datasetUri": self.datasetUri,
             "pipelineArn": self.pipelineArn,
             "schemaId": self.schemaId,
-            "transformation": self.transformation,
+            "taskConfig": self.taskConfig,
             "useLatestEdition": self.useLatestEdition,
         }
+        if self.transformation is not None:
+            dictionary["transformation"] = self.transformation
+        return dictionary
 
     def __repr__(self):
         return json.dumps(self.__dict__)
