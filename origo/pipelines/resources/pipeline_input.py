@@ -42,10 +42,6 @@ class PipelineInput(PipelineBase):
         raise NotImplementedError
 
     @classmethod
-    def list(cls, sdk: SDK):
-        raise NotImplementedError
-
-    @classmethod
     def _delete(cls, sdk: SDK, id: str):
         raise NotImplementedError
 

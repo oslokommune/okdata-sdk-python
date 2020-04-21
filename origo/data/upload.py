@@ -33,7 +33,11 @@ class Upload(SDK):
 
         files = {"file": open(fileName, "rb")}
         result = requests.post(url, data=s3Data, files=files)
-        return result.status_code == 204
+        data = {
+            "result": result.status_code == 204,
+            "status": s3SignedData["status_response"],
+        }
+        return data
 
     def create_s3_signed_data(self, fileName, datasetid, versionid, editionid):
         edition = f"{datasetid}/{versionid}/{editionid}"
