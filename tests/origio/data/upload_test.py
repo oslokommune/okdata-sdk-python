@@ -27,6 +27,7 @@ class TestUpload:
                 "Id": "test-upload-create-signed-data",
                 "fields": {"a": "b"},
                 "status_code": 204,
+                "status_response": "uu-ii-dd",
             }
         )
         matcher = re.compile(config.get("uploadUrl"))
@@ -38,7 +39,8 @@ class TestUpload:
 
         with patch("builtins.open", mock_open(read_data="file-name")):
             res = up.upload("file-name", "dataset-id", "version-id", "edition-id")
-            assert res is True
+            assert res["result"] is True
+            assert res["status"] == "uu-ii-dd"
 
     def test_createS3SignedData(self, requests_mock):
         up = Upload(config=config, auth=auth_default)
