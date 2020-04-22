@@ -33,9 +33,13 @@ class Upload(SDK):
 
         files = {"file": open(fileName, "rb")}
         result = requests.post(url, data=s3Data, files=files)
+        status = False
+        if "status_response" in s3SignedData:
+            status = s3SignedData["status_response"]
+
         data = {
             "result": result.status_code == 204,
-            "status": s3SignedData["status_response"],
+            "status": status,
         }
         return data
 
