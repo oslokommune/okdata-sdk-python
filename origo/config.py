@@ -24,6 +24,7 @@ ORIGO_CONFIG["dev"] = {
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
     "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
+    "simpleDatasetAuthorizerUrl": "https://api.data-dev.oslo.systems/simple-dataset-authorizer",
 }
 ORIGO_CONFIG["prod"] = {
     "client_id": None,
