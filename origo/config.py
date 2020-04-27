@@ -45,7 +45,7 @@ ORIGO_CONFIG["prod"] = {
     "simpleDatasetAuthorizerUrl": "https://api.data.oslo.systems/simple-dataset-authorizer",
 }
 
-ORIGO_DEFAULT_ENVIRONMENT = "dev"
+ORIGO_DEFAULT_ENVIRONMENT = "prod"
 
 ORIGO_ENVIRONMENTS = ["dev", "prod"]
 
