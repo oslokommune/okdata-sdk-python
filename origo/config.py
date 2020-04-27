@@ -43,7 +43,7 @@ ORIGO_CONFIG["prod"] = {
     "statusApiUrl": "https://api.data.oslo.systems/status-api/status",
 }
 
-ORIGO_DEFAULT_ENVIRONMENT = "dev"
+ORIGO_DEFAULT_ENVIRONMENT = "prod"
 
 ORIGO_ENVIRONMENTS = ["dev", "prod"]
 

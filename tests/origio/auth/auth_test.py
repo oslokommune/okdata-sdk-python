@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 config = Config()
-token_endpoint = "https://login.oslo.kommune.no/auth/realms/api-catalog/protocol/openid-connect/token"
+token_endpoint = "https://login-test.oslo.kommune.no/auth/realms/api-catalog/protocol/openid-connect/token"
 
 
 @pytest.fixture(scope="function")

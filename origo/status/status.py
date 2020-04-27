@@ -6,9 +6,9 @@ log = logging.getLogger()
 
 
 class Status(SDK):
-    def __init__(self, config=None, auth=None):
+    def __init__(self, config=None, auth=None, env=None):
         self.__name__ = "status"
-        super().__init__(config, auth)
+        super().__init__(config, auth, env)
 
     def get_status(self, uuid):
         url = self.config.get("statusApiUrl")
