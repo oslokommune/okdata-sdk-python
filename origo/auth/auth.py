@@ -88,7 +88,10 @@ class Authenticate(object):
         if not self.token_provider:
             return
 
-        tokens = self.token_provider.refresh_token(self.refresh_token)
+        if is_token_expired(self._refresh_token):
+            tokens = self.token_provider.new_token()
+        else:
+            tokens = self.token_provider.refresh_token(self.refresh_token)
         self._access_token = tokens["access_token"]
         self.file_cache.write_credentials(credentials=self)
 
