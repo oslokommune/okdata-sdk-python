@@ -1,6 +1,5 @@
 import json
 import os
-from dataclasses import dataclass
 
 import jsonschema
 from jsonschema import ValidationError, SchemaError
@@ -9,7 +8,6 @@ from origo.pipelines.resources.pipeline_base import PipelineBase, InternalError
 from origo.sdk import SDK
 
 
-@dataclass
 class PipelineInput(PipelineBase):
     """A Pipeline Input resource in pipeline-api
 

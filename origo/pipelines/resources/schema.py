@@ -1,11 +1,9 @@
 import json
-from dataclasses import dataclass
 
 from origo.pipelines.resources.pipeline_base import PipelineBase
 from origo.sdk import SDK
 
 
-@dataclass
 class Schema(PipelineBase):
     """A Schema resource in pipeline-api
 

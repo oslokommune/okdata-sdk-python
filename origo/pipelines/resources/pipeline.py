@@ -1,5 +1,4 @@
 import json
-from dataclasses import dataclass
 from typing import List
 
 from requests import HTTPError
@@ -9,7 +8,6 @@ from origo.pipelines.resources.pipeline_instance import PipelineInstance
 from origo.sdk import SDK
 
 
-@dataclass
 class Pipeline(PipelineBase):
     """A Pipeline resource in pipeline-api
 

@@ -1,6 +1,5 @@
 import json
 import os
-from dataclasses import dataclass
 
 import jsonschema
 from jsonschema import ValidationError, SchemaError
@@ -17,7 +16,6 @@ class ResourceConflict(Exception):
     pass
 
 
-@dataclass
 class PipelineBase:
     """An abstract class for resources in pipeline-api
 
