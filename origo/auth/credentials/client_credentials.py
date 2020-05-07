@@ -1,14 +1,22 @@
-from dataclasses import dataclass
-
 from keycloak.keycloak_openid import KeycloakOpenID
 
 from origo.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
+from origo.config import Config
 
 
-@dataclass
 class ClientCredentialsProvider(TokenProvider):
     client_id: str = None
     client_secret: str = None
+
+    # TODO: Annotate the class with `@dataclass` and remove this once support
+    # for Python 3.6 is dropped.
+    def __init__(
+        self, config: Config, client_id: str = None, client_secret: str = None
+    ):
+        super().__init__(config)
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.__post_init__()
 
     def __post_init__(self):
         if not self.client_id:
