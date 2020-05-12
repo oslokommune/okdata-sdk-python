@@ -17,18 +17,23 @@ edition = "latest"
 test_file_content = "kake;basilikum;laks;soyasaus"
 
 
-class DownloadTest:
-    def test_download_files(self, mock_home_dir, mock_http_calls):
-        data_exporter_client.download_files(dataset_id, version, edition)
-        with open(f"{os.environ['HOME']}/{s3_key}", "r") as f:
-            assert str(f) == test_file_content
+def test_download_files_default_output_path(mock_home_dir, mock_http_calls):
+    result = data_exporter_client.download_files(dataset_id, version, edition)
+    exp_output_file_path = f"{os.environ['HOME']}/{s3_key}"
+    with open(exp_output_file_path, "r") as f:
+        assert str(f) == test_file_content
+    assert result == {"downloaded_files": [exp_output_file_path]}
 
-        alternative_path = "alternative/path"
-        data_exporter_client.download_files(
-            dataset_id, version, edition, output_path=alternative_path
-        )
-        with open(f"{os.environ['HOME']}/{alternative_path}", "r") as f:
-            assert str(f) == test_file_content
+
+def test_download_files_alternative_output_path(mock_home_dir, mock_http_calls):
+    alternative_path = "alternative/path"
+    result = data_exporter_client.download_files(
+        dataset_id, version, edition, output_path=alternative_path
+    )
+    exp_output_file_path = f"{os.environ['HOME']}/{alternative_path}/{file_name}"
+    with open(exp_output_file_path, "r") as f:
+        assert str(f) == test_file_content
+    assert result == {"downloaded_files": [exp_output_file_path]}
 
 
 @pytest.fixture(scope="function")

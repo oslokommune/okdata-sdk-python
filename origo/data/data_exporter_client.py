@@ -21,11 +21,12 @@ class DataExporterClient(SDK):
             f"{self.data_exporter_url}/{dataset_id}/{version}/{edition}"
         )
 
-        result = self.get(get_download_urls_url)
-        return result.json()
+        response = self.get(get_download_urls_url)
+        return response.json()
 
     def download_files(self, dataset_id, version, edition, output_path=None):
         download_urls = self.get_download_urls(dataset_id, version, edition)
+        downloaded_files = []
         for download_url in download_urls:
             if output_path:
                 file_path = f"{os.environ['HOME']}/{output_path}"
@@ -34,6 +35,10 @@ class DataExporterClient(SDK):
                 file_path = f"{os.environ['HOME']}/{default_path}"
 
             file_name = download_url["key"].split("/")[-1]
-            file_content = requests.get(download_url["url"]).text
+            file_content_response = requests.get(download_url["url"])
+            file_content_response.raise_for_status()
 
-            write_file_content(file_name, file_path, file_content)
+            write_file_content(file_name, file_path, file_content_response.text)
+            downloaded_files.append(f"{file_path}/{file_name}")
+
+        return {"downloaded_files": downloaded_files}
