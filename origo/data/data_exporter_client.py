@@ -9,16 +9,17 @@ from origo.io_utils import write_file_content
 log = logging.getLogger()
 
 
-class Download(SDK):
-    def __init__(self, config=None, auth=None):
+class DataExporterClient(SDK):
+    def __init__(self, config=None, auth=None, env=None):
         self.__name__ = "download"
-        super().__init__(config, auth)
+        super().__init__(config, auth, env)
+        self.data_exporter_url = self.config.get("dataExporterUrl")
 
-    # TODO: the data-exporter repo needs to handle dataset export properly first
     def get_download_urls(self, dataset_id, version, edition):
-        base_url = self.config.get("downloadUrl")
 
-        get_download_urls_url = f"{base_url}/{dataset_id}/{version}/{edition}"
+        get_download_urls_url = (
+            f"{self.data_exporter_url}/{dataset_id}/{version}/{edition}"
+        )
 
         result = self.get(get_download_urls_url)
         return result.json()
@@ -29,7 +30,7 @@ class Download(SDK):
             if output_path:
                 file_path = f"{os.environ['HOME']}/{output_path}"
             else:
-                default_path = "/".join(download_url['key'].split("/")[0:-1])
+                default_path = "/".join(download_url["key"].split("/")[0:-1])
                 file_path = f"{os.environ['HOME']}/{default_path}"
 
             file_name = download_url["key"].split("/")[-1]
