@@ -13,20 +13,24 @@ class SimpleDatasetAuthorizerClient(SDK):
         create_dataset_access_url = f"{self.dataset_authorizer_url}/{dataset_id}"
         request_data = {"principalId": prinical_id}
         if bearer_token:
-            return requests.post(
+            result = requests.post(
                 create_dataset_access_url,
                 headers={"Authorization": f"Bearer {bearer_token}"},
                 data=request_data,
-            ).json()
+            )
+            result.raise_for_status()
+            return result.json()
         return self.post(create_dataset_access_url, data=request_data).json()
 
     def check_dataset_access(self, dataset_id, bearer_token=None):
         check_dataset_access_url = f"{self.dataset_authorizer_url}/{dataset_id}"
         if bearer_token:
-            return requests.get(
+            result = requests.get(
                 check_dataset_access_url,
                 headers={"Authorization": f"Bearer {bearer_token}"},
-            ).json()
+            )
+            result.raise_for_status()
+            return result.json()
         return self.get(check_dataset_access_url).json()
 
     def create_webhook_token(self, dataset_id, service_name):
