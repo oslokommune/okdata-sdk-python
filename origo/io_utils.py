@@ -39,3 +39,12 @@ def read_from_origo_cache(filename):
         return content
     except IOError:
         return
+
+
+def write_file_content(file_name, path, content):
+    if not Path(path).exists():
+        create_dir(path)
+
+    f = open(f"{path}/{file_name}", "w+")
+    f.write(content)
+    f.close()
