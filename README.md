@@ -86,7 +86,7 @@ If these are non existent then you can create them yourself. This can be achieve
 or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
 
 ```python
-from origo.data.data_exporter_client import DataExporterClient
+from origo.data.download import Download
 from origo.config import Config
 
 origo_config = Config(env="dev")
@@ -94,24 +94,17 @@ origo_config = Config(env="dev")
 # If necessary you can override default config values
 origo_config.config["cacheCredentials"] = False
 
-data_exporter_client = DataExporterClient(config=origo_config)
+data_downloader = Download(config=origo_config)
 
 dataset_id = "your-dataset-id"
 version = "1"
 edition = "latest"
 
-# Downloading a file to default directory (mirrors aws s3 key with your local home-directory)
-res1 = data_exporter_client.download_files(dataset_id, version, edition)
+# Downloading a file
+res1 = data_downloader.download(dataset_id, version, edition, "my/preferred/output/path")
 print(res1)
 # {
-#     "downloaded_files": ["$HOME/processed/green/your-dataset-id/version=1/edition=20200511T130743/file_name.csv"]
-# }
-
-# You can also override default output path with a file path of your own choosing
-res2 = data_exporter_client.download_files(dataset_id, version, edition, output_path="my/preferred/path")
-print(res2)
-# {
-#     "downloaded_files": ["$HOME/my/preferred/path/file_name.csv"]
+#     "downloaded_files": ["my/preferred/output/path/file_name.csv"]
 # }
 ```
 

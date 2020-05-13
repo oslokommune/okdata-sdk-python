@@ -9,7 +9,7 @@ from origo.io_utils import write_file_content
 log = logging.getLogger()
 
 
-class DataExporterClient(SDK):
+class Download(SDK):
     def __init__(self, config=None, auth=None, env=None):
         self.__name__ = "download"
         super().__init__(config, auth, env)
@@ -24,21 +24,14 @@ class DataExporterClient(SDK):
         response = self.get(get_download_urls_url)
         return response.json()
 
-    def download_files(self, dataset_id, version, edition, output_path=None):
-        download_urls = self.get_download_urls(dataset_id, version, edition)
+    def download(self, dataset_id, version, edition, output_path):
         downloaded_files = []
-        for download_url in download_urls:
-            if output_path:
-                file_path = f"{os.environ['HOME']}/{output_path}"
-            else:
-                default_path = "/".join(download_url["key"].split("/")[0:-1])
-                file_path = f"{os.environ['HOME']}/{default_path}"
-
+        for download_url in self.get_download_urls(dataset_id, version, edition):
             file_name = download_url["key"].split("/")[-1]
             file_content_response = requests.get(download_url["url"])
             file_content_response.raise_for_status()
 
-            write_file_content(file_name, file_path, file_content_response.text)
-            downloaded_files.append(f"{file_path}/{file_name}")
+            write_file_content(file_name, output_path, file_content_response.text)
+            downloaded_files.append(f"{output_path}/{file_name}")
 
-        return {"downloaded_files": downloaded_files}
+        return {"files": downloaded_files}
