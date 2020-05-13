@@ -41,11 +41,11 @@ def read_from_origo_cache(filename):
         return
 
 
-def write_file_content(file_name, path, content, c=0):
-    if Path(path).exists():
-        f = open(f"{path}/{file_name}", "w+")
-        f.write(content)
-        f.close()
-    else:
+def write_file_content(file_name, path, content):
+    if not Path(path).exists():
         create_dir(path)
         write_file_content(file_name, path, content)
+        
+    f = open(f"{path}/{file_name}", "w+")
+    f.write(content)
+    f.close()
