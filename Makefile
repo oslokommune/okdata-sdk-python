@@ -4,8 +4,8 @@ all: clean test bump-patch build publish-module
 .PHONY: init
 init:
 	python3 -m pip install tox black pip-tools wheel twine bumpversion
-	pip-compile
-	pip install -rrequirements.txt
+	python3 -m piptools compile
+	python3 -m pip install -rrequirements.txt
 
 .PHONY: format
 format:
