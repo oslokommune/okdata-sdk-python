@@ -29,7 +29,7 @@ ORIGO_CONFIG["dev"] = {
 ORIGO_CONFIG["prod"] = {
     "client_id": None,
     "client_secret": None,
-    "cacheCredentials": True,
+    "cacheCredentials": False,
     "dataExporterUrl": "https://api.data.oslo.systems/data-exporter",
     "datasetUrl": "https://api.data.oslo.systems/metadata/datasets",
     "elasticsearchQueryUrl": "https://api.data.oslo.systems/elasticsearch-queries",
