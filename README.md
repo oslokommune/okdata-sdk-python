@@ -220,8 +220,7 @@ dataset_metadata = {
         "email": "your_email@domain.com",
         "phone": "999555111"
     },
-    "publisher": "name of organization or person responsible for publishing the data",
-    "processing_stage": "raw"
+    "publisher": "name of organization or person responsible for publishing the data"
 }
 
 new_dataset = dataset.create_dataset(data=dataset_metadata)
@@ -238,7 +237,6 @@ new_dataset = dataset.create_dataset(data=dataset_metadata)
 #   'description': 'Describe your dataset here',
 #   'keywords': ['some-keyword'],
 #   'objective': 'Exemplify how to create a new dataset',
-#   'processing_stage': 'raw',
 #   'publisher': 'name of organization or person responsible for publishing the '
 #                'data',
 #   'title': 'Precise Descriptive Title'}
