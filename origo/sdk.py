@@ -36,6 +36,14 @@ class SDK(object):
         result.raise_for_status()
         return result
 
+    def put(self, url, data, **kwargs):
+        log.info(f"SDK:Putting resource to url: {url}")
+        result = requests.put(
+            url, data=json.dumps(data), headers=self.headers(), **kwargs
+        )
+        result.raise_for_status()
+        return result
+
     def get(self, url, **kwargs):
         log.info(f"SDK:Getting resource from url: {url}")
         result = requests.get(url, headers=self.headers(), **kwargs)
