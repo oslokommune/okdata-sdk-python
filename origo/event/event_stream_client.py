@@ -24,3 +24,23 @@ class EventStreamClient(SDK):
     def delete_event_stream(self, dataset_id, version):
         response = self.delete(f"{self.event_stream_api_url}/{dataset_id}/{version}")
         return response.json()
+
+    def get_subscribable(self, dataset_id, version):
+        response = self.get(
+            f"{self.event_stream_api_url}/{dataset_id}/{version}/subscribable"
+        )
+        return response.json()
+
+    def enable_subscribable(self, dataset_id, version):
+        response = self.put(
+            f"{self.event_stream_api_url}/{dataset_id}/{version}/subscribable",
+            data={"enabled": True},
+        )
+        return response.json()
+
+    def disable_subscribable(self, dataset_id, version):
+        response = self.put(
+            f"{self.event_stream_api_url}/{dataset_id}/{version}/subscribable",
+            data={"enabled": False},
+        )
+        return response.json()
