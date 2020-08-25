@@ -1,5 +1,4 @@
-import json
-import pytest
+import re
 
 from origo.event.event_stream_client import EventStreamClient
 
@@ -8,62 +7,94 @@ version = "1"
 
 event_stream_client = EventStreamClient()
 
-event_stream_url = (
-    f"{event_stream_client.stream_manager_url}/stream/{dataset_id}/{version}"
-)
-
-event_stream_info = {
+event_stream_item_response = {
     "id": f"{dataset_id}/{version}",
-    "status": "ACTIVE",
-    "createdBy": "jd",
-    "createdAt": "2020-01-21T09:28:57.831435+00:00",
+    "status": "SOME_STATUS",
+    "updated_by": "janedoe",
+    "updated_at": "2020-08-03T07:42:18.114531+00:00",
+    "create_raw": True,
+    "deleted": False,
+    "confidentiality": "green",
+}
+event_stream_deleted_response = {
+    "message": f"Deleted event stream with id {dataset_id}/{version}"
+}
+subscribable_item_response = {
+    "status": "SOME_STATUS",
+    "updated_by": "janedoe",
+    "updated_at": "2020-08-03T07:42:18.114531+00:00",
+    "enabled": True,
 }
 
-error_message_from_api = "Event stream with id: some-id does not exist"
+
+class TestEventStream:
+    def test_create_event_stream(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}")
+        requests_mock.register_uri(
+            "POST", matcher, json=event_stream_item_response, status_code=201
+        )
+
+        assert (
+            event_stream_client.create_event_stream(dataset_id, version)
+            == event_stream_item_response
+        )
+
+        assert (
+            event_stream_client.create_event_stream(
+                dataset_id, version, create_raw=True
+            )
+            == event_stream_item_response
+        )
+
+        assert requests_mock.last_request.json() == {"create_raw": True}
+
+    def test_get_event_stream(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}")
+        requests_mock.register_uri(
+            "GET", matcher, json=event_stream_item_response, status_code=200
+        )
+
+        assert (
+            event_stream_client.get_event_stream_info(dataset_id, version)
+            == event_stream_item_response
+        )
+
+    def test_delete_event_stream(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}")
+        requests_mock.register_uri(
+            "DELETE", matcher, json=event_stream_deleted_response, status_code=200
+        )
+
+        assert (
+            event_stream_client.delete_event_stream(dataset_id, version)
+            == event_stream_deleted_response
+        )
 
 
-def test_create_event_stream(mock_create_event_stream_request):
+class TestSubscribable:
+    def test_get_subscribable(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}/subscribable")
+        requests_mock.register_uri(
+            "GET", matcher, json=subscribable_item_response, status_code=200
+        )
 
-    assert event_stream_client.create_event_stream(dataset_id, version) == {
-        "message": "Accepted"
-    }
+        response = event_stream_client.get_subscribable(dataset_id, version)
+        assert response == subscribable_item_response
 
+    def test_enable_subscribable(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}/subscribable")
+        requests_mock.register_uri(
+            "PUT", matcher, json=subscribable_item_response, status_code=200
+        )
+        response = event_stream_client.enable_subscribable(dataset_id, version)
+        assert response == subscribable_item_response
+        assert requests_mock.last_request.json() == {"enabled": True}
 
-def test_get_event_stream_info(mock_get_event_stream_info_request):
-    assert (
-        event_stream_client.get_event_stream_info(dataset_id, version)
-        == event_stream_info
-    )
-
-
-def test_delete_event_stream(mock_delete_event_stream_request):
-    assert event_stream_client.delete_event_stream(dataset_id, version) == {
-        "message": "Delete initiated"
-    }
-
-
-@pytest.fixture(scope="function")
-def mock_create_event_stream_request(requests_mock):
-    requests_mock.register_uri(
-        "POST",
-        event_stream_url,
-        text=json.dumps({"message": "Accepted"}),
-        status_code=202,
-    )
-
-
-@pytest.fixture(scope="function")
-def mock_get_event_stream_info_request(requests_mock):
-    requests_mock.register_uri(
-        "GET", event_stream_url, text=json.dumps(event_stream_info), status_code=200
-    )
-
-
-@pytest.fixture(scope="function")
-def mock_delete_event_stream_request(requests_mock):
-    requests_mock.register_uri(
-        "DELETE",
-        event_stream_url,
-        text=json.dumps({"message": "Delete initiated"}),
-        status_code=202,
-    )
+    def test_disable_subscribable(self, requests_mock):
+        matcher = re.compile(f"streams/{dataset_id}/{version}/subscribable")
+        requests_mock.register_uri(
+            "PUT", matcher, json=subscribable_item_response, status_code=200
+        )
+        response = event_stream_client.disable_subscribable(dataset_id, version)
+        assert response == subscribable_item_response
+        assert requests_mock.last_request.json() == {"enabled": False}
