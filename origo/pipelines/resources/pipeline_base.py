@@ -19,9 +19,9 @@ class ResourceConflict(Exception):
 class PipelineBase:
     """An abstract class for resources in pipeline-api
 
-       Attributes:
-           sdk: An instance of the SDK
-       """
+    Attributes:
+        sdk: An instance of the SDK
+    """
 
     sdk: SDK
     __resource_name__: str

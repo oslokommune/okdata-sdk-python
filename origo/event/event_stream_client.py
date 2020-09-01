@@ -8,19 +8,62 @@ class EventStreamClient(SDK):
     def __init__(self, config=None, auth=None, env=None):
         self.__name__ = "event_stream_client"
         super().__init__(config, auth, env)
-        self.stream_manager_url = self.config.get("streamManagerUrl")
+        self.event_stream_url = self.config.get("eventStreamUrl")
 
-    def create_event_stream(self, dataset_id, version):
-        response = self.post(self.event_stream_url(dataset_id, version), data=None)
+    def create_event_stream(self, dataset_id, version, create_raw=True):
+        response = self.post(
+            f"{self.event_stream_url}/{dataset_id}/{version}",
+            data={"create_raw": create_raw},
+        )
         return response.json()
 
     def get_event_stream_info(self, dataset_id, version):
-        response = self.get(self.event_stream_url(dataset_id, version))
+        response = self.get(f"{self.event_stream_url}/{dataset_id}/{version}")
         return response.json()
 
     def delete_event_stream(self, dataset_id, version):
-        response = self.delete(self.event_stream_url(dataset_id, version))
+        response = self.delete(f"{self.event_stream_url}/{dataset_id}/{version}")
         return response.json()
 
-    def event_stream_url(self, dataset_id, version):
-        return f"{self.stream_manager_url}/stream/{dataset_id}/{version}"
+    def get_subscribable(self, dataset_id, version):
+        response = self.get(
+            f"{self.event_stream_url}/{dataset_id}/{version}/subscribable"
+        )
+        return response.json()
+
+    def enable_subscribable(self, dataset_id, version):
+        response = self.put(
+            f"{self.event_stream_url}/{dataset_id}/{version}/subscribable",
+            data={"enabled": True},
+        )
+        return response.json()
+
+    def disable_subscribable(self, dataset_id, version):
+        response = self.put(
+            f"{self.event_stream_url}/{dataset_id}/{version}/subscribable",
+            data={"enabled": False},
+        )
+        return response.json()
+
+    def get_sinks(self, dataset_id, version):
+        response = self.get(f"{self.event_stream_url}/{dataset_id}/{version}/sinks")
+        return response.json()
+
+    def add_sink(self, dataset_id, version, sink_type):
+        response = self.post(
+            f"{self.event_stream_url}/{dataset_id}/{version}/sinks",
+            data={"type": sink_type},
+        )
+        return response.json()
+
+    def get_sink(self, dataset_id, version, sink_id):
+        response = self.get(
+            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_id}"
+        )
+        return response.json()
+
+    def remove_sink(self, dataset_id, version, sink_id):
+        response = self.delete(
+            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_id}"
+        )
+        return response.json()
