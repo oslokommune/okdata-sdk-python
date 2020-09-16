@@ -31,14 +31,14 @@ class EventStreamClient(SDK):
         )
         return response.json()
 
-    def enable_subscribable(self, dataset_id, version):
+    def enable_subscription(self, dataset_id, version):
         response = self.put(
             f"{self.event_stream_url}/{dataset_id}/{version}/subscribable",
             data={"enabled": True},
         )
         return response.json()
 
-    def disable_subscribable(self, dataset_id, version):
+    def disable_subscription(self, dataset_id, version):
         response = self.put(
             f"{self.event_stream_url}/{dataset_id}/{version}/subscribable",
             data={"enabled": False},
@@ -49,7 +49,7 @@ class EventStreamClient(SDK):
         response = self.get(f"{self.event_stream_url}/{dataset_id}/{version}/sinks")
         return response.json()
 
-    def add_sink(self, dataset_id, version, sink_type):
+    def enable_sink(self, dataset_id, version, sink_type):
         response = self.post(
             f"{self.event_stream_url}/{dataset_id}/{version}/sinks",
             data={"type": sink_type},
@@ -62,7 +62,7 @@ class EventStreamClient(SDK):
         )
         return response.json()
 
-    def remove_sink(self, dataset_id, version, sink_id):
+    def disable_sink(self, dataset_id, version, sink_id):
         response = self.delete(
             f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_id}"
         )
