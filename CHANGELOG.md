@@ -1,3 +1,11 @@
+## 0.2.5
+
+* Rename event stream methods:
+    * `enable_subscribable` > `enable_subscription`
+    * `disable_subscribable` > `disable_subscription`
+    * `add_sink` > `enable_sink`
+    * `remove_sink` > `disable_sink`
+
 ## 0.2.4
 
 * Add event stream API support.
