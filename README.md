@@ -70,7 +70,7 @@ data_uploader = Upload(config=origo_config)
 
 # Upload file 'data.json' to dataset-id/version/edition
 dataset_id = "my-dataset-id"
-version = "my-version"  # example value: 1
+version = "my-version" # example value: 1
 edition = "my-edition" # example value: 20200618T114038
 
 filename = "/path-to-file/data.json"
