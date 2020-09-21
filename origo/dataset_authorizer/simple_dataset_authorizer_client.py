@@ -40,6 +40,11 @@ class SimpleDatasetAuthorizerClient(SDK):
         )
         return response.json()
 
+    def list_webhook_tokens(self, dataset_id):
+        response = self.get(f"{self.dataset_authorizer_url}/{dataset_id}/webhook")
+
+        return response.json()
+
     def delete_webhook_token(self, dataset_id, webhook_token):
         response = self.delete(
             f"{self.dataset_authorizer_url}/{dataset_id}/webhook/{webhook_token}"
