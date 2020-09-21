@@ -69,14 +69,19 @@ origo_config.config["cacheCredentials"] = False
 data_uploader = Upload(config=origo_config)
 
 # Upload file 'data.json' to dataset-id/version/edition
-dataset_id = "your-dataset-id"
-version = "version"
-edition = "20200115T130439"
+dataset_id = "my-dataset-id"
+version = "my-version"  # example value: 1
+edition = "my-edition"  # example value: 20200618T114038
 
-filename = "data.json"
+filename = "/path-to-file/data.json"
 
 # Note! filename must be pointing to an existing file on your disk
-upload_success = data_uploader.upload(filename, dataset_id, version, edition)
+upload_response = data_uploader.upload(filename, dataset_id, version, edition)
+print(upload_response)
+# {
+#     "result": True,
+#     "status": "my-dataset-id-54a3c78e-86a3-4631-8f28-0252fe1c7c13",
+# }
 ```
 
 ## Download data
@@ -215,8 +220,7 @@ dataset_metadata = {
         "email": "your_email@domain.com",
         "phone": "999555111"
     },
-    "publisher": "name of organization or person responsible for publishing the data",
-    "processing_stage": "raw"
+    "publisher": "name of organization or person responsible for publishing the data"
 }
 
 new_dataset = dataset.create_dataset(data=dataset_metadata)
@@ -233,7 +237,6 @@ new_dataset = dataset.create_dataset(data=dataset_metadata)
 #   'description': 'Describe your dataset here',
 #   'keywords': ['some-keyword'],
 #   'objective': 'Exemplify how to create a new dataset',
-#   'processing_stage': 'raw',
 #   'publisher': 'name of organization or person responsible for publishing the '
 #                'data',
 #   'title': 'Precise Descriptive Title'}
