@@ -48,6 +48,12 @@ def test_create_webhook_token(mock_create_webhook_token_request):
     )
 
 
+def test_list_webhook_token(mock_list_webhook_tokens_request):
+    assert dataset_authorizer_client.list_webhook_tokens(dataset_id) == [
+        webhook_token_data
+    ]
+
+
 def test_delete_webhook_token(mock_delete_webhook_token_request):
     assert dataset_authorizer_client.delete_webhook_token(
         dataset_id, webhook_token
@@ -87,6 +93,16 @@ def mock_create_webhook_token_request(requests_mock):
         f"{dataset_authorizer_client.dataset_authorizer_url}/{dataset_id}/webhook",
         text=json.dumps(webhook_token_data),
         status_code=201,
+    )
+
+
+@pytest.fixture
+def mock_list_webhook_tokens_request(requests_mock):
+    requests_mock.register_uri(
+        "GET",
+        f"{dataset_authorizer_client.dataset_authorizer_url}/{dataset_id}/webhook",
+        text=json.dumps([webhook_token_data]),
+        status_code=200,
     )
 
 
