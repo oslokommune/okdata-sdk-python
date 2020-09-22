@@ -21,21 +21,22 @@ Reformat files:
 make format
 ```
 
-## Releasing a new sdk version
-* Checkout the master branch
-* Either run `make` 
+## Releasing a new SDK version
+* Checkout the `master` branch
+* Either run `make`
 
 or manually run the make targets:
 1. Test
 ```
 make clean test
 ```
-2. Bump version and Build
+2. Bump version and build
 ```
-make bump-patch build 
+make bump-patch build
 ```
-3. Publish the module to pypi
+3. Publish the module to PyPI
 ```
 make publish-module
 ```
-* Finally push the version bump changes to git. Either make a new PR or push to master
+* Finally push the version bump commit and the generated tag (`git push --tags`)
+  to GitHub.
