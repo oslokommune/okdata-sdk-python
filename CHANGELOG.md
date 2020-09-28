@@ -1,3 +1,7 @@
+## 0.2.6
+
+* Add function for listing webhook tokens for a dataset.
+
 ## 0.2.5
 
 * Rename event stream methods:
