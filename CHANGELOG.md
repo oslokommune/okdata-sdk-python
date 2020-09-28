@@ -1,3 +1,7 @@
+## 0.2.7
+
+* Enable, disable and get event stream sinks by *type* (not id).
+
 ## 0.2.6
 
 * Add function for listing webhook tokens for a dataset.

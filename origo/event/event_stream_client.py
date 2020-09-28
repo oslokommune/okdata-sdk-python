@@ -56,14 +56,14 @@ class EventStreamClient(SDK):
         )
         return response.json()
 
-    def get_sink(self, dataset_id, version, sink_id):
+    def get_sink(self, dataset_id, version, sink_type):
         response = self.get(
-            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_id}"
+            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_type}"
         )
         return response.json()
 
-    def disable_sink(self, dataset_id, version, sink_id):
+    def disable_sink(self, dataset_id, version, sink_type):
         response = self.delete(
-            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_id}"
+            f"{self.event_stream_url}/{dataset_id}/{version}/sinks/{sink_type}"
         )
         return response.json()
