@@ -1,7 +1,6 @@
 import logging
-
 import requests
-
+from typing import Optional
 from origo.auth.credentials.common import TokenProviderNotInitialized, TokenProvider
 from origo.config import Config
 
@@ -9,8 +8,8 @@ log = logging.getLogger()
 
 
 class TokenServiceProvider(TokenProvider):
-    username: str = None
-    password: str = None
+    username: Optional[str] = None
+    password: Optional[str] = None
 
     # TODO: Annotate the class with `@dataclass` and remove this once support
     # for Python 3.6 is dropped.

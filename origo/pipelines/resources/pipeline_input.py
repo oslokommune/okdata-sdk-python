@@ -1,7 +1,8 @@
 import json
 import os
+from typing import Tuple, Optional
 
-import jsonschema
+import jsonschema  # type: ignore
 from jsonschema import ValidationError, SchemaError
 
 from origo.pipelines.resources.pipeline_base import PipelineBase, InternalError
@@ -43,7 +44,7 @@ class PipelineInput(PipelineBase):
     def _delete(cls, sdk: SDK, id: str):
         raise NotImplementedError
 
-    def validate(self) -> (bool, ValidationError):
+    def validate(self) -> Tuple[bool, Optional[ValidationError]]:
         path = os.path.dirname(__file__)
         with open(f"{path}/schemas/pipeline-inputs.json") as f:
             try:
