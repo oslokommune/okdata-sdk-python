@@ -1,12 +1,13 @@
-from keycloak.keycloak_openid import KeycloakOpenID
+from typing import Optional
+from keycloak.keycloak_openid import KeycloakOpenID  # type: ignore
 
 from origo.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
 from origo.config import Config
 
 
 class ClientCredentialsProvider(TokenProvider):
-    client_id: str = None
-    client_secret: str = None
+    client_id: Optional[str] = None
+    client_secret: Optional[str] = None
 
     # TODO: Annotate the class with `@dataclass` and remove this once support
     # for Python 3.6 is dropped.

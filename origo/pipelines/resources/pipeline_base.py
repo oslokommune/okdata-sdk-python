@@ -1,7 +1,8 @@
 import json
 import os
+from typing import Tuple, Optional
 
-import jsonschema
+import jsonschema  # type: ignore
 from jsonschema import ValidationError, SchemaError
 from requests import HTTPError
 
@@ -26,7 +27,10 @@ class PipelineBase:
     sdk: SDK
     __resource_name__: str
 
-    def validate(self) -> (bool, ValidationError):
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def validate(self) -> Tuple[bool, Optional[ValidationError]]:
         """Validates the current object against a json schema
 
         Uses __resource_name__ to find the correct schema
@@ -46,7 +50,7 @@ class PipelineBase:
                 # TODO: Logging
                 return False, ve
 
-    def create(self) -> (str, HTTPError):
+    def create(self) -> Tuple[Optional[str], Optional[HTTPError]]:
         """Creates the current object in pipeline-api
 
         Uses __resource_name__ to create the post url
