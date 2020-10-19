@@ -17,6 +17,7 @@ class PipelineInstance(PipelineBase):
             Defines what dataset + version this pipeline instance should result in. e.g. Running the pipeline instance
             should create a new edition in this dataset + version combination.
         pipelineArn: What Pipeline should be used.
+        pipelineProcessorId: ID of the pipeline processor to use.
         schemaId: Id for a schema. Used to validate the input or output.
             TODO: For now it's up to the pipeline to include a validation step. So this might not be in use even if supplied.
         transformation: object Transformation for the given Pipeline. Should include config for each step in
@@ -35,16 +36,21 @@ class PipelineInstance(PipelineBase):
         sdk: SDK,
         id: str,
         datasetUri: str,
-        pipelineArn: str,
         schemaId: str,
         taskConfig: object,
         useLatestEdition: bool,
+        # TODO: Remove this once all users have been updated to use
+        # `pipelineProcessorId` instead.
+        pipelineArn: str = None,
+        # TODO: Make this required once `pipelineArn` has been phased out.
+        pipelineProcessorId: str = None,
         transformation: object = None,
     ):
         self.sdk = sdk
         self._id = id
         self.datasetUri = datasetUri
         self.pipelineArn = pipelineArn
+        self.pipelineProcessorId = pipelineProcessorId
         self.schemaId = schemaId
         self.transformation = transformation
         self.taskConfig = taskConfig
@@ -55,11 +61,14 @@ class PipelineInstance(PipelineBase):
         dictionary = {
             "id": self.id,
             "datasetUri": self.datasetUri,
-            "pipelineArn": self.pipelineArn,
             "schemaId": self.schemaId,
             "taskConfig": self.taskConfig,
             "useLatestEdition": self.useLatestEdition,
         }
+        if self.pipelineArn is not None:
+            dictionary["pipelineArn"] = self.pipelineArn
+        if self.pipelineProcessorId is not None:
+            dictionary["pipelineProcessorId"] = self.pipelineProcessorId
         if self.transformation is not None:
             dictionary["transformation"] = self.transformation
         return dictionary

@@ -1,3 +1,9 @@
+## ?.?.?
+
+* `PipelineInstance` now takes an optional parameter `pipelineProcessorId`,
+  intended to supersede `pipelineArn` once all users have been updated. The
+  `pipelineArn` parameter is now optional.
+
 ## 0.2.7
 
 * Enable, disable and get event stream sinks by *type* (not id).

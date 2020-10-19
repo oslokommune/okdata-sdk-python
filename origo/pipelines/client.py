@@ -43,13 +43,13 @@ class PipelineApiClient(SDK):
     def get_pipeline_input(
         self, pipelineInstanceId: str, dataset: str, version: str
     ) -> List[PipelineInput]:
-        return PipelineInstance(
-            self, pipelineInstanceId, "", "", "", "", False
-        ).get_input(dataset, version)
+        return PipelineInstance(self, pipelineInstanceId, "", "", "", False).get_input(
+            dataset, version
+        )
 
     def get_pipeline_inputs(self, pipelineInstanceId: str) -> List[PipelineInput]:
         return PipelineInstance(
-            self, pipelineInstanceId, "", "", "", "", False
+            self, pipelineInstanceId, "", "", "", False
         ).get_inputs()
 
     def create_pipeline(self, data: dict):
