@@ -80,8 +80,40 @@ upload_response = data_uploader.upload(filename, dataset_id, version, edition)
 print(upload_response)
 # {
 #     "result": True,
-#     "status": "my-dataset-id-54a3c78e-86a3-4631-8f28-0252fe1c7c13",
+#     "trace_id": "my-dataset-id-54a3c78e-86a3-4631-8f28-0252fe1c7c13"
 # }
+```
+
+The `trace_id` returned by the upload method can be used to "trace" the steps involved in the upload process:
+
+```python
+from origo.status import Status
+...
+status = Status(config=origo_config)
+trace_events = status.get_status(trace_id)
+print(trace_events)
+# [
+#     {
+#         "trace_id": "my-dataset-1a2bc345-6789-1234-567d-8912ef34a567",
+#         "trace_status": "STARTED",
+#         "trace_event_id": "1a2b3cd4-eef5-6aa7-bccd-e889912334f5",
+#         "trace_event_status": "OK",
+#         "component": "data-uploader",
+#         ...
+#     },
+#     {
+#         "trace_id": "my-dataset-1a2bc345-6789-1234-567d-8912ef34a567",
+#         "trace_status": "CONTINUE",
+#         ...
+#     },
+#     {
+#         "trace_id": "my-dataset-1a2bc345-6789-1234-567d-8912ef34a567",
+#         "trace_event_id": "1aa2b345-678c-9de1-f2a3-4566bcd78912",
+#         "trace_status": "FINISHED",
+#         "trace_event_status": "OK",
+#         ...
+#     }
+# ]
 ```
 
 ## Download data

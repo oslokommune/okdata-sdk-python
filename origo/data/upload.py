@@ -33,11 +33,8 @@ class Upload(SDK):
 
         files = {"file": open(fileName, "rb")}
         result = requests.post(url, data=s3Data, files=files)
-        status = s3SignedData.get("status_response", False)
-        data = {
-            "result": result.status_code == 204,
-            "status": status,
-        }
+        trace_id = s3SignedData.get("trace_id")
+        data = {"result": result.status_code == 204, "trace_id": trace_id}
         return data
 
     def create_s3_signed_data(self, fileName, datasetid, versionid, editionid):
