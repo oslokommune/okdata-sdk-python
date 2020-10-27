@@ -37,8 +37,8 @@ class PipelineInstance(PipelineBase):
         id: str,
         datasetUri: str,
         schemaId: str,
-        taskConfig: object,
         useLatestEdition: bool,
+        taskConfig: object = None,
         # TODO: Remove this once all users have been updated to use
         # `pipelineProcessorId` instead.
         pipelineArn: str = None,
@@ -65,6 +65,8 @@ class PipelineInstance(PipelineBase):
             "taskConfig": self.taskConfig,
             "useLatestEdition": self.useLatestEdition,
         }
+        if self.taskConfig is not None:
+            dictionary["taskConfig"] = self.taskConfig
         if self.pipelineArn is not None:
             dictionary["pipelineArn"] = self.pipelineArn
         if self.pipelineProcessorId is not None:
