@@ -18,11 +18,8 @@ class PipelineInstance(PipelineBase):
             should create a new edition in this dataset + version combination.
         pipelineArn: What Pipeline should be used.
         pipelineProcessorId: ID of the pipeline processor to use.
-        schemaId: Id for a schema. Used to validate the input or output.
-            TODO: For now it's up to the pipeline to include a validation step. So this might not be in use even if supplied.
         transformation: object Transformation for the given Pipeline. Should include config for each step in
             the state-machine if needed. Should be validated against Pipeline.transformation_schema
-        useLatestEdition: bool Whether or not to create a new edition or use the latest edition when running the pipeline.
     """
 
     __resource_name__ = "pipeline-instances"
@@ -36,8 +33,6 @@ class PipelineInstance(PipelineBase):
         sdk: SDK,
         id: str,
         datasetUri: str,
-        schemaId: str,
-        useLatestEdition: bool,
         taskConfig: object = None,
         # TODO: Remove this once all users have been updated to use
         # `pipelineProcessorId` instead.
@@ -51,19 +46,15 @@ class PipelineInstance(PipelineBase):
         self.datasetUri = datasetUri
         self.pipelineArn = pipelineArn
         self.pipelineProcessorId = pipelineProcessorId
-        self.schemaId = schemaId
         self.transformation = transformation
         self.taskConfig = taskConfig
-        self.useLatestEdition = useLatestEdition
 
     @property
     def __dict__(self):
         dictionary = {
             "id": self.id,
             "datasetUri": self.datasetUri,
-            "schemaId": self.schemaId,
             "taskConfig": self.taskConfig,
-            "useLatestEdition": self.useLatestEdition,
         }
         if self.taskConfig is not None:
             dictionary["taskConfig"] = self.taskConfig

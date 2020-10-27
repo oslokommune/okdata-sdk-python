@@ -4,6 +4,11 @@
   intended to supersede `pipelineArn` once all users have been updated. The
   `pipelineArn` parameter is now optional.
 
+* The `taskConfig` to `PipelineInstance` is now also optional.
+
+* `PipelineInstance` no longer accepts the obsolete parameters `schemaId` and
+  `useLatestEdition`.
+
 ## 0.2.7
 
 * Enable, disable and get event stream sinks by *type* (not id).

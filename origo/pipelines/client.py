@@ -43,12 +43,12 @@ class PipelineApiClient(SDK):
     def get_pipeline_input(
         self, pipelineInstanceId: str, dataset: str, version: str
     ) -> List[PipelineInput]:
-        return PipelineInstance(self, pipelineInstanceId, "", "", False).get_input(
+        return PipelineInstance(self, pipelineInstanceId, "").get_input(
             dataset, version
         )
 
     def get_pipeline_inputs(self, pipelineInstanceId: str) -> List[PipelineInput]:
-        return PipelineInstance(self, pipelineInstanceId, "", "", False).get_inputs()
+        return PipelineInstance(self, pipelineInstanceId, "").get_inputs()
 
     def create_pipeline(self, data: dict):
         created, error = Pipeline.from_dict(self, data).create()
