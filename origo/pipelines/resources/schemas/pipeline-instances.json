@@ -7,7 +7,6 @@
   "required": [
     "id",
     "datasetUri",
-    "pipelineArn",
     "schemaId",
     "taskConfig",
     "useLatestEdition"
