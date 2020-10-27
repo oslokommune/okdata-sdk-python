@@ -8,7 +8,6 @@
     "id",
     "datasetUri",
     "schemaId",
-    "taskConfig",
     "useLatestEdition"
   ],
   "properties": {
