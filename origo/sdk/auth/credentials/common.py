@@ -1,4 +1,4 @@
-from origo.config import Config
+from origo.sdk.config import Config
 
 
 class TokenProviderNotInitialized(Exception):

@@ -1,12 +1,12 @@
 import json
 import logging
 
-from origo.auth.credentials.client_credentials import ClientCredentialsProvider
-from origo.auth.credentials.common import TokenProviderNotInitialized
-from origo.auth.credentials.password_grant import TokenServiceProvider
-from origo.auth.util import is_token_expired
-from origo.exceptions import ApiAuthenticateError
-from origo.file_cache import FileCache
+from origo.sdk.auth.credentials.client_credentials import ClientCredentialsProvider
+from origo.sdk.auth.credentials.common import TokenProviderNotInitialized
+from origo.sdk.auth.credentials.password_grant import TokenServiceProvider
+from origo.sdk.auth.util import is_token_expired
+from origo.sdk.exceptions import ApiAuthenticateError
+from origo.sdk.file_cache import FileCache
 
 log = logging.getLogger()
 

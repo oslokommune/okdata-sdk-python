@@ -3,9 +3,9 @@ from typing import List
 
 from requests import HTTPError
 
-from origo.pipelines.resources.pipeline_base import PipelineBase
-from origo.pipelines.resources.pipeline_instance import PipelineInstance
-from origo.sdk import SDK
+from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
+from origo.sdk.pipelines.resources.pipeline_instance import PipelineInstance
+from origo.sdk.sdk import SDK
 
 
 class Pipeline(PipelineBase):

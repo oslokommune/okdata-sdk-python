@@ -1,6 +1,6 @@
 import requests
 
-from origo.sdk import SDK
+from origo.sdk.sdk import SDK
 
 
 class SimpleDatasetAuthorizerClient(SDK):

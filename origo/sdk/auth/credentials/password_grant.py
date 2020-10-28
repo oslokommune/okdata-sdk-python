@@ -1,8 +1,8 @@
 import logging
 import requests
 from typing import Optional
-from origo.auth.credentials.common import TokenProviderNotInitialized, TokenProvider
-from origo.config import Config
+from origo.sdk.auth.credentials.common import TokenProviderNotInitialized, TokenProvider
+from origo.sdk.config import Config
 
 log = logging.getLogger()
 

@@ -1,11 +1,11 @@
 from typing import Type, List
 
-from origo.pipelines.resources.pipeline import Pipeline
-from origo.pipelines.resources.pipeline_base import PipelineBase
-from origo.pipelines.resources.pipeline_input import PipelineInput
-from origo.pipelines.resources.pipeline_instance import PipelineInstance
-from origo.pipelines.resources.schema import Schema
-from origo.sdk import SDK
+from origo.sdk.pipelines.resources.pipeline import Pipeline
+from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
+from origo.sdk.pipelines.resources.pipeline_input import PipelineInput
+from origo.sdk.pipelines.resources.pipeline_instance import PipelineInstance
+from origo.sdk.pipelines.resources.schema import Schema
+from origo.sdk.sdk import SDK
 
 
 class PipelineApiClient(SDK):

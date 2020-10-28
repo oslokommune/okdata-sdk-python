@@ -1,8 +1,8 @@
 import json
 
-from origo.pipelines.resources.pipeline_base import PipelineBase
-from origo.pipelines.resources.pipeline_input import PipelineInput
-from origo.sdk import SDK
+from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
+from origo.sdk.pipelines.resources.pipeline_input import PipelineInput
+from origo.sdk.sdk import SDK
 
 
 class PipelineInstance(PipelineBase):

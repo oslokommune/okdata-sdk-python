@@ -2,8 +2,8 @@ import logging
 import requests
 import json
 
-from origo.config import Config
-from origo.auth.auth import Authenticate
+from origo.sdk.config import Config
+from origo.sdk.auth.auth import Authenticate
 
 log = logging.getLogger()
 

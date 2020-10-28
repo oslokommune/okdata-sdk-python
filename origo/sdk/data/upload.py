@@ -2,8 +2,8 @@ import requests
 import logging
 import os
 
-from origo.sdk import SDK
-from origo.exceptions import ApiAuthenticateError
+from origo.sdk.sdk import SDK
+from origo.sdk.exceptions import ApiAuthenticateError
 
 
 log = logging.getLogger()

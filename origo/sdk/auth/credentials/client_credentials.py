@@ -1,8 +1,8 @@
 from typing import Optional
 from keycloak.keycloak_openid import KeycloakOpenID  # type: ignore
 
-from origo.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
-from origo.config import Config
+from origo.sdk.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
+from origo.sdk.config import Config
 
 
 class ClientCredentialsProvider(TokenProvider):

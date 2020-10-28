@@ -1,7 +1,7 @@
 import json
 import logging
 
-from origo.io_utils import write_to_origo_cache, read_from_origo_cache
+from origo.sdk.io_utils import write_to_origo_cache, read_from_origo_cache
 
 log = logging.getLogger()
 

@@ -5,8 +5,8 @@ from typing import Tuple, Optional
 import jsonschema  # type: ignore
 from jsonschema import ValidationError, SchemaError
 
-from origo.pipelines.resources.pipeline_base import PipelineBase, InternalError
-from origo.sdk import SDK
+from origo.sdk.pipelines.resources.pipeline_base import PipelineBase, InternalError
+from origo.sdk.sdk import SDK
 
 
 class PipelineInput(PipelineBase):

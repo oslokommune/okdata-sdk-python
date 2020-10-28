@@ -1,8 +1,8 @@
 import requests
 import logging
 
-from origo.sdk import SDK
-from origo.io_utils import write_file_content
+from origo.sdk.sdk import SDK
+from origo.sdk.io_utils import write_file_content
 
 
 log = logging.getLogger()

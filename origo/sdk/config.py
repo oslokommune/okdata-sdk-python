@@ -1,7 +1,7 @@
 import os
 import logging
 
-from origo.exceptions import ConfigurationError
+from origo.sdk.exceptions import ConfigurationError
 
 log = logging.getLogger()
 
