@@ -11,6 +11,16 @@ def test_create_pipeline_instance_from_json(sdk, mock_create_pipeline_instance):
     assert response == '"pipeline-instance-id"'
 
 
+def test_pipeline_instance_from_json_unknown_keyword():
+    client = PipelineApiClient()
+    raw = json.loads(create_pipeline_instance_request())
+    raw["transformation"] = "this keyword is unknown"
+    instance = PipelineInstance.from_json(client, json.dumps(raw))
+    validated, error = instance.validate()
+    assert validated
+    assert error is None
+
+
 def test_create_pipeline_instance_basic(sdk, mock_create_pipeline_instance):
     instance_input = json.loads(create_pipeline_instance_request())
     instance = PipelineInstance(sdk, **instance_input)
@@ -32,14 +42,3 @@ def test_get_pipeline_instance(mock_get_pipeline_instance):
     instance = client.fetch(PipelineInstance, "pipeline-instance-id")
     expected = json.loads(create_pipeline_instance_request())
     assert instance.taskConfig == expected["taskConfig"]
-
-
-def test_pipeline_instance_with_optional_transformation():
-    client = PipelineApiClient()
-    raw = json.loads(create_pipeline_instance_request())
-    raw["transformation"] = {"some transformation": "here"}
-    instance = PipelineInstance.from_json(client, json.dumps(raw))
-    validated, error = instance.validate()
-    assert validated
-    assert error is None
-    assert raw["transformation"] == instance.transformation

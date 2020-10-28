@@ -6,9 +6,7 @@
   "title": "The Root Schema",
   "required": [
     "id",
-    "datasetUri",
-    "schemaId",
-    "useLatestEdition"
+    "datasetUri"
   ],
   "properties": {
     "id": {
@@ -35,31 +33,10 @@
       ],
       "pattern": "^arn:aws:states:eu-west-1:[0-9]{12}:stateMachine:[-a-z]*$"
     },
-    "schemaId": {
-      "$id": "#/properties/schemaId",
-      "type": "string",
-      "title": "The Schemaid Schema",
-      "default": "",
-      "pattern": "^(.*)$"
-    },
-    "transformation": {
-      "$id": "#/properties/transformation",
-      "type": "object",
-      "title": "The Transformation Schema"
-    },
     "taskCofig": {
       "$id": "#/properties/transformation",
       "type": "object",
       "title": "The Transformation Schema"
-    },
-    "useLatestEdition": {
-      "$id": "#/properties/useLatestEdition",
-      "type": "boolean",
-      "title": "The Uselatestedition Schema",
-      "default": false,
-      "examples": [
-        true
-      ]
     }
   }
 }

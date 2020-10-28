@@ -33,7 +33,6 @@ def test_resource_example(
         assert errors.message == "12314 is not of type 'string'"
 
     instance: PipelineInstance = instances[0]
-    instance.schemaId = "blabla"
     instance.create()
 
     assert mock_create_pipeline_instance.called
@@ -59,15 +58,12 @@ def test_bootstrap_script(
         sdk,
         id="uuid?",
         datasetUri="boligpriser",
-        schemaId="coming soon",
         taskConfig="transformation goes here",
         pipelineArn=pipeline.arn,
-        useLatestEdition=True,
     )
     valid, error = instance.validate()
     assert not valid
     assert error.message.startswith("'boligpriser' does not match ")
     instance.datasetUri = "output/boligpriser/1"
-    instance.transformation = {"transformation": "goes here"}
     instance.create()
     assert mock_create_pipeline_instance.called
