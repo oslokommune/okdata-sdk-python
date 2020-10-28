@@ -6,8 +6,8 @@
 
 * The `taskConfig` to `PipelineInstance` is now also optional.
 
-* `PipelineInstance` no longer accepts the obsolete parameters `schemaId` and
-  `useLatestEdition`.
+* `PipelineInstance` no longer accepts the obsolete parameters `schemaId`,
+  `transformation`, and `useLatestEdition`.
 
 ## 0.2.7
 

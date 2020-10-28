@@ -18,8 +18,6 @@ class PipelineInstance(PipelineBase):
             should create a new edition in this dataset + version combination.
         pipelineArn: What Pipeline should be used.
         pipelineProcessorId: ID of the pipeline processor to use.
-        transformation: object Transformation for the given Pipeline. Should include config for each step in
-            the state-machine if needed. Should be validated against Pipeline.transformation_schema
     """
 
     __resource_name__ = "pipeline-instances"
@@ -39,14 +37,12 @@ class PipelineInstance(PipelineBase):
         pipelineArn: str = None,
         # TODO: Make this required once `pipelineArn` has been phased out.
         pipelineProcessorId: str = None,
-        transformation: object = None,
     ):
         self.sdk = sdk
         self._id = id
         self.datasetUri = datasetUri
         self.pipelineArn = pipelineArn
         self.pipelineProcessorId = pipelineProcessorId
-        self.transformation = transformation
         self.taskConfig = taskConfig
 
     @property
@@ -62,9 +58,30 @@ class PipelineInstance(PipelineBase):
             dictionary["pipelineArn"] = self.pipelineArn
         if self.pipelineProcessorId is not None:
             dictionary["pipelineProcessorId"] = self.pipelineProcessorId
-        if self.transformation is not None:
-            dictionary["transformation"] = self.transformation
         return dictionary
+
+    @classmethod
+    def from_dict(cls, sdk: SDK, instance_dict: dict):
+        """Create and return a pipeline instance from a dictionary.
+
+        Overrides the method from `PipelineBase` to be able to pick and choose
+        from `instance_dict`, instead of requiring an exact match with this
+        class' `___init___` parameters.
+        """
+        return cls(
+            sdk,
+            **{
+                key: instance_dict[key]
+                for key in [
+                    "id",
+                    "datasetUri",
+                    "taskConfig",
+                    "pipelineArn",
+                    "pipelineProcessorId",
+                ]
+                if key in instance_dict
+            },
+        )
 
     def __repr__(self):
         return json.dumps(self.__dict__)

@@ -65,6 +65,5 @@ def test_bootstrap_script(
     assert not valid
     assert error.message.startswith("'boligpriser' does not match ")
     instance.datasetUri = "output/boligpriser/1"
-    instance.transformation = {"transformation": "goes here"}
     instance.create()
     assert mock_create_pipeline_instance.called
