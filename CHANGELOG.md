@@ -1,3 +1,12 @@
+## ?.?.?
+
+### Breaking
+
+* Modules reorganized to leave top level `origo` namespace empty, all modules
+  are now under `origo.sdk`. Ie. `from origo.data.upload import Upload` now
+  becomes `from origo.sdk.data.upload import Upload`. This allows other
+  packages to add their modules under the `origo` namespace.
+
 ## 0.3.0
 
 * Support the new status API response format. This affects the upload command
