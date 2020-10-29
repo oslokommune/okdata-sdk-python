@@ -1,9 +1,11 @@
-## ?.?.?
+## 0.3.0
+
+* Support the new status API response format. This affects the upload command
+  response, now returning a `trace_id` key instead of `status`.
 
 * `PipelineInstance` now takes an optional parameter `pipelineProcessorId`,
   intended to supersede `pipelineArn` once all users have been updated. The
   `pipelineArn` parameter is now optional.
-* Support the new status API response format. This affects the upload command response, now returning a `trace_id` key instead of `status`.
 
 * The `taskConfig` to `PipelineInstance` is now also optional.
 
