@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="origo-sdk-python",
+    name="origo-sdk",
     version="0.3.0",
     author="Oslo Origo",
     author_email="dataplattform@oslo.kommune.no",
@@ -13,7 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/oslokommune/origo-sdk-python",
     package_data={"origo": ["py.typed"]},
-    packages=setuptools.find_packages(".", exclude=["tests*"]),
+    packages=setuptools.find_namespace_packages(
+        include="origo.sdk.*", exclude=["tests*"]
+    ),
     install_requires=[
         "requests",
         "urllib3",
@@ -26,10 +28,10 @@ setuptools.setup(
         (
             "schema",
             [
-                "origo/pipelines/resources/schemas/pipelines.json",
-                "origo/pipelines/resources/schemas/pipeline-instances.json",
-                "origo/pipelines/resources/schemas/pipeline-inputs.json",
-                "origo/pipelines/resources/schemas/schemas.json",
+                "origo/sdk/pipelines/resources/schemas/pipelines.json",
+                "origo/sdk/pipelines/resources/schemas/pipeline-instances.json",
+                "origo/sdk/pipelines/resources/schemas/pipeline-inputs.json",
+                "origo/sdk/pipelines/resources/schemas/schemas.json",
             ],
         )
     ],
