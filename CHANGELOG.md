@@ -1,3 +1,10 @@
+## ?.?.?
+
+* Deprecated `origo-sdk-python` in favor of `origo-sdk`. The module contents
+  has moved from the `origo` namespace to `origo.sdk`. Ie. `from
+  origo.data.upload import Upload` is changed to `from origo.sdk.data.upload
+  import Upload`.
+
 ## 0.3.0
 
 * Support the new status API response format. This affects the upload command

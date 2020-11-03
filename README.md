@@ -1,3 +1,11 @@
+# Deprecation warning
+
+This module is deprecated in favor of `origo-sdk`.
+
+The module contents has moved from the `origo` namespace to `origo.sdk`. Ie.
+`from origo.data.upload import Upload` is changed to `from
+origo.sdk.data.upload import Upload`.
+
 # Configuration
 
 When calling any classes interacting with the Origo API and there are no Config params passed to the constructor, a config object will be
