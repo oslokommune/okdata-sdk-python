@@ -6,7 +6,7 @@ import jsonschema  # type: ignore
 from jsonschema import ValidationError, SchemaError
 
 from origo.sdk.pipelines.resources.pipeline_base import PipelineBase, InternalError
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 
 class PipelineInput(PipelineBase):

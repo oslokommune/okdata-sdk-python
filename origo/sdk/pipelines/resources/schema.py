@@ -1,7 +1,7 @@
 import json
 
 from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 
 class Schema(PipelineBase):

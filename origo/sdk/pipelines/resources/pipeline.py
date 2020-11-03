@@ -5,7 +5,7 @@ from requests import HTTPError
 
 from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
 from origo.sdk.pipelines.resources.pipeline_instance import PipelineInstance
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 
 class Pipeline(PipelineBase):

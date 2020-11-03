@@ -1,7 +1,7 @@
 import requests
 import logging
 
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 from origo.sdk.io_utils import write_file_content
 
 

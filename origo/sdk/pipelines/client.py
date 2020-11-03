@@ -5,7 +5,7 @@ from origo.sdk.pipelines.resources.pipeline_base import PipelineBase
 from origo.sdk.pipelines.resources.pipeline_input import PipelineInput
 from origo.sdk.pipelines.resources.pipeline_instance import PipelineInstance
 from origo.sdk.pipelines.resources.schema import Schema
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 
 class PipelineApiClient(SDK):

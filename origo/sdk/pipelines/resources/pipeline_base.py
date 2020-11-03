@@ -6,7 +6,7 @@ import jsonschema  # type: ignore
 from jsonschema import ValidationError, SchemaError
 from requests import HTTPError
 
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 
 class InternalError(Exception):

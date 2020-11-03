@@ -1,7 +1,7 @@
 import logging
 import re
 
-from origo.sdk.sdk import SDK
+from origo.sdk import SDK
 
 log = logging.getLogger()
 
