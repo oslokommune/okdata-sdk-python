@@ -1,3 +1,7 @@
+# Installation
+
+`origo-sdk` is on PyPI: `pip install origo-sdk`
+
 # Configuration
 
 When calling any classes interacting with the Origo API and there are no Config params passed to the constructor, a config object will be
@@ -58,8 +62,8 @@ or you can use our [command line interface](https://github.com/oslokommune/origo
 
 
 ```python
-from origo.data.upload import Upload
-from origo.config import Config
+from origo.sdk.data.upload import Upload
+from origo.sdk.config import Config
 
 origo_config = Config()
 
@@ -87,7 +91,7 @@ print(upload_response)
 The `trace_id` returned by the upload method can be used to "trace" the steps involved in the upload process:
 
 ```python
-from origo.status import Status
+from origo.sdk.status import Status
 ...
 status = Status(config=origo_config)
 trace_events = status.get_status(trace_id)
@@ -123,8 +127,8 @@ If these are non existent then you can create them yourself. This can be achieve
 or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
 
 ```python
-from origo.data.download import Download
-from origo.config import Config
+from origo.sdk.data.download import Download
+from origo.sdk.config import Config
 
 origo_config = Config(env="dev")
 
@@ -152,8 +156,8 @@ in place you are good to go. If not, you can create one either by [using the sdk
 or by [using our command line interface](https://github.com/oslokommune/origo-cli).
 
 ```python
-from origo.event.post_event import PostEvent
-from origo.config import Config
+from origo.sdk.event.post_event import PostEvent
+from origo.sdk.config import Config
 
 origo_config = Config()
 
@@ -188,7 +192,7 @@ or you can use our [command line interface](https://github.com/oslokommune/origo
 You do not need to define an edition in order to create an event stream.
 
 ```python
-from origo.event.event_stream_client import EventStreamClient
+from origo.sdk.event.event_stream_client import EventStreamClient
 
 
 # Using default configuration for dev-environment
@@ -229,8 +233,8 @@ delete_response = event_stream_client.delete_event_stream(dataset_id, version)
 
 ## Creating datasets with versions and editions
 ```python
-from origo.data.dataset import Dataset
-from origo.config import Config
+from origo.sdk.data.dataset import Dataset
+from origo.sdk.config import Config
 
 origo_config = Config()
 
