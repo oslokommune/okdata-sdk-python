@@ -1,12 +1,13 @@
-from okdata.sdk.config import Config, EnvironmentConfig, ORIGO_DEFAULT_ENVIRONMENT
+from okdata.sdk.config import Config, EnvironmentConfig, OKDATA_DEFAULT_ENVIRONMENT
 from okdata.sdk.exceptions import ConfigurationError
 
 
 class TestConfig:
     def test_config_get_existing_key(self):
         config = Config(type="environment")
-        assert config.get("client_id") == "my-origio-user"
-        assert config.get("client_secret") == "my-origo-password"
+        # ENV variables set in tox.ini
+        assert config.get("client_id") == "my-okdata-user"
+        assert config.get("client_secret") == "my-okdata-password"
 
     def test_config_get_non_existing_key(self):
         config = Config(type="environment")
@@ -31,9 +32,14 @@ class TestConfig:
 
 class TestEnvironmentConfig:
     def test_resolve_environment(self):
-        env = EnvironmentConfig.resolve_environment(ORIGO_DEFAULT_ENVIRONMENT)
-        assert env == ORIGO_DEFAULT_ENVIRONMENT
+        env = EnvironmentConfig.resolve_environment(OKDATA_DEFAULT_ENVIRONMENT)
+        assert env == OKDATA_DEFAULT_ENVIRONMENT
         env = EnvironmentConfig.resolve_environment("foobar")
-        assert env == ORIGO_DEFAULT_ENVIRONMENT
+        assert env == OKDATA_DEFAULT_ENVIRONMENT
         env = EnvironmentConfig.resolve_environment(None)
-        assert env == ORIGO_DEFAULT_ENVIRONMENT
+        assert env == OKDATA_DEFAULT_ENVIRONMENT
+
+    def test_okdata_env_variables(self, monkeypatch):
+        monkeypatch.setenv("OKDATA_CLIENT_ID", "veryniceuser")
+        config = EnvironmentConfig.create(OKDATA_DEFAULT_ENVIRONMENT)
+        assert config["client_id"] == "veryniceuser"

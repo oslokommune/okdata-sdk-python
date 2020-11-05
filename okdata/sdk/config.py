@@ -7,8 +7,8 @@ log = logging.getLogger()
 
 # TODO: Move these to a config file later on
 # TODO: use only a single base URL and derive the URLs based on that
-ORIGO_CONFIG = {}
-ORIGO_CONFIG["dev"] = {
+OKDATA_CONFIG = {}
+OKDATA_CONFIG["dev"] = {
     "client_id": None,
     "client_secret": None,
     "cacheCredentials": False,
@@ -26,7 +26,7 @@ ORIGO_CONFIG["dev"] = {
     "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
     "simpleDatasetAuthorizerUrl": "https://api.data-dev.oslo.systems/simple-dataset-authorizer",
 }
-ORIGO_CONFIG["prod"] = {
+OKDATA_CONFIG["prod"] = {
     "client_id": None,
     "client_secret": None,
     "cacheCredentials": False,
@@ -45,9 +45,9 @@ ORIGO_CONFIG["prod"] = {
     "simpleDatasetAuthorizerUrl": "https://api.data.oslo.systems/simple-dataset-authorizer",
 }
 
-ORIGO_DEFAULT_ENVIRONMENT = "prod"
+OKDATA_DEFAULT_ENVIRONMENT = "prod"
 
-ORIGO_ENVIRONMENTS = ["dev", "prod"]
+OKDATA_ENVIRONMENTS = ["dev", "prod"]
 
 
 class Config:
@@ -71,11 +71,11 @@ class Config:
         # only load from environment if nothing is passed to constructor
         # parameter > environment > default
         if not env:
-            tmp_env = os.getenv("ORIGO_ENVIRONMENT", None)
+            tmp_env = os.getenv("OKDATA_ENVIRONMENT", None)
             if tmp_env:
                 env = tmp_env
-        if env not in ORIGO_CONFIG:
-            env = ORIGO_DEFAULT_ENVIRONMENT
+        if env not in OKDATA_CONFIG:
+            env = OKDATA_DEFAULT_ENVIRONMENT
         return env
 
     def get(self, key):
@@ -106,21 +106,22 @@ class Config:
 class EnvironmentConfig:
     def resolve_environment(env):
         if not env:
-            env = ORIGO_DEFAULT_ENVIRONMENT
-        if env not in ORIGO_CONFIG:
-            env = ORIGO_DEFAULT_ENVIRONMENT
+            env = OKDATA_DEFAULT_ENVIRONMENT
+        if env not in OKDATA_CONFIG:
+            env = OKDATA_DEFAULT_ENVIRONMENT
         return env
 
     def create(env):
         log.info(f"SDK:Creating EnvironmentConfig for {env}")
         env = EnvironmentConfig.resolve_environment(env)
-        conf = ORIGO_CONFIG[env]
+        conf = OKDATA_CONFIG[env]
+
         # Map environment variables to internal configuration structure
         envConf = {
-            "ORIGO_CLIENT_ID": "client_id",
-            "ORIGO_CLIENT_SECRET": "client_secret",
-            "ORIGO_USERNAME": "username",
-            "ORIGO_PASSWORD": "password",
+            "OKDATA_CLIENT_ID": "client_id",
+            "OKDATA_CLIENT_SECRET": "client_secret",
+            "OKDATA_USERNAME": "username",
+            "OKDATA_PASSWORD": "password",
         }
         for key in envConf.keys():
             value = os.getenv(key, default=None)
@@ -128,6 +129,7 @@ class EnvironmentConfig:
                 log.info(f"Could not resolve value for {key}")
                 continue
             conf[envConf[key]] = value
+
         return conf
 
 

@@ -3,22 +3,22 @@ import errno
 from pathlib import Path
 
 
-def write_to_origo_cache(content, filename, failure_count=0):
+def write_to_okdata_cache(content, filename, failure_count=0):
 
-    origo_cache_path = Path(f"{os.environ['HOME']}/.origo/cache")
+    okdata_cache_path = Path(f"{os.environ['HOME']}/.okdata/cache")
 
     if failure_count == 2:
-        print(f"Could not write credentials to {origo_cache_path}/{filename}")
+        print(f"Could not write credentials to {okdata_cache_path}/{filename}")
         return
 
-    if origo_cache_path.exists():
-        f = open(f"{origo_cache_path}/{filename}", "w+")
+    if okdata_cache_path.exists():
+        f = open(f"{okdata_cache_path}/{filename}", "w+")
         f.write(content)
         f.close()
 
     else:
-        create_dir(origo_cache_path)
-        write_to_origo_cache(content, filename, failure_count + 1)
+        create_dir(okdata_cache_path)
+        write_to_okdata_cache(content, filename, failure_count + 1)
 
 
 def create_dir(path):
@@ -29,11 +29,11 @@ def create_dir(path):
             raise
 
 
-def read_from_origo_cache(filename):
-    origo_cache_path = Path(f"{os.environ['HOME']}/.origo/cache")
+def read_from_okdata_cache(filename):
+    okdata_cache_path = Path(f"{os.environ['HOME']}/.okdata/cache")
 
     try:
-        f = open(f"{origo_cache_path}/{filename}", "r")
+        f = open(f"{okdata_cache_path}/{filename}", "r")
         content = f.read()
         f.close()
         return content
