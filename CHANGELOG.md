@@ -1,3 +1,13 @@
+## ?.?.?
+
+### Breaking
+
+* Rename project to `okdata-sdk`.
+    - Repository name will be `okdata-sdk-python`
+    - PyPI package `okdata-sdk`
+    - Python modules will reside in `okdata.sdk.*`, where `okdata` is an
+      implicit namespace.
+
 ## 0.4.0
 
 ### Breaking

@@ -4,10 +4,10 @@
 
 Setup
 ```
-git clone git@github.oslo.kommune.no:origo-dataplatform/origo-sdk-python.git
-cd origo-sdk-python
+git clone git@github.com:oslokommune/okdata-sdk-python.git
+cd okdata-sdk-python
 python3.7 -m venv .venv
-. .venv/bin/activate
+source .venv/bin/activate
 make init
 ```
 
