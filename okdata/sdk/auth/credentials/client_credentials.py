@@ -1,7 +1,10 @@
 from typing import Optional
 from keycloak.keycloak_openid import KeycloakOpenID  # type: ignore
 
-from okdata.sdk.auth.credentials.common import TokenProvider, TokenProviderNotInitialized
+from okdata.sdk.auth.credentials.common import (
+    TokenProvider,
+    TokenProviderNotInitialized,
+)
 from okdata.sdk.config import Config
 
 

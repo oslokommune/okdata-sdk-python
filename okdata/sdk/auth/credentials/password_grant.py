@@ -1,7 +1,10 @@
 import logging
 import requests
 from typing import Optional
-from okdata.sdk.auth.credentials.common import TokenProviderNotInitialized, TokenProvider
+from okdata.sdk.auth.credentials.common import (
+    TokenProviderNotInitialized,
+    TokenProvider,
+)
 from okdata.sdk.config import Config
 
 log = logging.getLogger()
