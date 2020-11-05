@@ -2,8 +2,8 @@ import json
 import logging
 
 import pytest
-from origo.sdk.auth.credentials.password_grant import TokenServiceProvider
-from origo.sdk.config import Config
+from okdata.sdk.auth.credentials.password_grant import TokenServiceProvider
+from okdata.sdk.config import Config
 from tests.auth.client_credentials_test_utils import from_cache_not_expired_token
 
 logging.basicConfig(level=logging.INFO)

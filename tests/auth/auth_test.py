@@ -4,10 +4,10 @@ import re
 
 import pytest
 
-from origo.sdk.auth.auth import Authenticate
-from origo.sdk.auth.credentials.client_credentials import ClientCredentialsProvider
-from origo.sdk.config import Config
-from origo.sdk.exceptions import ApiAuthenticateError
+from okdata.sdk.auth.auth import Authenticate
+from okdata.sdk.auth.credentials.client_credentials import ClientCredentialsProvider
+from okdata.sdk.config import Config
+from okdata.sdk.exceptions import ApiAuthenticateError
 from freezegun import freeze_time
 
 from tests.auth.client_credentials_test_utils import (

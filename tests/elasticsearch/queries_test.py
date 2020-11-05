@@ -1,6 +1,6 @@
 from requests.exceptions import HTTPError
 import pytest
-from origo.sdk.elasticsearch.queries import ElasticsearchQueries
+from okdata.sdk.elasticsearch.queries import ElasticsearchQueries
 
 
 def test_event_stat(requests_mock):

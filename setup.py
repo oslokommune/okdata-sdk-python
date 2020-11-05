@@ -4,17 +4,17 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="origo-sdk",
+    name="okdata-sdk",
     version="0.4.1",
     author="Oslo Origo",
     author_email="dataplattform@oslo.kommune.no",
-    description="SDK for origo",
+    description="SDK for origo dataplatform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/oslokommune/origo-sdk-python",
-    package_data={"origo": ["py.typed"]},
+    url="https://github.com/oslokommune/okdata-sdk-python",
+    package_data={"okdata": ["py.typed"]},
     packages=setuptools.find_namespace_packages(
-        include="origo.sdk.*", exclude=["tests*"]
+        include="okdata.sdk.*", exclude=["tests*"]
     ),
     install_requires=[
         "requests",
@@ -28,10 +28,10 @@ setuptools.setup(
         (
             "schema",
             [
-                "origo/sdk/pipelines/resources/schemas/pipelines.json",
-                "origo/sdk/pipelines/resources/schemas/pipeline-instances.json",
-                "origo/sdk/pipelines/resources/schemas/pipeline-inputs.json",
-                "origo/sdk/pipelines/resources/schemas/schemas.json",
+                "okdata/sdk/pipelines/resources/schemas/pipelines.json",
+                "okdata/sdk/pipelines/resources/schemas/pipeline-instances.json",
+                "okdata/sdk/pipelines/resources/schemas/pipeline-inputs.json",
+                "okdata/sdk/pipelines/resources/schemas/schemas.json",
             ],
         )
     ],

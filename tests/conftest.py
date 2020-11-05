@@ -5,9 +5,9 @@ from urllib.parse import urlencode
 
 import pytest
 
-from origo.sdk.config import ORIGO_CONFIG, ORIGO_DEFAULT_ENVIRONMENT
-from origo.sdk.pipelines.resources.pipeline_instance import PipelineInstance
-from origo.sdk import SDK
+from okdata.sdk.config import ORIGO_CONFIG, ORIGO_DEFAULT_ENVIRONMENT
+from okdata.sdk.pipelines.resources.pipeline_instance import PipelineInstance
+from okdata.sdk import SDK
 from tests.test_utils import well_known_response, client_credentials_response
 
 

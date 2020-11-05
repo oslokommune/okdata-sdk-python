@@ -2,7 +2,7 @@ import re
 import pytest
 from requests.exceptions import HTTPError
 
-from origo.sdk.event.event_stream_client import EventStreamClient
+from okdata.sdk.event.event_stream_client import EventStreamClient
 
 dataset_id = "dataset-id"
 version = "1"

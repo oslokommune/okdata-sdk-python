@@ -1,7 +1,7 @@
 import json
 import pytest
 
-from origo.sdk.dataset_authorizer.simple_dataset_authorizer_client import (
+from okdata.sdk.dataset_authorizer.simple_dataset_authorizer_client import (
     SimpleDatasetAuthorizerClient,
 )
 

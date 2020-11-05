@@ -1,5 +1,5 @@
-from origo.sdk.config import Config, EnvironmentConfig, ORIGO_DEFAULT_ENVIRONMENT
-from origo.sdk.exceptions import ConfigurationError
+from okdata.sdk.config import Config, EnvironmentConfig, ORIGO_DEFAULT_ENVIRONMENT
+from okdata.sdk.exceptions import ConfigurationError
 
 
 class TestConfig:
