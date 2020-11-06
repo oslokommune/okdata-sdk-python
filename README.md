@@ -1,6 +1,8 @@
+[![PyPI](https://img.shields.io/pypi/v/okdata-sdk)](https://pypi.org/project/okdata-sdk/)
+
 # `okdata-sdk`: Python SDK for Origo Dataplatform
 
-`okdata-sdk` is on PyPI: `pip install okdata-sdk`
+[`okdata-sdk`](https://pypi.org/project/okdata-sdk/) is on PyPI: `pip install okdata-sdk`
 
 # Configuration
 
