@@ -1,6 +1,6 @@
 from freezegun import freeze_time
 
-from origo.sdk.auth.util import is_token_expired
+from okdata.sdk.auth.util import is_token_expired
 from tests.auth.client_credentials_test_utils import (
     not_expired_token,
     expired_token,

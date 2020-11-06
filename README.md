@@ -1,10 +1,10 @@
-# Installation
+# `okdata-sdk`: Python SDK for Origo Dataplatform
 
-`origo-sdk` is on PyPI: `pip install origo-sdk`
+`okdata-sdk` is on PyPI: `pip install okdata-sdk`
 
 # Configuration
 
-When calling any classes interacting with the Origo API and there are no Config params passed to the constructor, a config object will be
+When calling any classes interacting with the Origo Dataplatform API and there are no Config params passed to the constructor, a config object will be
 automaticly created for you based on environment variables
 
 
@@ -13,28 +13,28 @@ Default, will pick up configuration from current environment.
 The credentials is resolved automatically if you do not set a specific Auth config, in the following order:
 
 1. _Client Credentials_: If you have added client_id / client_secret to the config. Or if you use the
-environment variable equivalent: `ORIGO_CLIENT_ID` / `ORIGO_CLIENT_SECRET`.
+environment variable equivalent: `OKDATA_CLIENT_ID` / `OKDATA_CLIENT_SECRET`.
 2. _Username And Password_:  If you have added username / password to the config. Or if you use the
-environment variable equivalent: `ORIGO_USERNAME` / `ORIGO_PASSWORD`.
+environment variable equivalent: `OKDATA_USERNAME` / `OKDATA_PASSWORD`.
 ```
 # keycloak user
-export ORIGO_USERNAME=my-user
+export OKDATA_USERNAME=my-user
 
-# keycloak password for ORIGO_USERNAME
-export ORIGO_PASSWORD=my-password
+# keycloak password for OKDATA_USERNAME
+export OKDATA_PASSWORD=my-password
 
 # keycloak client
-export ORIGO_CLIENT_ID=my-machine-client
+export OKDATA_CLIENT_ID=my-machine-client
 
-# keycloak secret for ORIGO_CLIENT_ID
-export ORIGO_CLIENT_SECRET=some-generated-secure-string
+# keycloak secret for OKDATA_CLIENT_ID
+export OKDATA_CLIENT_SECRET=some-generated-secure-string
 
 
 # overrides default environment (dev), but will be trumped by --env=<environment> on the commandline
-export ORIGO_ENVIRONMENT=dev|prod
+export OKDATA_ENVIRONMENT=dev|prod
 
 # If you are sending events and have been assigned a API key
-export ORIGO_API_KEY=your-api-key
+export OKDATA_API_KEY=your-api-key
 ```
 
 ### Getting Credentials:
@@ -44,7 +44,7 @@ use their personal account to access the SDK.
 For `client credentials` please contact the data platform team. `dataplattform[at]oslo.kommune.no`
 
 ### TODO: Named profiles
-If environment variables are not available, the system will try to load from a default profile: Located in ~/.origo/configuration
+If environment variables are not available, the system will try to load from a default profile: Located in ~/.okdata/configuration
 
 # Usage
 
@@ -58,19 +58,19 @@ Table of contents:
 
 When uploading data you need to refer to an existing dataset that you own, a version and an edition. 
 If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
-or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
+or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 
 
 ```python
-from origo.sdk.data.upload import Upload
-from origo.sdk.config import Config
+from okdata.sdk.data.upload import Upload
+from okdata.sdk.config import Config
 
-origo_config = Config()
+okdata_config = Config()
 
 # If necessary you can override default values
-origo_config.config["cacheCredentials"] = False
+okdata_config.config["cacheCredentials"] = False
 
-data_uploader = Upload(config=origo_config)
+data_uploader = Upload(config=okdata_config)
 
 # Upload file 'data.json' to dataset-id/version/edition
 dataset_id = "my-dataset-id"
@@ -91,9 +91,9 @@ print(upload_response)
 The `trace_id` returned by the upload method can be used to "trace" the steps involved in the upload process:
 
 ```python
-from origo.sdk.status import Status
+from okdata.sdk.status import Status
 ...
-status = Status(config=origo_config)
+status = Status(config=okdata_config)
 trace_events = status.get_status(trace_id)
 print(trace_events)
 # [
@@ -124,18 +124,18 @@ print(trace_events)
 
 When downloading data you need to refer to an existing dataset that you own, a version and an edition.
 If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
-or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
+or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 
 ```python
-from origo.sdk.data.download import Download
-from origo.sdk.config import Config
+from okdata.sdk.data.download import Download
+from okdata.sdk.config import Config
 
-origo_config = Config(env="dev")
+okdata_config = Config(env="dev")
 
 # If necessary you can override default config values
-origo_config.config["cacheCredentials"] = False
+okdata_config.config["cacheCredentials"] = False
 
-data_downloader = Download(config=origo_config)
+data_downloader = Download(config=okdata_config)
 
 dataset_id = "your-dataset-id"
 version = "1"
@@ -153,18 +153,18 @@ print(res1)
 
 In order to start sending events you will need access to an event stream. If such an event stream is already
 in place you are good to go. If not, you can create one either by [using the sdk](#create-and-manage-event-streams),
-or by [using our command line interface](https://github.com/oslokommune/origo-cli).
+or by [using our command line interface](https://github.com/oslokommune/okdata-cli).
 
 ```python
-from origo.sdk.event.post_event import PostEvent
-from origo.sdk.config import Config
+from okdata.sdk.event.post_event import PostEvent
+from okdata.sdk.config import Config
 
-origo_config = Config()
+okdata_config = Config()
 
 # If necessary you can override default config values
-origo_config.config["cacheCredentials"] = True
+okdata_config.config["cacheCredentials"] = True
 
-event_poster = PostEvent(config=origo_config)
+event_poster = PostEvent(config=okdata_config)
 
 dataset_id = "some-dataset-id"
 version = "1"
@@ -188,11 +188,11 @@ res2 = event_poster.post_event(event_list, dataset_id, version)
 In order to create an event stream you need to have defined a dataset and a version, 
 unless these already exist. Defining a dataset and a version can be 
 achieved [using the sdk](#creating-datasets-with-versions-and-editions),
-or you can use our [command line interface](https://github.com/oslokommune/origo-cli).
+or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 You do not need to define an edition in order to create an event stream.
 
 ```python
-from origo.sdk.event.event_stream_client import EventStreamClient
+from okdata.sdk.event.event_stream_client import EventStreamClient
 
 
 # Using default configuration for dev-environment
@@ -233,16 +233,16 @@ delete_response = event_stream_client.delete_event_stream(dataset_id, version)
 
 ## Creating datasets with versions and editions
 ```python
-from origo.sdk.data.dataset import Dataset
-from origo.sdk.config import Config
+from okdata.sdk.data.dataset import Dataset
+from okdata.sdk.config import Config
 
-origo_config = Config()
+okdata_config = Config()
 
 # If necessary you can override default values
-origo_config.config["cacheCredentials"] = False
+okdata_config.config["cacheCredentials"] = False
 
 # Create a new dataset
-dataset = Dataset(config=origo_config)
+dataset = Dataset(config=okdata_config)
 
 dataset_metadata = {
     "title": "Precise Descriptive Title",

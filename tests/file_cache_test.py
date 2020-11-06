@@ -1,5 +1,5 @@
-from origo.sdk.file_cache import FileCache
-from origo.sdk.config import Config
+from okdata.sdk.file_cache import FileCache
+from okdata.sdk.config import Config
 
 config = Config()
 

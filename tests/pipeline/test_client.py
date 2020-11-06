@@ -3,7 +3,7 @@ import json
 import pytest
 from requests import HTTPError
 
-from origo.sdk.pipelines.client import PipelineApiClient
+from okdata.sdk.pipelines.client import PipelineApiClient
 
 
 def test_pipeline_helpers(

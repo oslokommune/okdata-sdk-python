@@ -2,7 +2,7 @@ import os
 import pytest
 import json
 
-from origo.sdk.data.download import Download
+from okdata.sdk.data.download import Download
 
 data_downloader = Download()
 

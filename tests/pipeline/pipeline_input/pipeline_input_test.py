@@ -1,6 +1,6 @@
 import json
-from origo.sdk.pipelines.client import PipelineApiClient
-from origo.sdk.pipelines.resources.pipeline_input import PipelineInput
+from okdata.sdk.pipelines.client import PipelineApiClient
+from okdata.sdk.pipelines.resources.pipeline_input import PipelineInput
 from tests.conftest import create_pipeline_input_request
 
 
