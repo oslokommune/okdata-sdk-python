@@ -16,7 +16,7 @@ auth_default = Authenticate(config, file_cache=file_cache)
 get_status_response = [{"trace_event_id": "my-id"}, {"trace_event_id": "my-other-id"}]
 
 
-class TestStatus:
+class TestGetStatus:
     def test_get_status(self, requests_mock):
         uuid = "my-uu-ii-dd-1"
         status = Status(config=config, auth=auth_default)
@@ -36,3 +36,18 @@ class TestStatus:
             status.get_status(uuid)
         except HTTPError:
             assert True
+
+
+class TestUpdateStatus:
+    def test_update_status(self, requests_mock):
+        uuid = "dead-beef-cafe"
+        data = {
+            "trace_id": uuid,
+            "something": "like this",
+        }
+
+        requests_mock.register_uri(
+            "POST", f"/status-api/status/{uuid}", json=data, status_code=200
+        )
+        status = Status(config=config, auth=auth_default).update_status(uuid, {})
+        assert status == data

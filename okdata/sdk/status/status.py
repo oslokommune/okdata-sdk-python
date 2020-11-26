@@ -17,3 +17,8 @@ class Status(SDK):
         if response.status_code == 200:
             return response.json()
         response.raise_for_status()
+
+    def update_status(self, trace_id, data):
+        url = self.config.get("statusApiUrl")
+        response = self.post(f"{url}/{trace_id}", data)
+        return response.json()
