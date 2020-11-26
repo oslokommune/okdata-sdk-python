@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Added `Status.update_status` method
+
 ## 0.5.0
 
 ### Breaking
