@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.5.1
 
 * Added `Status.update_status` method
 
