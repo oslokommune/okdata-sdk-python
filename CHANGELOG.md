@@ -1,3 +1,8 @@
+## ?.?.?
+
+* The `okdata` namespace package now uses the old-style `pkg_resources`
+  declaration instead of being an implicit namespace package.
+
 ## 0.5.1
 
 * Added `Status.update_status` method

@@ -16,6 +16,7 @@ setuptools.setup(
     packages=setuptools.find_namespace_packages(
         include="okdata.sdk.*", exclude=["tests*"]
     ),
+    namespace_packages=["okdata"],
     install_requires=[
         "requests",
         "urllib3",
