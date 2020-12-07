@@ -1,5 +1,6 @@
-import json
 import re
+import json
+import pytest
 from requests.exceptions import HTTPError
 
 from okdata.sdk.data.dataset import Dataset
@@ -65,6 +66,15 @@ class TestDataset:
         dataset = ds.get_dataset("test-get-dataset")
         assert dataset["Id"] == "test-get-dataset"
 
+    def test_updateDataset(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        datasetid = "test-dataset-updateDataset"
+        matcher = re.compile("datasets")
+        response = json.dumps({"Id": datasetid})
+        requests_mock.register_uri("PUT", matcher, text=response, status_code=200)
+        body = ds.update_dataset(datasetid, {"Id": datasetid})
+        assert body["Id"] == datasetid
+
 
 class TestVersion:
     def test_createDatasetVersion(self, requests_mock):
@@ -102,6 +112,23 @@ class TestVersion:
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
         version = ds.get_latest_version("test-dataset-version-latest")
         assert version["Id"] == "test-dataset-version-latest"
+
+    def test_updateDatasetVersion(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "test-dataset-update-version/1"})
+        matcher = re.compile("datasets/test-dataset-update-version/versions")
+        requests_mock.register_uri("PUT", matcher, text=response, status_code=200)
+        version = ds.update_version("test-dataset-update-version", 1, {"some": "data"})
+        assert requests_mock.last_request.json() == {"some": "data"}
+        assert version["Id"] == "test-dataset-update-version/1"
+
+    def test_updateDatasetInvalidVersion(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "test-dataset-update-version/1"})
+        matcher = re.compile("datasets/test-dataset-update-version/versions")
+        requests_mock.register_uri("PUT", matcher, text=response, status_code=409)
+        with pytest.raises(HTTPError):
+            ds.update_version("test-dataset-update-version", 1, {"version": "2"})
 
 
 class TestEdition:
@@ -146,3 +173,64 @@ class TestEdition:
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
         edition = ds.get_latest_edition("test-dataset-edition-latest", 1)
         assert edition["Id"] == "test-dataset-edition-latest"
+
+    def test_updateDatasetVersionEdition(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "test-dataset-updatedataset-edition/1/my-edition"})
+        matcher = re.compile(
+            "datasets/test-dataset-updatedataset-edition/versions/1/editions/my-edition"
+        )
+        requests_mock.register_uri("PUT", matcher, text=response, status_code=200)
+        edition = ds.update_edition(
+            "test-dataset-updatedataset-edition", 1, "my-edition", {"some": "data"}
+        )
+        assert requests_mock.last_request.json() == {"some": "data"}
+        assert edition["Id"] == "test-dataset-updatedataset-edition/1/my-edition"
+
+
+class TestDistribution:
+    def test_createDatasetVersionEditionDistribution(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "my-dataset/1/my-edition/test-distro"})
+        matcher = re.compile(
+            "datasets/my-dataset/versions/1/editions/my-edition/distributions"
+        )
+        requests_mock.register_uri("POST", matcher, text=response, status_code=200)
+        distribution = ds.create_distribution(
+            "my-dataset", 1, "my-edition", {"some": "data"}
+        )
+        assert requests_mock.last_request.json() == {"some": "data"}
+        assert distribution["Id"] == "my-dataset/1/my-edition/test-distro"
+
+    def test_getDatasetVersionEditionDistributions(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps([{"Id": "my-dataset"}])
+        matcher = re.compile(
+            "datasets/my-dataset/versions/1/editions/my-edition/distributions"
+        )
+        requests_mock.register_uri("GET", matcher, text=response, status_code=200)
+        list = ds.get_distributions("my-dataset", 1, "my-edition")
+        assert len(list) == 1
+
+    def test_getDatasetVersionEditionDistribution(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "my-dataset/1/my-edition/my-distro"})
+        matcher = re.compile(
+            "datasets/my-dataset/versions/1/editions/my-edition/distributions/my-distro"
+        )
+        requests_mock.register_uri("GET", matcher, text=response, status_code=200)
+        distribution = ds.get_distribution("my-dataset", 1, "my-edition", "my-distro")
+        assert distribution["Id"] == "my-dataset/1/my-edition/my-distro"
+
+    def test_updateDatasetVersionEditionDistribution(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "my-dataset/1/my-edition/my-distro"})
+        matcher = re.compile(
+            "datasets/my-dataset/versions/1/editions/my-edition/distributions/my-distro"
+        )
+        requests_mock.register_uri("PUT", matcher, text=response, status_code=200)
+        distribution = ds.update_distribution(
+            "my-dataset", 1, "my-edition", "my-distro", {"some": "data"}
+        )
+        assert requests_mock.last_request.json() == {"some": "data"}
+        assert distribution["Id"] == "my-dataset/1/my-edition/my-distro"
