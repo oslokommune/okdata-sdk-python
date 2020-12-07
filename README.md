@@ -55,6 +55,7 @@ Table of contents:
 - [Sending events](#sending-events)
 - [Create and manage event streams](#create-and-manage-event-streams)
 - [Creating datasets with versions and editions](#creating-datasets-with-versions-and-editions)
+- [Updating dataset metadata](#updating-dataset-metadata)
 
 ## Upload data
 
@@ -310,4 +311,37 @@ new_edition = dataset.create_edition(new_dataset["Id"], new_version["version"], 
 #   'edition': '2020-01-15T13:04:39.041778+00:00',
 #   'endTime': '2019-12-31',
 #   'startTime': '2019-01-01'}
+```
+
+## Updating dataset metadata
+
+Similarly to creating datasets, metadata for any given dataset, version etc., can also be 
+**updated** by using the methods listed below. These methods accepts an updated version of 
+the JSON document posted when creating the same resource:
+
+```py
+dataset.update_dataset(datasetid, data={ ... })
+dataset.update_version(datasetid, versionid, data={ ... })
+dataset.update_edition(datasetid, versionid, editionid, data={ ... })
+dataset.update_distribution(datasetid, versionid, editionid, distributionid, data={ ... })
+
+# Example: Update dataset metadata
+dataset.update_dataset(
+    datasetid="precise-descriptive-title",
+    data={
+        "title": "Precise Descriptive Title",
+        "description": "Describe your dataset here",
+        "keywords": ["some-keyword", "another-keyword"], # Add another keyword
+        "accessRights": "public",
+        "confidentiality": "green",
+        "license": "Norsk lisens for offentlige data (NLOD) 1.0", # Add licensing information
+        "objective": "Exemplify how to update an existing dataset", # Update objective text
+        "contactPoint": {
+            "name": "Your name",
+            "email": "your_email@domain.com",
+            "phone": "999555111"
+        },
+        "publisher": "name of organization or person responsible for publishing the data"
+    }
+)
 ```
