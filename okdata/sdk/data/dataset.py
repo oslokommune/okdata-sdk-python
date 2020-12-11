@@ -13,7 +13,7 @@ class Dataset(SDK):
 
     def create_dataset(self, data=None):
         url = self.config.get("datasetUrl")
-        log.info(f"SDK:Creating dataset with data: {data}")
+        log.info(f"SDK:Creating dataset with payload: {data}")
         result = self.post(url, data)
         body = result.json()
         log.info(f"Created dataset: {body['Id']}")
@@ -42,7 +42,7 @@ class Dataset(SDK):
     def update_dataset(self, datasetid, data):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}"
-        log.info(f"SDK:Updating dataset: {datasetid} with data: {data}")
+        log.info(f"SDK:Updating dataset: {datasetid} with payload: {data}")
         result = self.put(url, data)
         body = result.json()
         log.info(f"Updated dataset: {body['Id']}")
@@ -52,7 +52,7 @@ class Dataset(SDK):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions"
         log.info(
-            f"SDK:Creating version for {datasetid} from: {url}, with payload: {data}"
+            f"SDK:Creating version for: {datasetid} from: {url}, with payload: {data}"
         )
         result = self.post(url, data)
 
@@ -77,7 +77,7 @@ class Dataset(SDK):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions/{versionid}"
         log.info(
-            f"SDK:Updating version {versionid} for {datasetid} from: {url}, with payload: {data}"
+            f"SDK:Updating version {versionid} for: {datasetid} from: {url}, with payload: {data}"
         )
         result = self.put(url, data)
         body = result.json()
@@ -92,7 +92,6 @@ class Dataset(SDK):
             f"SDK:Creating dataset edition for: {datasetid} from: {url} with payload: {data}"
         )
         result = self.post(url, data)
-        log.info(f"SDK:API reported back: {result.json()}")
         body = result.json()
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Created dataset edition: {editionid} on {datasetid}/{versionid}")
@@ -118,7 +117,7 @@ class Dataset(SDK):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/latest"
         log.info(
-            f"SDK:Getting latest dataset version edition for {datasetid}/{versionid} from: {url}"
+            f"SDK:Getting latest dataset version edition for: {datasetid}/{versionid} from: {url}"
         )
         return self.get(url).json()
 
@@ -129,7 +128,6 @@ class Dataset(SDK):
             f"SDK:Updating dataset edition {editionid} for: {datasetid} from: {url} with payload: {data}"
         )
         result = self.put(url, data)
-        log.info(f"SDK:API reported back: {result.json()}")
         body = result.json()
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Updated dataset edition: {editionid} on {datasetid}/{versionid}")
