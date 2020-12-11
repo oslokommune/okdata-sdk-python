@@ -59,7 +59,7 @@ Table of contents:
 
 ## Upload data
 
-When uploading data you need to refer to an existing dataset that you own, a version and an edition. 
+When uploading data you need to refer to an existing dataset that you own, a version and an edition.
 If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
 or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 
@@ -188,8 +188,8 @@ res2 = event_poster.post_event(event_list, dataset_id, version)
 
 ## Create and manage event streams
 
-In order to create an event stream you need to have defined a dataset and a version, 
-unless these already exist. Defining a dataset and a version can be 
+In order to create an event stream you need to have defined a dataset and a version,
+unless these already exist. Defining a dataset and a version can be
 achieved [using the sdk](#creating-datasets-with-versions-and-editions),
 or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 You do not need to define an edition in order to create an event stream.
@@ -315,8 +315,8 @@ new_edition = dataset.create_edition(new_dataset["Id"], new_version["version"], 
 
 ## Updating dataset metadata
 
-Similarly to creating datasets, metadata for any given dataset, version etc., can also be 
-**updated** by using the methods listed below. These methods accepts an updated version of 
+Similarly to creating datasets, metadata for any given dataset, version etc., can also be
+**updated** by using the methods listed below. These methods accept an updated version of
 the JSON document posted when creating the same resource:
 
 ```py
