@@ -5,9 +5,7 @@ from okdata.sdk.event.post_event import PostEvent
 from okdata.sdk.auth.auth import Authenticate
 from okdata.sdk.config import Config
 from okdata.sdk.file_cache import FileCache
-from tests.auth.client_credentials_test_utils import (
-    default_test_client_credentials,
-)
+from tests.auth.client_credentials_test_utils import default_test_client_credentials
 
 config = Config()
 file_cache = FileCache(config)
