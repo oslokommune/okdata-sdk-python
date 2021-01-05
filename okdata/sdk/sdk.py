@@ -1,6 +1,8 @@
 import logging
 import requests
 import json
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 from okdata.sdk.config import Config
 from okdata.sdk.auth.auth import Authenticate
@@ -28,30 +30,45 @@ class SDK(object):
             headers["Authorization"] = f"Bearer {self.auth.access_token}"
         return headers
 
-    def post(self, url, data, **kwargs):
+    def post(self, url, data, retries=0, **kwargs):
         log.info(f"SDK:Posting resource to url: {url}")
-        result = requests.post(
+        session = prepared_request_with_retries(retries)
+        result = session.post(
             url, data=json.dumps(data), headers=self.headers(), **kwargs
         )
         result.raise_for_status()
         return result
 
-    def put(self, url, data, **kwargs):
+    def put(self, url, data, retries=0, **kwargs):
         log.info(f"SDK:Putting resource to url: {url}")
-        result = requests.put(
+        session = prepared_request_with_retries(retries)
+        result = session.put(
             url, data=json.dumps(data), headers=self.headers(), **kwargs
         )
         result.raise_for_status()
         return result
 
-    def get(self, url, **kwargs):
+    def get(self, url, retries=0, **kwargs):
         log.info(f"SDK:Getting resource from url: {url}")
-        result = requests.get(url, headers=self.headers(), **kwargs)
+        session = prepared_request_with_retries(retries)
+        result = session.get(url, headers=self.headers(), **kwargs)
         result.raise_for_status()
         return result
 
-    def delete(self, url, **kwargs):
+    def delete(self, url, retries=0, **kwargs):
         log.info(f"SDK:Deleting resource from url: {url}")
-        result = requests.delete(url, headers=self.headers(), **kwargs)
+        session = prepared_request_with_retries(retries)
+        result = session.delete(url, headers=self.headers(), **kwargs)
         result.raise_for_status()
         return result
+
+
+def prepared_request_with_retries(retries):
+    #  https://findwork.dev/blog/advanced-usage-python-requests-timeouts-retries-hooks/#retry-on-failure
+    retry_strategy = Retry(total=retries, status_forcelist=[429, 500, 502, 503, 504])
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session = requests.Session()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+
+    return session
