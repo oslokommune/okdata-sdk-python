@@ -14,18 +14,18 @@ class Download(SDK):
         super().__init__(config, auth, env)
         self.data_exporter_url = self.config.get("dataExporterUrl")
 
-    def get_files(self, dataset_id, version, edition):
+    def get_files(self, dataset_id, version, edition, retries=0):
 
         get_download_urls_url = (
             f"{self.data_exporter_url}/{dataset_id}/{version}/{edition}"
         )
 
-        response = self.get(get_download_urls_url)
+        response = self.get(get_download_urls_url, retries=retries)
         return response.json()
 
-    def download(self, dataset_id, version, edition, output_path):
+    def download(self, dataset_id, version, edition, output_path, retries=0):
         downloaded_files = []
-        for file in self.get_files(dataset_id, version, edition):
+        for file in self.get_files(dataset_id, version, edition, retries=retries):
             file_name = file["key"].split("/")[-1]
             file_content_response = requests.get(file["url"])
             file_content_response.raise_for_status()
