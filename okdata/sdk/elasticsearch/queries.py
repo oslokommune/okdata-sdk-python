@@ -11,9 +11,9 @@ class ElasticsearchQueries(SDK):
         super().__init__(config, auth, env)
         self.elasticsearch_query_url = self.config.get("elasticsearchQueryUrl")
 
-    def event_stat(self, dataset_id):
+    def event_stat(self, dataset_id, retries=0):
         url = f"{self.elasticsearch_query_url}/{dataset_id}/events"
-        res = self.get(url)
+        res = self.get(url, retries=retries)
         log.debug(f"event stat status: {res.status_code}")
 
         return res.json()
