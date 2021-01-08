@@ -13,7 +13,7 @@ class Dataset(SDK):
 
     def create_dataset(self, data=None):
         url = self.config.get("datasetUrl")
-        log.info(f"SDK:Creating dataset with data: {data}")
+        log.info(f"SDK:Creating dataset with payload: {data}")
         result = self.post(url, data)
         body = result.json()
         log.info(f"Created dataset: {body['Id']}")
@@ -39,11 +39,20 @@ class Dataset(SDK):
         log.info(f"SDK:Getting dataset: {datasetid} from: {url}")
         return self.get(url).json()
 
+    def update_dataset(self, datasetid, data):
+        datasetUrl = self.config.get("datasetUrl")
+        url = f"{datasetUrl}/{datasetid}"
+        log.info(f"SDK:Updating dataset: {datasetid} with payload: {data}")
+        result = self.put(url, data)
+        body = result.json()
+        log.info(f"Updated dataset: {body['Id']}")
+        return body
+
     def create_version(self, datasetid, data):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions"
         log.info(
-            f"SDK:Creating version for {datasetid} from: {url}, with payload: {data}"
+            f"SDK:Creating version for: {datasetid} from: {url}, with payload: {data}"
         )
         result = self.post(url, data)
 
@@ -64,14 +73,25 @@ class Dataset(SDK):
         log.info(f"SDK:Getting latest dataset version for: {datasetid} from: {url}")
         return self.get(url).json()
 
+    def update_version(self, datasetid, versionid, data):
+        baseUrl = self.config.get("datasetUrl")
+        url = f"{baseUrl}/{datasetid}/versions/{versionid}"
+        log.info(
+            f"SDK:Updating version {versionid} for: {datasetid} from: {url}, with payload: {data}"
+        )
+        result = self.put(url, data)
+        body = result.json()
+        datasetVersion = body["Id"].split("/")[1]
+        log.info(f"SDK:Updated dataset version: {datasetVersion} on {datasetid}")
+        return body
+
     def create_edition(self, datasetid, versionid, data):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions/{versionid}/editions"
         log.info(
-            f"SDK:Creating dataset edition for: {datasetid} from: {url} with payload: {data}"
+            f"SDK:Creating dataset edition for: {datasetid} from: {url} with payload: {data}"
         )
         result = self.post(url, data)
-        log.info(f"SDK:API reported back: {result.json()}")
         body = result.json()
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Created dataset edition: {editionid} on {datasetid}/{versionid}")
@@ -97,25 +117,64 @@ class Dataset(SDK):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/latest"
         log.info(
-            f"SDK:Getting latest dataset version edition for {datasetid}/{versionid} from: {url}"
+            f"SDK:Getting latest dataset version edition for: {datasetid}/{versionid} from: {url}"
         )
         return self.get(url).json()
+
+    def update_edition(self, datasetid, versionid, editionid, data):
+        baseUrl = self.config.get("datasetUrl")
+        url = f"{baseUrl}/{datasetid}/versions/{versionid}/editions/{editionid}"
+        log.info(
+            f"SDK:Updating dataset edition {editionid} for: {datasetid} from: {url} with payload: {data}"
+        )
+        result = self.put(url, data)
+        body = result.json()
+        editionid = body["Id"].split("/")[2]
+        log.info(f"SDK:Updated dataset edition: {editionid} on {datasetid}/{versionid}")
+        return body
 
     def get_distributions(self, datasetid, versionid, editionid):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions"
+        log.info(
+            f"SDK:Getting distributions for: {datasetid}/{versionid}/{editionid} from: {url}"
+        )
+        return self.get(url).json()
+
+    def get_distribution(self, datasetid, versionid, editionid, distributionid):
+        datasetUrl = self.config.get("datasetUrl")
+        url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions/{distributionid}"
+        log.info(
+            f"SDK:Getting distribution for: {datasetid}/{versionid}/{editionid} from: {url}"
+        )
         return self.get(url).json()
 
     def create_distribution(self, datasetid, versionid, editionid, data):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions"
         log.info(
-            f"SDK:Creating dataset distribution for: {datasetid} from: {url} with payload: {data}"
+            f"SDK:Creating dataset distribution for: {datasetid} from: {url} with payload: {data}"
         )
         result = self.post(url, data)
         body = result.json()
         distributionid = body["Id"].split("/")[3]
         log.info(
             f"SDK:Created dataset distribution: {distributionid} on {datasetid}/{versionid}/{editionid}"
+        )
+        return body
+
+    def update_distribution(
+        self, datasetid, versionid, editionid, distributionid, data
+    ):
+        datasetUrl = self.config.get("datasetUrl")
+        url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions/{distributionid}"
+        log.info(
+            f"SDK:Updating distribution {distributionid} for: {datasetid} from: {url} with payload: {data}"
+        )
+        result = self.put(url, data)
+        body = result.json()
+        distributionid = body["Id"].split("/")[3]
+        log.info(
+            f"SDK:Updated dataset distribution: {distributionid} on {datasetid}/{versionid}/{editionid}"
         )
         return body

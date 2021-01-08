@@ -1,3 +1,8 @@
+## ?.?.?
+
+* Added `Dataset.get_distribution` method
+* Added `Dataset.update_*` methods for updating dataset, version, edition and distribution metadata
+
 ## 0.5.2
 
 * The `okdata` namespace package now uses the old-style `pkg_resources`
