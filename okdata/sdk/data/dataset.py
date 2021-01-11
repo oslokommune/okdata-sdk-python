@@ -146,12 +146,12 @@ class Dataset(SDK):
     def get_distribution(
         self, datasetid, versionid, editionid, distributionid, retries=0
     ):
-        datasetUrl = self.config.get("datasetUrl", retries=retries)
+        datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions/{distributionid}"
         log.info(
             f"SDK:Getting distribution for: {datasetid}/{versionid}/{editionid} from: {url}"
         )
-        return self.get(url).json()
+        return self.get(url, retries=retries).json()
 
     def create_distribution(self, datasetid, versionid, editionid, data, retries=0):
         datasetUrl = self.config.get("datasetUrl")
