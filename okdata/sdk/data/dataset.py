@@ -39,11 +39,11 @@ class Dataset(SDK):
         log.info(f"SDK:Getting dataset: {datasetid} from: {url}")
         return self.get(url, retries=retries).json()
 
-    def update_dataset(self, datasetid, data):
+    def update_dataset(self, datasetid, data, retries=0):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}"
         log.info(f"SDK:Updating dataset: {datasetid} with payload: {data}")
-        result = self.put(url, data)
+        result = self.put(url, data, retries=retries)
         body = result.json()
         log.info(f"Updated dataset: {body['Id']}")
         return body
@@ -73,13 +73,13 @@ class Dataset(SDK):
         log.info(f"SDK:Getting latest dataset version for: {datasetid} from: {url}")
         return self.get(url, retries=retries).json()
 
-    def update_version(self, datasetid, versionid, data):
+    def update_version(self, datasetid, versionid, data, retries=0):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions/{versionid}"
         log.info(
             f"SDK:Updating version {versionid} for: {datasetid} from: {url}, with payload: {data}"
         )
-        result = self.put(url, data)
+        result = self.put(url, data, retries=retries)
         body = result.json()
         datasetVersion = body["Id"].split("/")[1]
         log.info(f"SDK:Updated dataset version: {datasetVersion} on {datasetid}")
@@ -122,13 +122,13 @@ class Dataset(SDK):
         )
         return self.get(url, retries=retries).json()
 
-    def update_edition(self, datasetid, versionid, editionid, data):
+    def update_edition(self, datasetid, versionid, editionid, data, retries=0):
         baseUrl = self.config.get("datasetUrl")
         url = f"{baseUrl}/{datasetid}/versions/{versionid}/editions/{editionid}"
         log.info(
             f"SDK:Updating dataset edition {editionid} for: {datasetid} from: {url} with payload: {data}"
         )
-        result = self.put(url, data)
+        result = self.put(url, data, retries=retries)
         body = result.json()
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Updated dataset edition: {editionid} on {datasetid}/{versionid}")
@@ -143,7 +143,9 @@ class Dataset(SDK):
         )
         return self.get(url).json()
 
-    def get_distribution(self, datasetid, versionid, editionid, distributionid):
+    def get_distribution(
+        self, datasetid, versionid, editionid, distributionid, retries=0
+    ):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions/{distributionid}"
         log.info(
@@ -166,14 +168,14 @@ class Dataset(SDK):
         return body
 
     def update_distribution(
-        self, datasetid, versionid, editionid, distributionid, data
+        self, datasetid, versionid, editionid, distributionid, data, retries=0
     ):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}/versions/{versionid}/editions/{editionid}/distributions/{distributionid}"
         log.info(
             f"SDK:Updating distribution {distributionid} for: {datasetid} from: {url} with payload: {data}"
         )
-        result = self.put(url, data)
+        result = self.put(url, data, retries=retries)
         body = result.json()
         distributionid = body["Id"].split("/")[3]
         log.info(
