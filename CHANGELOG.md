@@ -1,7 +1,8 @@
-## ?.?.?
+## 0.5.3
 
 * Added `Dataset.get_distribution` method
 * Added `Dataset.update_*` methods for updating dataset, version, edition and distribution metadata
+* Added retry parameter to sdk methods
 
 ## 0.5.2
 
