@@ -17,7 +17,7 @@ event_stream_item_response = {
     "updated_at": "2020-08-03T07:42:18.114531+00:00",
     "create_raw": True,
     "deleted": False,
-    "confidentiality": "green",
+    "accessRights": "public",
 }
 event_stream_deleted_response = {
     "message": f"Deleted event stream with id {dataset_id}/{version}"

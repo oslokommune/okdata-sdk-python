@@ -252,7 +252,6 @@ dataset_metadata = {
     "description": "Describe your dataset here",
     "keywords": ["some-keyword"],
     "accessRights": "public",
-    "confidentiality": "green",
     "objective": "Exemplify how to create a new dataset",
     "contactPoint": {
         "name": "Your name",
@@ -269,7 +268,6 @@ new_dataset = dataset.create_dataset(data=dataset_metadata)
 #   'Type': 'Dataset',
 #   '_links': {'self': {'href': '/datasets/precise-descriptive-title'}},
 #   'accessRights': 'public',
-#   'confidentiality': 'green',
 #   'contactPoint': { 'email': 'your_email@domain.com',
 #                     'name': 'Your name',
 #                     'phone': '999555111'},
@@ -333,7 +331,6 @@ dataset.update_dataset(
         "description": "Describe your dataset here",
         "keywords": ["some-keyword", "another-keyword"], # Add another keyword
         "accessRights": "public",
-        "confidentiality": "green",
         "license": "Norsk lisens for offentlige data (NLOD) 1.0", # Add licensing information
         "objective": "Exemplify how to update an existing dataset", # Update objective text
         "contactPoint": {
