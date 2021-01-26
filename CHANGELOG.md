@@ -1,8 +1,10 @@
-## 0.5.3
+## 0.6.0
 
-* Added `Dataset.get_distribution` method
-* Added `Dataset.update_*` methods for updating dataset, version, edition and distribution metadata
-* Added retry parameter to sdk methods
+* Added `Dataset.get_distribution` method.
+* Added `Dataset.update_*` methods for updating dataset, version, edition and
+  distribution metadata.
+* Added retry parameter to SDK methods.
+* The `confidentiality` metadata field is now fully replaced by `accessRights`.
 
 ## 0.5.2
 
