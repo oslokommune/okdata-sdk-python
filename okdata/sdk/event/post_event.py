@@ -11,7 +11,7 @@ class PostEvent(SDK):
         super().__init__(config, auth, env)
         self.event_collector_url = self.config.get("eventCollectorUrl")
 
-    def post_event(self, event_payload, dataset_id, version_id):
+    def post_event(self, event_payload, dataset_id, version_id, retries=0):
 
         if type(event_payload) is dict:
             post_url = f"{self.event_collector_url}/event/{dataset_id}/{version_id}"
@@ -22,4 +22,4 @@ class PostEvent(SDK):
                 f"Invalid type: {type(event_payload)}. Must be either {list} or {dict}"
             )
 
-        return self.post(post_url, event_payload).json()
+        return self.post(post_url, event_payload, retries=retries).json()
