@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.6.1
 
 * `PostEvent.post_event` now also supports retries.
 
