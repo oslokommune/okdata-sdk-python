@@ -1,3 +1,7 @@
+## ?.?.?
+
+* `PostEvent.post_event` now also supports retries.
+
 ## 0.6.0
 
 * Added `Dataset.get_distribution` method.
