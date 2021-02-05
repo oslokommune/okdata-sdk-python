@@ -1,3 +1,8 @@
+## ?.?.?
+
+* Authentication is no longer necessary for downloading public ("green")
+  datasets.
+
 ## 0.6.1
 
 * `PostEvent.post_event` now also supports retries.
