@@ -15,13 +15,14 @@ class Download(SDK):
         self.data_exporter_url = self.config.get("dataExporterUrl")
 
     def get_files(self, dataset_id, version, edition, retries=0):
-
-        get_download_urls_url = (
-            f"{self.data_exporter_url}/{dataset_id}/{version}/{edition}"
+        url = "{}/{}{}/{}/{}".format(
+            self.data_exporter_url,
+            "" if self.auth.token_provider else "public/",
+            dataset_id,
+            version,
+            edition,
         )
-
-        response = self.get(get_download_urls_url, retries=retries)
-        return response.json()
+        return self.get(url, retries=retries).json()
 
     def download(self, dataset_id, version, edition, output_path, retries=0):
         downloaded_files = []

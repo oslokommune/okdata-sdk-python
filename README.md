@@ -52,6 +52,7 @@ If environment variables are not available, the system will try to load from a d
 
 Table of contents:
 - [Upload data](#upload-data)
+- [Download data](#download-data)
 - [Sending events](#sending-events)
 - [Create and manage event streams](#create-and-manage-event-streams)
 - [Creating datasets with versions and editions](#creating-datasets-with-versions-and-editions)
@@ -60,7 +61,7 @@ Table of contents:
 ## Upload data
 
 When uploading data you need to refer to an existing dataset that you own, a version and an edition.
-If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
+If these are non existent then you can create them yourself. This can be achieved [using the sdk](#creating-datasets-with-versions-and-editions),
 or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
 
 
@@ -125,9 +126,15 @@ print(trace_events)
 
 ## Download data
 
-When downloading data you need to refer to an existing dataset that you own, a version and an edition.
-If these are non existent then you can create them yourself. This can be achieved [using the sdk](#create-a-new-dataset-with-version-and-edition),
-or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
+To download data you need to refer to a dataset that you have access to. This
+could be a public dataset, a restricted dataset you've been given access to, or
+a dataset that you own yourself. If the dataset is public, [authenticating
+yourself](#environment-variables) is not necessary.
+
+You will also need to refer to the specific version and edition of the dataset
+that you want to download. If this is your own dataset, make sure to create a
+[version and edition](#creating-datasets-with-versions-and-editions) before
+attempting to download it.
 
 ```python
 from okdata.sdk.data.download import Download
