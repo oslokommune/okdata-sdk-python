@@ -11,8 +11,8 @@ not_expired = {"exp": datetime.timestamp(not_expired_time)}
 
 expired = {"exp": datetime.timestamp(expired_time)}
 
-not_expired_token = jwt.encode(not_expired, "secret", algorithm="HS256").decode("utf-8")
-expired_token = jwt.encode(expired, "secret", algorithm="HS256").decode("utf-8")
+not_expired_token = jwt.encode(not_expired, "secret", algorithm="HS256")
+expired_token = jwt.encode(expired, "secret", algorithm="HS256")
 
 default_test_client_credentials = {
     "access_token": not_expired_token,
@@ -24,7 +24,5 @@ from_cache_expired = {"exp": expired_time, "source": "cache"}
 
 from_cache_not_expired_token = jwt.encode(
     from_cache_not_expired, "secret", algorithm="HS256"
-).decode("utf-8")
-from_cache_expired_token = jwt.encode(
-    from_cache_expired, "secret", algorithm="HS256"
-).decode("utf-8")
+)
+from_cache_expired_token = jwt.encode(from_cache_expired, "secret", algorithm="HS256")

@@ -19,7 +19,7 @@ def is_expired(timestamp):
 
 
 def decode_token(token):
-    return jwt.decode(token, verify=False, algorithms=["HS256"])
+    return jwt.decode(token, options={"verify_signature": False})
 
 
 def get_expired_timestamp(token):

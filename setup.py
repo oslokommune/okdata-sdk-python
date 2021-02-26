@@ -22,7 +22,7 @@ setuptools.setup(
         "urllib3",
         "PrettyTable",
         "python-keycloak",
-        "PyJWT",
+        "PyJWT>=2.0.0",
         "jsonschema",
     ],
     data_files=[
