@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.6.3
 
 * PyJWT 2.0.0 or above is now required.
 
