@@ -4,26 +4,53 @@
 #
 #    pip-compile
 #
-attrs==19.3.0             # via jsonschema
-certifi==2019.9.11        # via requests
-chardet==3.0.4            # via requests
-ecdsa==0.13.3             # via python-jose
-future==0.18.2            # via python-jose
-idna==2.8                 # via requests
-importlib-metadata==1.3.0  # via jsonschema
+attrs==19.3.0
+    # via jsonschema
+certifi==2019.9.11
+    # via requests
+chardet==3.0.4
+    # via requests
+ecdsa==0.13.3
+    # via python-jose
+future==0.18.2
+    # via python-jose
+idna==2.8
+    # via requests
+importlib-metadata==1.3.0
+    # via jsonschema
 jsonschema==3.2.0
-more-itertools==8.0.2     # via zipp
+    # via okdata-sdk (setup.py)
+more-itertools==8.0.2
+    # via zipp
 prettytable==0.7.2
-pyasn1==0.4.7             # via rsa
-pyjwt==1.7.1
-pyrsistent==0.15.6        # via jsonschema
-python-jose==3.0.1        # via python-keycloak
+    # via okdata-sdk (setup.py)
+pyasn1==0.4.7
+    # via rsa
+pyjwt==2.0.1
+    # via okdata-sdk (setup.py)
+pyrsistent==0.15.6
+    # via jsonschema
+python-jose==3.0.1
+    # via python-keycloak
 python-keycloak==0.18.0
+    # via okdata-sdk (setup.py)
 requests==2.22.0
-rsa==4.0                  # via python-jose
-six==1.12.0               # via jsonschema, pyrsistent, python-jose
+    # via
+    #   okdata-sdk (setup.py)
+    #   python-keycloak
+rsa==4.0
+    # via python-jose
+six==1.12.0
+    # via
+    #   jsonschema
+    #   pyrsistent
+    #   python-jose
 urllib3==1.25.6
-zipp==0.6.0               # via importlib-metadata
+    # via
+    #   okdata-sdk (setup.py)
+    #   requests
+zipp==0.6.0
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

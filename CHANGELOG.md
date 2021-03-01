@@ -1,3 +1,7 @@
+## ?.?.?
+
+* PyJWT 2.0.0 or above is now required.
+
 ## 0.6.2
 
 * Authentication is no longer necessary for downloading public ("green")
