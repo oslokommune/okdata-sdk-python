@@ -338,7 +338,7 @@ dataset.update_dataset(
         "description": "Describe your dataset here",
         "keywords": ["some-keyword", "another-keyword"], # Add another keyword
         "accessRights": "public",
-        "license": "Norsk lisens for offentlige data (NLOD) 1.0", # Add licensing information
+        "license": "http://data.norge.no/nlod/", # Add licensing information
         "objective": "Exemplify how to update an existing dataset", # Update objective text
         "contactPoint": {
             "name": "Your name",
@@ -347,5 +347,14 @@ dataset.update_dataset(
         },
         "publisher": "name of organization or person responsible for publishing the data"
     }
+)
+```
+
+The `update_dataset` method also supports an optional `partial` keyword,
+enabling partial updates when true:
+
+```py
+dataset.update_dataset(
+    "my-dataset-id", {"description": "Only update description"}, partial=True
 )
 ```

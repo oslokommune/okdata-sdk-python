@@ -1,3 +1,8 @@
+## ?.?.?
+
+* `Dataset.update_dataset` now supports partial metadata updates when the
+  keyword argument `partial` is true.
+
 ## 0.6.3
 
 * PyJWT 2.0.0 or above is now required.
