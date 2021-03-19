@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.7.0
 
 * `Dataset.update_dataset` now supports partial metadata updates when the
   keyword argument `partial` is true.
