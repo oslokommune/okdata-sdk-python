@@ -30,37 +30,31 @@ class SDK(object):
             headers["Authorization"] = f"Bearer {self.auth.access_token}"
         return headers
 
-    def post(self, url, data, retries=0, **kwargs):
-        log.info(f"SDK:Posting resource to url: {url}")
+    def _request(self, method, url, retries, **kwargs):
         session = self.prepared_request_with_retries(retries)
-        result = session.post(
-            url, data=json.dumps(data), headers=self.headers(), **kwargs
-        )
-        result.raise_for_status()
-        return result
+        try:
+            request_method = getattr(session, method)
+        except AttributeError:
+            raise ValueError(f"'{method}' is not a valid request method")
+        log.info(f"SDK:Making a {method.upper()} request to URL: {url}")
+        response = request_method(url, headers=self.headers(), **kwargs)
+        response.raise_for_status()
+        return response
+
+    def post(self, url, data, retries=0, **kwargs):
+        return self._request("post", url, retries, data=json.dumps(data), **kwargs)
 
     def put(self, url, data, retries=0, **kwargs):
-        log.info(f"SDK:Putting resource to url: {url}")
-        session = self.prepared_request_with_retries(retries)
-        result = session.put(
-            url, data=json.dumps(data), headers=self.headers(), **kwargs
-        )
-        result.raise_for_status()
-        return result
+        return self._request("put", url, retries, data=json.dumps(data), **kwargs)
+
+    def patch(self, url, data, retries=0, **kwargs):
+        return self._request("patch", url, retries, data=json.dumps(data), **kwargs)
 
     def get(self, url, retries=0, **kwargs):
-        log.info(f"SDK:Getting resource from url: {url}")
-        session = self.prepared_request_with_retries(retries)
-        result = session.get(url, headers=self.headers(), **kwargs)
-        result.raise_for_status()
-        return result
+        return self._request("get", url, retries, **kwargs)
 
     def delete(self, url, retries=0, **kwargs):
-        log.info(f"SDK:Deleting resource from url: {url}")
-        session = self.prepared_request_with_retries(retries)
-        result = session.delete(url, headers=self.headers(), **kwargs)
-        result.raise_for_status()
-        return result
+        return self._request("delete", url, retries, **kwargs)
 
     @staticmethod
     def prepared_request_with_retries(retries):

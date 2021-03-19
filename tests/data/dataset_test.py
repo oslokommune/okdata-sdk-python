@@ -69,11 +69,20 @@ class TestDataset:
     def test_updateDataset(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
         datasetid = "test-dataset-updateDataset"
-        matcher = re.compile("datasets")
+        matcher = re.compile(f"datasets/{datasetid}")
         response = json.dumps({"Id": datasetid})
         requests_mock.register_uri("PUT", matcher, text=response, status_code=200)
         body = ds.update_dataset(datasetid, {"Id": datasetid})
         assert body["Id"] == datasetid
+
+    def test_update_dataset_partial(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        dataset_id = "test-dataset-update-partial"
+        matcher = re.compile(f"datasets/{dataset_id}")
+        response = json.dumps({"Id": dataset_id})
+        requests_mock.register_uri("PATCH", matcher, text=response, status_code=200)
+        body = ds.update_dataset(dataset_id, {"Id": dataset_id}, partial=True)
+        assert body["Id"] == dataset_id
 
 
 class TestVersion:

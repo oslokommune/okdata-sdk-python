@@ -39,12 +39,13 @@ class Dataset(SDK):
         log.info(f"SDK:Getting dataset: {datasetid} from: {url}")
         return self.get(url, retries=retries).json()
 
-    def update_dataset(self, datasetid, data, retries=0):
+    def update_dataset(self, datasetid, data, partial=False, retries=0):
         datasetUrl = self.config.get("datasetUrl")
         url = f"{datasetUrl}/{datasetid}"
         log.info(f"SDK:Updating dataset: {datasetid} with payload: {data}")
-        result = self.put(url, data, retries=retries)
-        body = result.json()
+        method = self.patch if partial else self.put
+        response = method(url, data, retries=retries)
+        body = response.json()
         log.info(f"Updated dataset: {body['Id']}")
         return body
 
