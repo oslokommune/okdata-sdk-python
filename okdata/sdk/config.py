@@ -104,6 +104,7 @@ class Config:
 
 
 class EnvironmentConfig:
+    @staticmethod
     def resolve_environment(env):
         if not env:
             env = OKDATA_DEFAULT_ENVIRONMENT
@@ -111,6 +112,7 @@ class EnvironmentConfig:
             env = OKDATA_DEFAULT_ENVIRONMENT
         return env
 
+    @staticmethod
     def create(env):
         log.info(f"SDK:Creating EnvironmentConfig for {env}")
         env = EnvironmentConfig.resolve_environment(env)
@@ -134,6 +136,7 @@ class EnvironmentConfig:
 
 
 class ConfigurationConfig:
+    @staticmethod
     def create(env):
         log.info(f"SDK:Creating ConfigurationConfig for {env}")
         return False

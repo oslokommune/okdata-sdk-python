@@ -12,10 +12,8 @@ def write_to_okdata_cache(content, filename, failure_count=0):
         return
 
     if okdata_cache_path.exists():
-        f = open(f"{okdata_cache_path}/{filename}", "w+")
-        f.write(content)
-        f.close()
-
+        with open(f"{okdata_cache_path}/{filename}", "w+") as file:
+            file.write(content)
     else:
         create_dir(okdata_cache_path)
         write_to_okdata_cache(content, filename, failure_count + 1)
@@ -33,18 +31,17 @@ def read_from_okdata_cache(filename):
     okdata_cache_path = Path(f"{os.environ['HOME']}/.okdata/cache")
 
     try:
-        f = open(f"{okdata_cache_path}/{filename}", "r")
-        content = f.read()
-        f.close()
-        return content
+        file = open(f"{okdata_cache_path}/{filename}", "r")
     except IOError:
-        return
+        return None
+    else:
+        with file:
+            return file.read()
 
 
 def write_file_content(file_name, path, content):
     if not Path(path).exists():
         create_dir(path)
 
-    f = open(f"{path}/{file_name}", "w+")
-    f.write(content)
-    f.close()
+    with open(f"{path}/{file_name}", "w+") as file:
+        file.write(content)

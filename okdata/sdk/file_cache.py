@@ -29,7 +29,6 @@ class FileCache:
                     return json.loads(credentials)
                 except ValueError as ve:
                     log.debug(f"Could not read credentials from cache: {ve}")
-                    return
         else:
             log.debug("Skipping write_credentials: cache is not enabled")
-            return
+        return None

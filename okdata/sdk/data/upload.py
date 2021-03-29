@@ -30,12 +30,13 @@ class Upload(SDK):
         for var in s3SignedData["fields"]:
             s3Data[var] = s3SignedData["fields"][var]
 
-        files = {"file": open(fileName, "rb")}
-        upload_session = self.prepared_request_with_retries(retries=retries)
-        result = upload_session.post(url, data=s3Data, files=files)
-        trace_id = s3SignedData.get("trace_id")
-        data = {"result": result.status_code == 204, "trace_id": trace_id}
-        return data
+        with open(fileName, "rb") as file:
+            files = {"file": file}
+            upload_session = self.prepared_request_with_retries(retries=retries)
+            result = upload_session.post(url, data=s3Data, files=files)
+            trace_id = s3SignedData.get("trace_id")
+            data = {"result": result.status_code == 204, "trace_id": trace_id}
+            return data
 
     def create_s3_signed_data(
         self, fileName, datasetid, versionid, editionid, retries=0
