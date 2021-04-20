@@ -25,6 +25,7 @@ OKDATA_CONFIG["dev"] = {
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
     "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
     "simpleDatasetAuthorizerUrl": "https://api.data-dev.oslo.systems/simple-dataset-authorizer",
+    "permissionApiUrl": "https://api.data-dev.oslo.systems/okdata-permission-api",
 }
 OKDATA_CONFIG["prod"] = {
     "client_id": None,
@@ -43,6 +44,7 @@ OKDATA_CONFIG["prod"] = {
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
     "statusApiUrl": "https://api.data.oslo.systems/status-api/status",
     "simpleDatasetAuthorizerUrl": "https://api.data.oslo.systems/simple-dataset-authorizer",
+    "permissionApiUrl": "https://api.data.oslo.systems/okdata-permission-api",
 }
 
 OKDATA_DEFAULT_ENVIRONMENT = "prod"
