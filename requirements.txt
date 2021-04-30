@@ -45,7 +45,7 @@ six==1.12.0
     #   jsonschema
     #   pyrsistent
     #   python-jose
-urllib3==1.25.6
+urllib3==1.25.8
     # via
     #   okdata-sdk (setup.py)
     #   requests
