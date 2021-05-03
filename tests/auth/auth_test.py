@@ -42,8 +42,8 @@ class TestAuthenticate:
         requests_mock.register_uri("POST", matcher, text=response, status_code=200)
 
         auth.login()
-        assert auth.access_token == client_credentials_response["access_token"]
-        assert auth.refresh_token == client_credentials_response["refresh_token"]
+        assert auth._access_token == client_credentials_response["access_token"]
+        assert auth._refresh_token == client_credentials_response["refresh_token"]
 
     def test_authenticat_no_cache(self, requests_mock, mock_home_dir):
 
@@ -57,8 +57,8 @@ class TestAuthenticate:
         requests_mock.register_uri("POST", matcher, text=response, status_code=200)
 
         auth.login()
-        assert auth.access_token == client_credentials_response["access_token"]
-        assert auth.refresh_token == client_credentials_response["refresh_token"]
+        assert auth._access_token == client_credentials_response["access_token"]
+        assert auth._refresh_token == client_credentials_response["refresh_token"]
 
     def test_authenticate_cached_credentials(self, mock_home_dir):
         client_credentials_provider = ClientCredentialsProvider(config)
@@ -73,8 +73,8 @@ class TestAuthenticate:
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
         auth.login()
-        assert auth.access_token == cached_credentials["access_token"]
-        assert auth.refresh_token == cached_credentials["refresh_token"]
+        assert auth._access_token == cached_credentials["access_token"]
+        assert auth._refresh_token == cached_credentials["refresh_token"]
 
     def test_authenticate_refresh_credentials(self, requests_mock, mock_home_dir):
 
@@ -96,8 +96,8 @@ class TestAuthenticate:
         requests_mock.register_uri("POST", matcher, text=response, status_code=200)
 
         auth.login()
-        assert auth.access_token == cached_credentials["access_token"]
-        assert auth.refresh_token == cached_credentials["refresh_token"]
+        assert auth._access_token == cached_credentials["access_token"]
+        assert auth._refresh_token == cached_credentials["refresh_token"]
 
     def test_authenticate_expired_tokens(self, requests_mock, mock_home_dir):
         client_credentials_provider = ClientCredentialsProvider(config)
@@ -120,8 +120,8 @@ class TestAuthenticate:
         auth.login()
         print(from_cache_not_expired_token)
         print(from_cache_expired_token)
-        assert auth.access_token == client_credentials_response["access_token"]
-        assert auth.refresh_token == client_credentials_response["access_token"]
+        assert auth._access_token == client_credentials_response["access_token"]
+        assert auth._refresh_token == client_credentials_response["access_token"]
 
     def test_authenticate_expired_access_token(self, requests_mock, mock_home_dir):
         client_credentials_provider = ClientCredentialsProvider(config)
@@ -142,8 +142,8 @@ class TestAuthenticate:
         requests_mock.register_uri("POST", matcher, text=response, status_code=200)
 
         auth.login()
-        assert auth.access_token == from_cache_not_expired_token
-        assert auth.refresh_token == cached_credentials["refresh_token"]
+        assert auth._access_token == from_cache_not_expired_token
+        assert auth._refresh_token == cached_credentials["refresh_token"]
 
     def test_authenticate_fail(self, requests_mock, mock_home_dir):
         client_credentials_provider = ClientCredentialsProvider(
