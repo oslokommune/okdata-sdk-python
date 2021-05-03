@@ -2,7 +2,10 @@ import json
 import logging
 
 from okdata.sdk.auth.credentials.client_credentials import ClientCredentialsProvider
-from okdata.sdk.auth.credentials.common import TokenProviderNotInitialized
+from okdata.sdk.auth.credentials.common import (
+    TokenProviderNotInitialized,
+    TokenRefreshError,
+)
 from okdata.sdk.auth.credentials.password_grant import TokenServiceProvider
 from okdata.sdk.auth.util import is_token_expired
 from okdata.sdk.exceptions import ApiAuthenticateError
@@ -55,16 +58,6 @@ class Authenticate(object):
             self.refresh_access_token()
         return self._access_token
 
-    # read only
-    @property
-    def refresh_token(self):
-        if not self.token_provider:
-            return None
-        # If expired, relog
-        if is_token_expired(self._refresh_token):
-            self.token_provider.new_token()
-        return self._refresh_token
-
     def login(self, force=False):
         if not self.token_provider:
             return
@@ -77,21 +70,26 @@ class Authenticate(object):
         if self._access_token and not is_token_expired(self._access_token):
             log.info("Token not expired, skipping")
             return
-        tokens = self.token_provider.new_token()
-        if "access_token" not in tokens:
-            raise ApiAuthenticateError
-        self._access_token = tokens["access_token"]
-        self._refresh_token = tokens["refresh_token"]
-        self.file_cache.write_credentials(credentials=self)
+        self.refresh_access_token()
 
     def refresh_access_token(self):
         if not self.token_provider:
             return
 
-        if is_token_expired(self._refresh_token):
+        tokens = None
+
+        if self._refresh_token and not is_token_expired(self._refresh_token):
+            try:
+                tokens = self.token_provider.refresh_token(self._refresh_token)
+            except TokenRefreshError as e:
+                log.warn(f"Error refreshing token: {e}")
+
+        if not tokens:
             tokens = self.token_provider.new_token()
-        else:
-            tokens = self.token_provider.refresh_token(self.refresh_token)
+            if "access_token" not in tokens:
+                raise ApiAuthenticateError
+            self._refresh_token = tokens["refresh_token"]
+
         self._access_token = tokens["access_token"]
         self.file_cache.write_credentials(credentials=self)
 
