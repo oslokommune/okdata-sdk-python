@@ -6,6 +6,9 @@
   read errors, and redirects). The `retry` parameter now only controls the
   maximum number of retries to perform on bad HTTP status codes.
 
+* Fix refresh of Keycloak access token when refresh token is invalid, e.g.
+  due to inactive session because Keycloak server restarted.
+
 ## 0.7.0
 
 * `Dataset.update_dataset` now supports partial metadata updates when the
