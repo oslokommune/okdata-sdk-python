@@ -161,3 +161,34 @@ class TestAuthenticate:
             auth.login()
         except ApiAuthenticateError:
             assert True
+
+    def test_refresh_inactive_session(self, requests_mock, mock_home_dir):
+        client_credentials_provider = ClientCredentialsProvider(config)
+        auth = Authenticate(config=config, token_provider=client_credentials_provider)
+
+        auth.file_cache.credentials_cache_enabled = True
+
+        cached_credentials = {
+            "provider": "TokenServiceProvider",
+            "access_token": from_cache_expired_token,
+            "refresh_token": from_cache_not_expired_token,
+        }
+
+        auth.file_cache.write_credentials(json.dumps(cached_credentials))
+
+        error_msg = {
+            "error": "invalid_grant",
+            "error_description": "Session not active",
+        }
+        refresh_response = {"text": json.dumps(error_msg), "status_code": 400}
+        login_response = {
+            "text": json.dumps(client_credentials_response),
+            "status_code": 200,
+        }
+        matcher = re.compile(token_endpoint)
+        requests_mock.register_uri("POST", matcher, [refresh_response, login_response])
+
+        auth.login()
+
+        assert auth._access_token == from_cache_not_expired_token
+        assert auth._refresh_token == cached_credentials["refresh_token"]
