@@ -2,6 +2,10 @@
 
 * Added support for the new [permission API](https://github.com/oslokommune/okdata-permission-api).
 
+* Retries have been re-enabled for low-level network errors (connection errors,
+  read errors, and redirects). The `retry` parameter now only controls the
+  maximum number of retries to perform on bad HTTP status codes.
+
 ## 0.7.0
 
 * `Dataset.update_dataset` now supports partial metadata updates when the
