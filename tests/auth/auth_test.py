@@ -152,7 +152,7 @@ class TestAuthenticate:
         auth = Authenticate(config=config, token_provider=client_credentials_provider)
 
         response = json.dumps(
-            {"error": "authenitcation error", "error_description": "No such client"}
+            {"error": "authentication error", "error_description": "No such client"}
         )
         matcher = re.compile(token_endpoint)
         requests_mock.register_uri("POST", matcher, text=response, status_code=200)
