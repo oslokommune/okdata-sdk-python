@@ -47,7 +47,15 @@ class PermissionClient(SDK):
         return self.put(url, data, retries=retries).json()
 
     def get_my_permissions(self, retries=0):
-        """Return a list of permissions associated with the current user."""
+        """Return a dictionary of permissions associated with the current user.
+
+        The dictionary is on the form:
+
+          {
+            "resource-name-1": {"scopes": ["scope-1", "scope-2"]},
+            "resource-name-2": ...
+          }
+        """
         url = f"{self.api_url}/my_permissions"
         log.info(f"SDK:Listing permissions from: {url}")
         return self.get(url, retries=retries).json()

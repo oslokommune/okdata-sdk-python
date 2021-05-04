@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Added support for the new [permission API](https://github.com/oslokommune/okdata-permission-api).
+
 ## 0.7.0
 
 * `Dataset.update_dataset` now supports partial metadata updates when the
