@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.8.0
 
 * Added support for the new [permission API](https://github.com/oslokommune/okdata-permission-api).
 
