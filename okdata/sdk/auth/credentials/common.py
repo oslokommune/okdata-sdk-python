@@ -5,6 +5,10 @@ class TokenProviderNotInitialized(Exception):
     pass
 
 
+class TokenRefreshError(Exception):
+    pass
+
+
 class TokenProvider:
     config: Config
 
