@@ -60,7 +60,7 @@ class SDK(object):
     def prepared_request_with_retries(retries):
         #  https://findwork.dev/blog/advanced-usage-python-requests-timeouts-retries-hooks/#retry-on-failure
         retry_strategy = Retry(
-            total=retries,
+            status=retries,
             status_forcelist=[429, 500, 502, 503, 504],
             backoff_factor=1,
             method_whitelist=[
