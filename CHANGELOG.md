@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.8.1
 
 * Fix handling of Keycloak tokens that don't contain a refresh token.
 
