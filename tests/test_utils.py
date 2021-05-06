@@ -121,3 +121,11 @@ client_credentials_response = {
     "session_state": "28957acd-9d5d-44f1-9f3f-7900b63fb010",
     "scope": "profile email",
 }
+
+client_credentials_response_no_refresh = {
+    "access_token": from_cache_not_expired_token,
+    "expires_in": 300,
+    "token_type": "bearer",
+    "not-before-policy": 1563194597,
+    "scope": "profile email",
+}
