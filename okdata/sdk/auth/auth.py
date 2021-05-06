@@ -65,7 +65,7 @@ class Authenticate(object):
         cached = self.file_cache.read_credentials()
         if cached:
             self._access_token = cached["access_token"]
-            self._refresh_token = cached["refresh_token"]
+            self._refresh_token = cached.get("refresh_token")
 
         if self._access_token and not is_token_expired(self._access_token):
             log.info("Token not expired, skipping")
@@ -88,7 +88,7 @@ class Authenticate(object):
             tokens = self.token_provider.new_token()
             if "access_token" not in tokens:
                 raise ApiAuthenticateError
-            self._refresh_token = tokens["refresh_token"]
+            self._refresh_token = tokens.get("refresh_token")
 
         self._access_token = tokens["access_token"]
         self.file_cache.write_credentials(credentials=self)

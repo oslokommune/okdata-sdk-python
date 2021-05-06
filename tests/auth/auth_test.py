@@ -15,7 +15,10 @@ from tests.auth.client_credentials_test_utils import (
     from_cache_expired_token,
     utc_now,
 )
-from tests.test_utils import client_credentials_response
+from tests.test_utils import (
+    client_credentials_response,
+    client_credentials_response_no_refresh,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -192,3 +195,25 @@ class TestAuthenticate:
 
         assert auth._access_token == from_cache_not_expired_token
         assert auth._refresh_token == cached_credentials["refresh_token"]
+
+    def test_refresh_no_refresh_token(self, requests_mock, mock_home_dir):
+        client_credentials_provider = ClientCredentialsProvider(config)
+        auth = Authenticate(config=config, token_provider=client_credentials_provider)
+
+        auth.file_cache.credentials_cache_enabled = True
+
+        cached_credentials = {
+            "provider": "TokenServiceProvider",
+            "access_token": from_cache_expired_token,
+        }
+
+        auth.file_cache.write_credentials(json.dumps(cached_credentials))
+
+        response = json.dumps(client_credentials_response_no_refresh)
+        matcher = re.compile(token_endpoint)
+        requests_mock.register_uri("POST", matcher, text=response, status_code=200)
+
+        auth.login()
+
+        assert auth._access_token == from_cache_not_expired_token
+        assert auth._refresh_token is None
