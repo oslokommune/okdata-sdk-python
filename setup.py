@@ -20,7 +20,6 @@ setuptools.setup(
     install_requires=[
         "requests",
         "urllib3",
-        "PrettyTable",
         "python-keycloak",
         "PyJWT>=2.0.0",
         "jsonschema",
