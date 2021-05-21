@@ -28,7 +28,7 @@ class WebhookClient(SDK):
             "is_active": True,
           }
         Note!
-        The service_name parameter should NOT be prefixed with "service-account-"
+        The service_name parameter should NOT be prefixed with "service-account-".
         """
         url = f"{self.api_url}/{dataset_id}/tokens"
         request_body = {"service": service_name}
@@ -68,7 +68,7 @@ class WebhookClient(SDK):
         return self.delete(url, retries=retries).json()
 
     def authorize_webhook_token(self, dataset_id: str, token: str, retries: int = 0):
-        """Checks if a webhook token has access to perform operations on a dataset from a logged in service.
+        """Check if a webhook token has access to perform operations on a dataset from a logged in service.
 
         Returns a dictionary on the form:
           {
