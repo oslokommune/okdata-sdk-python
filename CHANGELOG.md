@@ -1,3 +1,7 @@
+## 0.x.x
+
+* Add new sdk WebhookClient for managing webhook tokens with okdata-permission-api
+
 ## 0.8.1
 
 * Fix handling of Keycloak tokens that don't contain a refresh token.
