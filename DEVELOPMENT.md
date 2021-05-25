@@ -38,5 +38,14 @@ make bump-patch build
 ```
 make publish-module
 ```
-* Finally push the version bump commit and the generated tag (`git push --tags`)
+4. Push the version bump commit and the generated tag
   to GitHub.
+```
+git push
+git push --tags
+```
+5. Create new release in github.
+    1. Go to https://github.com/oslokommune/okdata-sdk-python/tags
+    2. On the latest tag, click on `...` -> `Create release`
+    3. Fill out `Title`-field with the new release version. Fill out `Write`-field with value (bullet points) from latest release in CHANGELOG
+    4. Click `Publish release`
