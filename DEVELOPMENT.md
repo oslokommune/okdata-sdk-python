@@ -47,5 +47,5 @@ git push --tags
 5. Create new release in github.
     1. Go to https://github.com/oslokommune/okdata-sdk-python/tags
     2. On the latest tag, click on `...` -> `Create release`
-    3. Fill out `Title`-field with the new release version. Fill out `Write`-field with value (bullet point) from latest release in CHANGELOG
+    3. Fill out `Title`-field with the new release version. Fill out `Write`-field with value (bullet points) from latest release in CHANGELOG
     4. Click `Publish release`
