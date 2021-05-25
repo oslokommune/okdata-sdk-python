@@ -16,7 +16,7 @@ class WebhookClient(SDK):
     ):
         """Create a webhook token associated with a dataset and an okdata service.
 
-        Returns a dictionary on the form:
+        Return a dictionary on the form:
 
           {
             "token": "774d8f35-fb4b-4e06-9d7f-54d1a08589b4",
@@ -38,7 +38,7 @@ class WebhookClient(SDK):
     def list_webhook_tokens(self, dataset_id: str, retries: int = 0):
         """List all webhook tokens associated with a dataset.
 
-        Returns a list of dictionaries on the form:
+        Return a list of dictionaries on the form:
           [
             {
               "token": "774d8f35-fb4b-4e06-9d7f-54d1a08589b4",
@@ -59,7 +59,7 @@ class WebhookClient(SDK):
     def delete_webhook_token(self, dataset_id: str, token: str, retries: int = 0):
         """Delete a webhook token.
 
-        Returns a dictionary on the form:
+        Return a dictionary on the form:
           {
             "message": "Deleted token for dataset dataset_id"
           }
@@ -70,7 +70,7 @@ class WebhookClient(SDK):
     def authorize_webhook_token(self, dataset_id: str, token: str, retries: int = 0):
         """Check if a webhook token has access to perform operations on a dataset from a logged in service.
 
-        Returns a dictionary on the form:
+        Return a dictionary on the form:
           {
             "access": True
             "reason": None
