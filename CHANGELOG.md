@@ -1,4 +1,4 @@
-## ?.?.?
+## 0.8.2
 
 * Add new SDK `WebhookClient` for managing webhook tokens with okdata-permission-api.
 
