@@ -1,3 +1,8 @@
+## ?.?.?
+
+* Tweaked the webhook client to create and authorize tokens based on operations
+  (read, write) instead of tying them to a specific service.
+
 ## 0.8.2
 
 * Add new SDK `WebhookClient` for managing webhook tokens with okdata-permission-api.
