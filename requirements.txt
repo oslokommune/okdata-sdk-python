@@ -28,7 +28,7 @@ python-jose==3.0.1
     # via python-keycloak
 python-keycloak==0.18.0
     # via okdata-sdk (setup.py)
-requests==2.22.0
+requests==2.25.1
     # via
     #   okdata-sdk (setup.py)
     #   python-keycloak
@@ -39,10 +39,8 @@ six==1.12.0
     #   jsonschema
     #   pyrsistent
     #   python-jose
-urllib3==1.25.8
-    # via
-    #   okdata-sdk (setup.py)
-    #   requests
+urllib3==1.26.5
+    # via requests
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
