@@ -19,7 +19,6 @@ setuptools.setup(
     namespace_packages=["okdata"],
     install_requires=[
         "requests",
-        "urllib3",
         "python-keycloak",
         "PyJWT>=2.0.0",
         "jsonschema",
