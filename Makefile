@@ -29,7 +29,7 @@ clean:
 	rm -rf build
 	rm -rf dist
 	rm -rf *.egg-info
-
+	rm -rf .tox
 
 .PHONY: bump-patch
 bump-patch: is-git-clean
