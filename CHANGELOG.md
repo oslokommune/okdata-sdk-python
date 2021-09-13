@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Handle error responses from status API update calls.
+
 ## 0.9.0
 
 * Tweaked the webhook client to create and authorize tokens based on operations
