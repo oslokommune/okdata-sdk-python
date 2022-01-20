@@ -1,6 +1,5 @@
 import logging
 import requests
-import json
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
@@ -42,13 +41,13 @@ class SDK(object):
         return response
 
     def post(self, url, data, retries=0, **kwargs):
-        return self._request("post", url, retries, data=json.dumps(data), **kwargs)
+        return self._request("post", url, retries, json=data, **kwargs)
 
     def put(self, url, data, retries=0, **kwargs):
-        return self._request("put", url, retries, data=json.dumps(data), **kwargs)
+        return self._request("put", url, retries, json=data, **kwargs)
 
     def patch(self, url, data, retries=0, **kwargs):
-        return self._request("patch", url, retries, data=json.dumps(data), **kwargs)
+        return self._request("patch", url, retries, json=data, **kwargs)
 
     def get(self, url, retries=0, **kwargs):
         return self._request("get", url, retries, **kwargs)

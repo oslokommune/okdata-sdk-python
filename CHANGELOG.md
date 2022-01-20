@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Use built-in JSON encoder from `requests` for `post`, `put` and `patch` methods.
+
 ## 0.9.1
 
 * Handle error responses from status API update calls.
