@@ -1,3 +1,8 @@
+## ?.?.?
+
+* Added support for Python 3.10.
+* Dropped support for Python 3.6.
+
 ## 0.9.2
 
 * Use built-in JSON encoder from `requests` for `post`, `put` and `patch` methods.

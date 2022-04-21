@@ -18,10 +18,11 @@ setuptools.setup(
     ),
     namespace_packages=["okdata"],
     install_requires=[
-        "requests",
-        "python-keycloak",
-        "PyJWT>=2.0.0",
         "jsonschema",
+        "PyJWT>=2.0.0",
+        "python-jose>=3.1.0,<4.0.0",
+        "python-keycloak",
+        "requests",
     ],
     data_files=[
         (
@@ -37,10 +38,13 @@ setuptools.setup(
     include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     zip_safe=False,
 )

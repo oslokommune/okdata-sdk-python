@@ -1,9 +1,7 @@
 import logging
+from dataclasses import asdict
 from urllib.parse import quote
 
-# TODO: Polyfill. Replace with `from dataclasses import asdict` once support
-# for Python 3.6 is dropped.
-from okdata.sdk.permission.user_types import asdict
 from okdata.sdk import SDK
 
 log = logging.getLogger()
