@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from okdata.sdk.config import Config
 
 
@@ -9,13 +11,9 @@ class TokenRefreshError(Exception):
     pass
 
 
+@dataclass
 class TokenProvider:
     config: Config
-
-    # TODO: Annotate the class with `@dataclass` and remove this once support
-    # for Python 3.6 is dropped.
-    def __init__(self, config: Config):
-        self.config = config
 
     def new_token(self):
         raise NotImplementedError

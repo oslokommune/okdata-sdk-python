@@ -1,26 +1,21 @@
 import logging
-import requests
+from dataclasses import dataclass
 from typing import Optional
+
+import requests
+
 from okdata.sdk.auth.credentials.common import (
     TokenProviderNotInitialized,
     TokenProvider,
 )
-from okdata.sdk.config import Config
 
 log = logging.getLogger()
 
 
+@dataclass
 class TokenServiceProvider(TokenProvider):
     username: Optional[str] = None
     password: Optional[str] = None
-
-    # TODO: Annotate the class with `@dataclass` and remove this once support
-    # for Python 3.6 is dropped.
-    def __init__(self, config: Config, username: str = None, password: str = None):
-        super().__init__(config)
-        self.username = username
-        self.password = password
-        self.__post_init__()
 
     def __post_init__(self):
         self.token_service_url = self.config.config.get("tokenService")
