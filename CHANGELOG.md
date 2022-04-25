@@ -1,4 +1,4 @@
-## ?.?.?
+## 1.0.0
 
 * Added support for Python 3.10.
 * Dropped support for Python 3.6.
