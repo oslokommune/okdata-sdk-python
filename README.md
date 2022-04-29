@@ -53,8 +53,6 @@ If environment variables are not available, the system will try to load from a d
 Table of contents:
 - [Upload data](#upload-data)
 - [Download data](#download-data)
-- [Sending events](#sending-events)
-- [Create and manage event streams](#create-and-manage-event-streams)
 - [Creating datasets with versions and editions](#creating-datasets-with-versions-and-editions)
 - [Updating dataset metadata](#updating-dataset-metadata)
 
@@ -158,88 +156,6 @@ print(res1)
 #     "downloaded_files": ["my/preferred/output/path/file_name.csv"]
 # }
 ```
-
-## Sending events
-
-In order to start sending events you will need access to an event stream. If such an event stream is already
-in place you are good to go. If not, you can create one either by [using the sdk](#create-and-manage-event-streams),
-or by [using our command line interface](https://github.com/oslokommune/okdata-cli).
-
-```python
-from okdata.sdk.event.post_event import PostEvent
-from okdata.sdk.config import Config
-
-okdata_config = Config()
-
-# If necessary you can override default config values
-okdata_config.config["cacheCredentials"] = True
-
-event_poster = PostEvent(config=okdata_config)
-
-dataset_id = "some-dataset-id"
-version = "1"
-event = {"foo": "bar"}
-
-res = event_poster.post_event(event, dataset_id, version)
-# res:
-# {'message': 'Ok'}
-
-# Method also supports list of dictionaries
-event_list = [{"foo": "bar"}, {"foo": "bar"}]
-
-res2 = event_poster.post_event(event_list, dataset_id, version)
-# res2:
-# {'message': 'Ok'}
-
-```
-
-## Create and manage event streams
-
-In order to create an event stream you need to have defined a dataset and a version,
-unless these already exist. Defining a dataset and a version can be
-achieved [using the sdk](#creating-datasets-with-versions-and-editions),
-or you can use our [command line interface](https://github.com/oslokommune/okdata-cli).
-You do not need to define an edition in order to create an event stream.
-
-```python
-from okdata.sdk.event.event_stream_client import EventStreamClient
-
-
-# Using default configuration for dev-environment
-event_stream_client = EventStreamClient(env="dev")
-
-dataset_id = "some-dataset-id"
-version = "1"
-
-
-# Creating a new event stream:
-create_response = event_stream_client.create_event_stream(
-    dataset_id, version
-)
-# create_response:
-# {'message': 'Accepted'}
-
-
-# Getting info about the event stream
-event_stream_info = event_stream_client.get_event_stream_info(dataset_id, version)
-# event_stream_info:
-# { 'createdAt': '2020-01-29T07:02:32.598520+00:00',
-#   'createdBy': 'jd',
-#   'id': 'test-stream-manager/1',
-#   'status': 'CREATE_IN_PROGRESS'
-#   }
-
-# Note! You must wait until the event stream has status=ACTIVE
-#       before you can successfully send events to the stream
-
-
-# Deleting the event stream
-delete_response = event_stream_client.delete_event_stream(dataset_id, version)
-# delete_response:
-# {'message': 'Delete initiated'}
-
-```
-
 
 ## Creating datasets with versions and editions
 ```python

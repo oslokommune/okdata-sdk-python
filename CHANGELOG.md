@@ -1,5 +1,7 @@
 ## ?.?.?
 
+* The classes `PostEvent`, `EventStreamClient`, and `ElasticsearchQueries` for
+  working with event streams have all been removed.
 * The `WebhookClient` class for managing webhooks has been removed.
 * The `SimpleDatasetAuthorizerClient` class was deprecated and has been removed.
 
