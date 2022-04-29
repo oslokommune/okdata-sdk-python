@@ -24,7 +24,6 @@ OKDATA_CONFIG["dev"] = {
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
     "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
-    "simpleDatasetAuthorizerUrl": "https://api.data-dev.oslo.systems/simple-dataset-authorizer",
     "permissionApiUrl": "https://api.data-dev.oslo.systems/okdata-permission-api",
 }
 OKDATA_CONFIG["prod"] = {
@@ -43,7 +42,6 @@ OKDATA_CONFIG["prod"] = {
     "tokenService": "https://api.data.oslo.systems/token-service/token",
     "uploadUrl": "https://api.data.oslo.systems/data-uploader",
     "statusApiUrl": "https://api.data.oslo.systems/status-api/status",
-    "simpleDatasetAuthorizerUrl": "https://api.data.oslo.systems/simple-dataset-authorizer",
     "permissionApiUrl": "https://api.data.oslo.systems/okdata-permission-api",
 }
 
