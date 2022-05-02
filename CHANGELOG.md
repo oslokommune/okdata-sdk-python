@@ -1,5 +1,7 @@
 ## ?.?.?
 
+* A new client class `TeamClient` for retrieving information about teams and
+  their members has been added.
 * The classes `PostEvent`, `EventStreamClient`, and `ElasticsearchQueries` for
   working with event streams have all been removed.
 * The `WebhookClient` class for managing webhooks has been removed.
