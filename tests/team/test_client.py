@@ -25,18 +25,3 @@ def test_get_team(requests_mock):
         status_code=200,
     )
     assert TeamClient().get_team(team_id) == team
-
-
-def test_get_team_members(requests_mock):
-    team_id = "abc"
-    members = [
-        {"id": "abc", "username": "Foo"},
-        {"id": "123", "username": "Bar"},
-    ]
-    requests_mock.register_uri(
-        "GET",
-        re.compile(f"teams/{team_id}/members"),
-        text=json.dumps(members),
-        status_code=200,
-    )
-    assert TeamClient().get_team_members(team_id) == members
