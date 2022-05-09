@@ -1,4 +1,4 @@
-## ?.?.?
+## 2.0.0
 
 * A new client class `TeamClient` for retrieving information about teams has
   been added.
