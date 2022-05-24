@@ -62,7 +62,7 @@ class SDK(object):
             status=retries,
             status_forcelist=[429, 500, 502, 503, 504],
             backoff_factor=1,
-            method_whitelist=[
+            allowed_methods=[
                 "HEAD",
                 "GET",
                 "PUT",

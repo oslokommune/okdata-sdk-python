@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Fixed a deprecation warning from urllib3.
+
 ## 2.0.0
 
 * A new client class `TeamClient` for retrieving information about teams has
