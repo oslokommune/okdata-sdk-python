@@ -20,7 +20,7 @@ pyasn1==0.4.8
     # via
     #   python-jose
     #   rsa
-pyjwt==2.3.0
+pyjwt==2.4.0
     # via okdata-sdk (setup.py)
 pyrsistent==0.18.1
     # via jsonschema
