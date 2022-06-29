@@ -25,3 +25,15 @@ def test_get_team(requests_mock):
         status_code=200,
     )
     assert TeamClient().get_team(team_id) == team
+
+
+def test_get_team_by_name(requests_mock):
+    team_name = "Foo"
+    team = {"team_id": "abc", "name": team_name}
+    requests_mock.register_uri(
+        "GET",
+        re.compile(f"teams/name/{team_name}"),
+        text=json.dumps(team),
+        status_code=200,
+    )
+    assert TeamClient().get_team_by_name(team_name) == team
