@@ -31,3 +31,9 @@ class TeamClient(SDK):
         url = "{}/teams/{}".format(self.api_url, quote(team_id))
         log.info(f"SDK:Getting team from: {url}")
         return self.get(url).json()
+
+    def get_team_by_name(self, team_name):
+        """Return details for a team by name."""
+        url = "{}/teams/name/{}".format(self.api_url, quote(team_name))
+        log.info(f"SDK:Getting team from: {url}")
+        return self.get(url).json()

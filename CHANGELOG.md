@@ -1,5 +1,6 @@
 ## ?.?.?
 
+* New method `TeamClient.get_team_by_name`.
 * Fixed a deprecation warning from urllib3.
 
 ## 2.0.0
