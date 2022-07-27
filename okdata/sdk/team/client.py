@@ -50,3 +50,18 @@ class TeamClient(SDK):
         url = "{}/teams/{}/members".format(self.api_url, quote(team_id))
         log.info(f"SDK:Getting team members from: {url}")
         return self.get(url).json()
+
+    def update_team_name(self, team_id, team_name):
+        """Update the name of team with ID `team_id` to `team_name`."""
+        url = "{}/teams/{}".format(self.api_url, quote(team_id))
+        log.info(f"SDK:Updating team name on: {url}")
+        return self.patch(url, {"name": team_name}).json()
+
+    def update_team_attribute(self, team_id, attribute, value):
+        """Update `attribute` of team with ID `team_id` to `value`.
+
+        Supplying a falsy `value` removes the attribute.
+        """
+        url = "{}/teams/{}".format(self.api_url, quote(team_id))
+        log.info(f"SDK:Updating team attribute on: {url}")
+        return self.patch(url, {"attributes": {attribute: [value]}}).json()

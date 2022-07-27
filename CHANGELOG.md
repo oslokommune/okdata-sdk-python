@@ -2,6 +2,8 @@
 
 * New parameter `include` added to `TeamClient.get_teams`.
 * New method `TeamClient.get_team_members` for getting the members of a team.
+* New methods `TeamClient.update_team_name` and
+  `TeamClient.update_team_attribute`.
 
 ## 2.1.0
 
