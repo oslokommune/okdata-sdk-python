@@ -1,3 +1,8 @@
+## ?.?.?
+
+* New methods `TeamClient.add_team_member` and
+  `TeamClient.remove_team_member` for manipulating team members.
+
 ## 2.1.0
 
 * New method `TeamClient.get_team_by_name`.

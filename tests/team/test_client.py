@@ -37,3 +37,25 @@ def test_get_team_by_name(requests_mock):
         status_code=200,
     )
     assert TeamClient().get_team_by_name(team_name) == team
+
+
+def test_add_team_member(requests_mock):
+    team_id = "abc"
+    username = "fooo123"
+    requests_mock.register_uri(
+        "PUT",
+        re.compile(f"teams/{team_id}/members/{username}"),
+        status_code=204,
+    )
+    assert TeamClient().add_team_member(team_id, username) is None
+
+
+def test_remove_team_member(requests_mock):
+    team_id = "abc"
+    username = "fooo123"
+    requests_mock.register_uri(
+        "DELETE",
+        re.compile(f"teams/{team_id}/members/{username}"),
+        status_code=204,
+    )
+    assert TeamClient().remove_team_member(team_id, username) is None

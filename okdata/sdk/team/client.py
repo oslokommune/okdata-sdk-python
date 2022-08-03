@@ -37,3 +37,23 @@ class TeamClient(SDK):
         url = "{}/teams/name/{}".format(self.api_url, quote(team_name))
         log.info(f"SDK:Getting team from: {url}")
         return self.get(url).json()
+
+    def add_team_member(self, team_id, username):
+        """Add user with `username` as member to team with ID `team_id`."""
+        url = "{}/teams/{}/members/{}".format(
+            self.api_url, quote(team_id), quote(username)
+        )
+        log.info(f"SDK:Adding member to team: {url}")
+        self.put(url, data=None)
+        return None
+
+    def remove_team_member(self, team_id, username):
+        """Remove user with `username` as member from team with
+        ID `team_id`.
+        """
+        url = "{}/teams/{}/members/{}".format(
+            self.api_url, quote(team_id), quote(username)
+        )
+        log.info(f"SDK:Removing member from team: {url}")
+        self.delete(url)
+        return None
