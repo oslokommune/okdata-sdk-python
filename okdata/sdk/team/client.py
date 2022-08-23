@@ -12,8 +12,13 @@ class TeamClient(SDK):
         super().__init__(config, auth, env)
         self.api_url = self.config.get("permissionApiUrl")
 
-    def get_teams(self, has_role=None):
+    def get_teams(self, include=None, has_role=None):
         """Return a list of teams.
+
+        The `include` parameter currently supports the following values:
+
+        - `None`: Only the calling user's own teams are included.
+        - `"all"`: All teams are included regardless of membership.
 
         When `has_role` is passed, return only teams with the given role.
         """
@@ -21,6 +26,8 @@ class TeamClient(SDK):
         log.info(f"SDK:Listing teams from: {url}")
         params = {}
 
+        if include:
+            params["include"] = include
         if has_role:
             params["has_role"] = has_role
 
