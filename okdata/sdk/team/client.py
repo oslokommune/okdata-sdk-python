@@ -64,4 +64,6 @@ class TeamClient(SDK):
         """
         url = "{}/teams/{}".format(self.api_url, quote(team_id))
         log.info(f"SDK:Updating team attribute on: {url}")
-        return self.patch(url, {"attributes": {attribute: [value]}}).json()
+        return self.patch(
+            url, {"attributes": {attribute: [value] if value else []}}
+        ).json()
