@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Fixed a bug in `TeamClient.update_team_attribute` when `value` is falsy.
+
 ## 2.2.0
 
 * New parameter `include` added to `TeamClient.get_teams`.
