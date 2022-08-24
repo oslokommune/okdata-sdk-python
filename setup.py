@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="okdata-sdk",
-    version="2.2.0",
+    version="2.2.1",
     author="Oslo Origo",
     author_email="dataplattform@oslo.kommune.no",
     description="SDK for origo dataplatform",

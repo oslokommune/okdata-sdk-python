@@ -1,4 +1,4 @@
-## ?.?.?
+## 2.2.1
 
 * Fixed a bug in `TeamClient.update_team_attribute` when `value` is falsy.
 
