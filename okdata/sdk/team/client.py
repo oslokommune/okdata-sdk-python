@@ -67,3 +67,9 @@ class TeamClient(SDK):
         return self.patch(
             url, {"attributes": {attribute: [value] if value else []}}
         ).json()
+
+    def update_team_members(self, team_id, user_ids):
+        """Update members of a team and return the resulting member list."""
+        url = "{}/teams/{}/members".format(self.api_url, quote(team_id))
+        log.info(f"SDK:Updating team members: {url}")
+        return self.put(url, user_ids).json()
