@@ -91,4 +91,16 @@ def test_update_team_members(requests_mock):
         text=json.dumps(members),
         status_code=200,
     )
-    assert TeamClient().update_team_members(team_id, ["abc-123", "def-456"]) == members
+    assert TeamClient().update_team_members(team_id, ["foo", "bar"]) == members
+
+
+def test_get_user_by_username(requests_mock):
+    username = "foo"
+    member = {"name": "Foo", "username": username}
+    requests_mock.register_uri(
+        "GET",
+        re.compile(f"teams/users/{username}"),
+        text=json.dumps(member),
+        status_code=200,
+    )
+    assert TeamClient().get_user_by_username("foo") == member

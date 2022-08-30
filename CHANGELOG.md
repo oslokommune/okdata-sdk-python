@@ -1,6 +1,7 @@
 ## ?.?.?
 
-* Add method `TeamClient.update_team_members` for adding and/or removing
+* New method `TeamClient.get_user_by_username` for looking up Keycloak users.
+* New method `TeamClient.update_team_members` for adding and/or removing
   members to/from a team.
 
 ## 2.2.1
