@@ -77,3 +77,30 @@ def test_update_team_attribute(requests_mock):
         status_code=200,
     )
     assert TeamClient().update_team_attribute(team_id, "a", "b") == team
+
+
+def test_update_team_members(requests_mock):
+    team_id = "abc"
+    members = [
+        {"name": "Foo", "username": "foo"},
+        {"name": "Bar", "username": "bar"},
+    ]
+    requests_mock.register_uri(
+        "PUT",
+        re.compile(f"teams/{team_id}/members"),
+        text=json.dumps(members),
+        status_code=200,
+    )
+    assert TeamClient().update_team_members(team_id, ["foo", "bar"]) == members
+
+
+def test_get_user_by_username(requests_mock):
+    username = "foo"
+    member = {"name": "Foo", "username": username}
+    requests_mock.register_uri(
+        "GET",
+        re.compile(f"teams/users/{username}"),
+        text=json.dumps(member),
+        status_code=200,
+    )
+    assert TeamClient().get_user_by_username("foo") == member

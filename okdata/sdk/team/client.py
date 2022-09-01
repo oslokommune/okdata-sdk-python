@@ -67,3 +67,15 @@ class TeamClient(SDK):
         return self.patch(
             url, {"attributes": {attribute: [value] if value else []}}
         ).json()
+
+    def update_team_members(self, team_id, usernames):
+        """Update members of a team and return the resulting member list."""
+        url = "{}/teams/{}/members".format(self.api_url, quote(team_id))
+        log.info(f"SDK:Updating team members: {url}")
+        return self.put(url, usernames).json()
+
+    def get_user_by_username(self, username):
+        """Search Keycloak user by `username`."""
+        url = "{}/teams/users/{}".format(self.api_url, quote(username))
+        log.info(f"SDK:Searching user: {url}")
+        return self.get(url).json()
