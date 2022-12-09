@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 from okdata.sdk.pipelines.resources.pipeline_base import PipelineBase
 from okdata.sdk.pipelines.resources.pipeline_input import PipelineInput
@@ -34,9 +35,9 @@ class PipelineInstance(PipelineBase):
         taskConfig: object = None,
         # TODO: Remove this once all users have been updated to use
         # `pipelineProcessorId` instead.
-        pipelineArn: str = None,
+        pipelineArn: Optional[str] = None,
         # TODO: Make this required once `pipelineArn` has been phased out.
-        pipelineProcessorId: str = None,
+        pipelineProcessorId: Optional[str] = None,
     ):
         self.sdk = sdk
         self._id = id
