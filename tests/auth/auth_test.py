@@ -49,7 +49,6 @@ class TestAuthenticate:
         assert auth._refresh_token == client_credentials_response["refresh_token"]
 
     def test_authenticat_no_cache(self, requests_mock, mock_home_dir):
-
         client_credentials_provider = ClientCredentialsProvider(config)
         auth = Authenticate(config=config, token_provider=client_credentials_provider)
 
@@ -80,7 +79,6 @@ class TestAuthenticate:
         assert auth._refresh_token == cached_credentials["refresh_token"]
 
     def test_authenticate_refresh_credentials(self, requests_mock, mock_home_dir):
-
         client_credentials_provider = ClientCredentialsProvider(config)
         auth = Authenticate(config=config, token_provider=client_credentials_provider)
 
