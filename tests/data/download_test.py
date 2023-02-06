@@ -47,7 +47,6 @@ def mock_home_dir(monkeypatch, tmp_path):
 
 @pytest.fixture(scope="function")
 def mock_http_calls(requests_mock):
-
     requests_mock.register_uri(
         "GET",
         f"{Download().data_exporter_url}/{dataset_id}/{version}/{edition}",

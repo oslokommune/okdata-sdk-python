@@ -4,7 +4,6 @@ from pathlib import Path
 
 
 def write_to_okdata_cache(content, filename, failure_count=0):
-
     okdata_cache_path = Path(f"{os.environ['HOME']}/.okdata/cache")
 
     if failure_count == 2:
