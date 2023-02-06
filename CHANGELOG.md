@@ -1,3 +1,7 @@
+## ?.?.?
+
+* Added support for Python 3.11.
+
 ## 2.3.0
 
 * New method `TeamClient.get_user_by_username` for looking up Keycloak users.
