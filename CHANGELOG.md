@@ -1,3 +1,9 @@
+## ?.?.?
+
+* The optional search filter in `Dataset.get_datasets` has been relaxed to allow
+  matches anywhere in the dataset name (instead of only at the beginning). In
+  addition it now also searches the dataset's ID.
+
 ## 2.4.0
 
 * Added support for Python 3.11.

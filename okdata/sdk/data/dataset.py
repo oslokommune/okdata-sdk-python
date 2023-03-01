@@ -19,19 +19,19 @@ class Dataset(SDK):
         log.info(f"Created dataset: {body['Id']}")
         return body
 
+    def _matches(self, dataset, pattern):
+        """Return true if `dataset`'s ID or name matches `pattern`."""
+        return re.search(pattern, dataset["Id"], re.IGNORECASE) or (
+            "title" in dataset and re.search(pattern, dataset["title"], re.IGNORECASE)
+        )
+
     def get_datasets(self, filter=None, retries=0):
         url = self.config.get("datasetUrl")
         log.info(f"SDK:Get datasets from: {url}")
-        result = self.get(url, retries=retries)
-        ret = result.json()
-        if filter is not None:
-            if isinstance(filter, str):
-                tmp = []
-                for el in ret:
-                    if "title" in el and re.match(filter, el["title"], re.IGNORECASE):
-                        tmp.append(el)
-                ret = tmp
-        return ret
+        datasets = self.get(url, retries=retries).json()
+        if isinstance(filter, str):
+            return [d for d in datasets if self._matches(d, filter)]
+        return datasets
 
     def get_dataset(self, datasetid, retries=0):
         datasetUrl = self.config.get("datasetUrl")
