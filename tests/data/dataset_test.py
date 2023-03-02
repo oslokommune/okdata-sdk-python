@@ -1,11 +1,12 @@
-import re
 import json
+import re
+
 import pytest
 from requests.exceptions import HTTPError
 
-from okdata.sdk.data.dataset import Dataset
 from okdata.sdk.auth.auth import Authenticate
 from okdata.sdk.config import Config
+from okdata.sdk.data.dataset import Dataset
 from okdata.sdk.file_cache import FileCache
 
 config = Config()
@@ -30,33 +31,42 @@ class TestDataset:
 
         assert ds.headers() == {}
 
-    def test_getDatasets(self, requests_mock):
+    def test_get_datasets(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
-        response = json.dumps([{"Id": "test-get-dataset"}])
+        response = json.dumps([{"Id": "test-get-datasets"}])
         matcher = re.compile("datasets")
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
-        list = ds.get_datasets()
-        assert list[0]["Id"] == "test-get-dataset"
+        res = ds.get_datasets()
+        assert [d["Id"] for d in res] == ["test-get-datasets"]
 
-    def test_getDatasets_filter_no_result(self, requests_mock):
+    def test_get_datasets_filter_no_results(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
         response = json.dumps(
             [{"Id": "foo-bar", "title": "deichman", "publisher": "someone"}]
         )
         matcher = re.compile("datasets")
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
-        list = ds.get_datasets("eide")
-        assert len(list) == 0
+        assert ds.get_datasets("eide") == []
 
-    def test_getDatasets_filter(self, requests_mock):
+    def test_get_datasets_filter_by_id(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
         response = json.dumps(
             [{"Id": "foo-bar", "title": "eide"}, {"Id": "foo-bar2", "title": "someone"}]
         )
         matcher = re.compile("datasets")
         requests_mock.register_uri("GET", matcher, text=response, status_code=200)
-        list = ds.get_datasets("eide")
-        assert len(list) == 1
+        res = ds.get_datasets("bar2")
+        assert [d["Id"] for d in res] == ["foo-bar2"]
+
+    def test_get_datasets_filter_by_title(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps(
+            [{"Id": "foo-bar", "title": "eide"}, {"Id": "foo-bar2", "title": "someone"}]
+        )
+        matcher = re.compile("datasets")
+        requests_mock.register_uri("GET", matcher, text=response, status_code=200)
+        res = ds.get_datasets("eide")
+        assert [d["Id"] for d in res] == ["foo-bar"]
 
     def test_getDataset(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
