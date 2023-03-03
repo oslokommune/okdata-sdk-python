@@ -1,4 +1,4 @@
-## ?.?.?
+## 2.4.1
 
 * The optional search filter in `Dataset.get_datasets` has been relaxed to allow
   matches anywhere in the dataset name (instead of only at the beginning). In
