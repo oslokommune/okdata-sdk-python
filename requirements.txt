@@ -30,7 +30,7 @@ python-jose==3.3.0
     #   python-keycloak
 python-keycloak==0.27.0
     # via okdata-sdk (setup.py)
-requests==2.27.1
+requests==2.31.0
     # via
     #   okdata-sdk (setup.py)
     #   python-keycloak
