@@ -1,3 +1,8 @@
+## ?.?.?
+
+* Dropped support for Python 3.7 which has reached end of life. Python 3.8+ is
+  now required.
+
 ## 2.4.1
 
 * The optional search filter in `Dataset.get_datasets` has been relaxed to allow

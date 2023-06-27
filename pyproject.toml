@@ -1,5 +1,5 @@
 [tool.black]
-py37 = true
+py38 = true
 # Keep exclude in sync with flake8 config in tox.ini
 exclude = '''
 /(
