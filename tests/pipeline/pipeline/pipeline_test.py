@@ -57,7 +57,7 @@ def test_list_instances_for_pipeline(sdk, ok_pipeline, mock_list_instances):
     instances, error = pipeline.list_instances()
     assert error is None
     assert len(instances) == 2
-    assert type(instances[0]) == PipelineInstance
+    assert isinstance(instances[0], PipelineInstance)
 
 
 def test_client_exists_check(mock_get_pipeline):
