@@ -38,5 +38,5 @@ rsa==4.8
     # via python-jose
 six==1.16.0
     # via ecdsa
-urllib3==1.26.17
+urllib3==1.26.18
     # via requests
