@@ -27,13 +27,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@bad341350a2f5616f9e048e51360cedc49181ce8 # v2.15.1
       with:
         languages: ${{ matrix.language }}
         queries: +security-and-quality
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@bad341350a2f5616f9e048e51360cedc49181ce8 # v2.15.1
