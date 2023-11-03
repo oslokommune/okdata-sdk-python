@@ -22,7 +22,8 @@ setuptools.setup(
         "PyJWT>=2.0.0",
         "python-jose>=3.1.0,<4.0.0",
         "python-keycloak",
-        "requests",
+        "requests>=2.25,<3",
+        "urllib3>=1.26,<2",
     ],
     data_files=[
         (
