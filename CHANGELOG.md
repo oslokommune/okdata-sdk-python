@@ -1,4 +1,4 @@
-## ?.?.?
+## 3.0.0
 
 * Added support for Python 3.12.
 * Dropped support for Python 3.7 which has reached end of life. Python 3.8+ is
