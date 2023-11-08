@@ -22,7 +22,7 @@ make format
 ```
 
 ## Releasing a new SDK version
-* Checkout the `master` branch
+* Checkout the `main` branch
 * Either run `make`
 
 or manually run the make targets:
