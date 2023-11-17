@@ -41,6 +41,6 @@ build:
 
 .PHONY: publish-module
 publish-module:
-	username=$$(gopass show dataplatform/websites/pypi.org/origo-dataplatform username) &&\
-	password=$$(gopass show --password dataplatform/websites/pypi.org/origo-dataplatform) &&\
+	username=$$(op read op://Dataspeilet/pypi-upload-token/username) &&\
+	password=$$(op read op://Dataspeilet/pypi-upload-token/credential) &&\
 	python -m twine upload -u $$username -p $$password dist/*
