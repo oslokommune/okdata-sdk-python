@@ -1,3 +1,8 @@
+## ?.?.?
+
+* New method `Dataset.auto_create_edition` for creating a new edition with an
+  automatic name based on the current time.
+
 ## 3.0.0
 
 * Added support for Python 3.12.

@@ -1,5 +1,6 @@
 import logging
 import re
+from datetime import datetime
 
 from okdata.sdk import SDK
 
@@ -98,6 +99,20 @@ class Dataset(SDK):
         editionid = body["Id"].split("/")[2]
         log.info(f"SDK:Created dataset edition: {editionid} on {datasetid}/{versionid}")
         return body
+
+    def auto_create_edition(self, datasetid, versionid):
+        """Create an automatically named edition for the given dataset version.
+
+        Return the name of the newly created edition.
+        """
+        data = {
+            "edition": datetime.now().astimezone().replace(microsecond=0).isoformat(),
+            "description": f"Auto-created edition for {datasetid}/{versionid}",
+        }
+        log.info(f"Creating new edition for {datasetid}/{versionid} with data: {data}")
+        edition = self.create_edition(datasetid, versionid, data)
+        log.info(f"Created edition: {edition}")
+        return edition
 
     def get_editions(self, datasetid, versionid, retries=0):
         datasetUrl = self.config.get("datasetUrl")
