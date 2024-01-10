@@ -163,6 +163,16 @@ class TestEdition:
         edition = ds.create_edition("test-dataset-createdataset-edition", 1, {})
         assert edition["Id"] == "test-dataset-createdataset-edition/1/test-edition"
 
+    def test_auto_create_edition(self, requests_mock):
+        ds = Dataset(config=config, auth=auth_default)
+        response = json.dumps({"Id": "test-dataset/1/test-edition"})
+        matcher = re.compile("datasets/test-dataset/versions/1/editions")
+        requests_mock.register_uri("POST", matcher, text=response, status_code=200)
+        assert (
+            ds.auto_create_edition("test-dataset", "1")["Id"]
+            == "test-dataset/1/test-edition"
+        )
+
     def test_getDatasetVersionEditions(self, requests_mock):
         ds = Dataset(config=config, auth=auth_default)
         response = json.dumps([{"Id": "test-dataset-get-dataset-version-editions"}])
