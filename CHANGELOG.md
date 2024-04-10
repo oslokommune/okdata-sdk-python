@@ -1,3 +1,8 @@
+## ?.?.? - Unreleased
+
+* Removed dependency on the vulnerable (and seemingly abandoned) python-jose
+  library.
+
 ## 3.1.0 - 2024-01-10
 
 * New method `Dataset.auto_create_edition` for creating a new edition with an

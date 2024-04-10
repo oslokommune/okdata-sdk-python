@@ -20,8 +20,9 @@ setuptools.setup(
     install_requires=[
         "jsonschema",
         "PyJWT>=2.0.0",
-        "python-jose>=3.1.0,<4.0.0",
-        "python-keycloak",
+        # Versions prior to 3.9.1 depends on the vulnerable (and seemingly
+        # abandoned) python-jose library.
+        "python-keycloak>=3.9.1,<4",
         "requests>=2.25,<3",
         "urllib3>=1.26,<2",
     ],

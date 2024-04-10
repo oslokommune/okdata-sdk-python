@@ -8,36 +8,39 @@ attrs==21.4.0
     # via jsonschema
 certifi==2023.7.22
     # via requests
+cffi==1.16.0
+    # via cryptography
 charset-normalizer==2.0.12
     # via requests
-ecdsa==0.17.0
-    # via python-jose
+cryptography==42.0.5
+    # via jwcrypto
+deprecation==2.1.0
+    # via python-keycloak
 idna==3.3
     # via requests
 jsonschema==4.4.0
     # via okdata-sdk (setup.py)
-pyasn1==0.4.8
-    # via
-    #   python-jose
-    #   rsa
+jwcrypto==1.5.6
+    # via python-keycloak
+packaging==24.0
+    # via deprecation
+pycparser==2.22
+    # via cffi
 pyjwt==2.4.0
     # via okdata-sdk (setup.py)
 pyrsistent==0.18.1
     # via jsonschema
-python-jose==3.3.0
-    # via
-    #   okdata-sdk (setup.py)
-    #   python-keycloak
-python-keycloak==0.27.0
+python-keycloak==3.11.1
     # via okdata-sdk (setup.py)
 requests==2.31.0
     # via
     #   okdata-sdk (setup.py)
     #   python-keycloak
-rsa==4.8
-    # via python-jose
-six==1.16.0
-    # via ecdsa
+    #   requests-toolbelt
+requests-toolbelt==1.0.0
+    # via python-keycloak
+typing-extensions==4.11.0
+    # via jwcrypto
 urllib3==1.26.18
     # via
     #   okdata-sdk (setup.py)

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from keycloak.exceptions import KeycloakGetError  # type: ignore
+from keycloak.exceptions import KeycloakPostError  # type: ignore
 from keycloak.keycloak_openid import KeycloakOpenID  # type: ignore
 
 from okdata.sdk.auth.credentials.common import (
@@ -35,7 +35,7 @@ class ClientCredentialsProvider(TokenProvider):
     def refresh_token(self, refresh_token):
         try:
             return self.client.refresh_token(refresh_token=refresh_token)
-        except KeycloakGetError as e:
+        except KeycloakPostError as e:
             raise TokenRefreshError(str(e))
 
     def new_token(self):
