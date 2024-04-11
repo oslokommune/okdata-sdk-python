@@ -1,4 +1,4 @@
-## ?.?.? - Unreleased
+## 3.1.1 - 2024-04-11
 
 * Removed dependency on the vulnerable (and seemingly abandoned) python-jose
   library.
