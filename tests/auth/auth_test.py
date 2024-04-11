@@ -11,8 +11,10 @@ from okdata.sdk.exceptions import ApiAuthenticateError
 from freezegun import freeze_time
 
 from tests.auth.client_credentials_test_utils import (
-    from_cache_not_expired_token,
+    expired_time,
     from_cache_expired_token,
+    from_cache_not_expired_token,
+    not_expired_time,
     utc_now,
 )
 from tests.test_utils import (
@@ -71,6 +73,8 @@ class TestAuthenticate:
             "provider": "ClientCredentialsProvider",
             "access_token": from_cache_not_expired_token,
             "refresh_token": from_cache_not_expired_token,
+            "expires_at": not_expired_time.isoformat(),
+            "refresh_expires_at": not_expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
@@ -88,6 +92,8 @@ class TestAuthenticate:
             "provider": "ClientCredentialsProvider",
             "access_token": from_cache_not_expired_token,
             "refresh_token": from_cache_not_expired_token,
+            "expires_at": not_expired_time.isoformat(),
+            "refresh_expires_at": not_expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
@@ -110,6 +116,8 @@ class TestAuthenticate:
             "provider": "TokenServiceProvider",
             "access_token": from_cache_expired_token,
             "refresh_token": from_cache_expired_token,
+            "expires_at": expired_time.isoformat(),
+            "refresh_expires_at": expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
@@ -134,6 +142,8 @@ class TestAuthenticate:
             "provider": "TokenServiceProvider",
             "access_token": from_cache_expired_token,
             "refresh_token": from_cache_not_expired_token,
+            "expires_at": expired_time.isoformat(),
+            "refresh_expires_at": not_expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
@@ -173,6 +183,8 @@ class TestAuthenticate:
             "provider": "TokenServiceProvider",
             "access_token": from_cache_expired_token,
             "refresh_token": from_cache_not_expired_token,
+            "expires_at": expired_time.isoformat(),
+            "refresh_expires_at": not_expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))
@@ -203,6 +215,7 @@ class TestAuthenticate:
         cached_credentials = {
             "provider": "TokenServiceProvider",
             "access_token": from_cache_expired_token,
+            "expires_at": expired_time.isoformat(),
         }
 
         auth.file_cache.write_credentials(json.dumps(cached_credentials))

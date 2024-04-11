@@ -26,8 +26,6 @@ packaging==24.0
     # via deprecation
 pycparser==2.22
     # via cffi
-pyjwt==2.4.0
-    # via okdata-sdk (setup.py)
 pyrsistent==0.18.1
     # via jsonschema
 python-keycloak==3.11.1

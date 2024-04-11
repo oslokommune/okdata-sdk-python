@@ -2,6 +2,7 @@
 
 * Removed dependency on the vulnerable (and seemingly abandoned) python-jose
   library.
+* PyJWT is no longer a dependency.
 
 ## 3.1.0 - 2024-01-10
 

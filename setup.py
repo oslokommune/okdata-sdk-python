@@ -19,7 +19,6 @@ setuptools.setup(
     namespace_packages=["okdata"],
     install_requires=[
         "jsonschema",
-        "PyJWT>=2.0.0",
         # Versions prior to 3.9.1 depends on the vulnerable (and seemingly
         # abandoned) python-jose library.
         "python-keycloak>=3.9.1,<4",
