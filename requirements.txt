@@ -30,7 +30,7 @@ pyrsistent==0.18.1
     # via jsonschema
 python-keycloak==3.11.1
     # via okdata-sdk (setup.py)
-requests==2.31.0
+requests==2.32.0
     # via
     #   okdata-sdk (setup.py)
     #   python-keycloak
