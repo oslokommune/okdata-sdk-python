@@ -1,3 +1,9 @@
+## ?.?.? - Unreleased
+
+* New methods `Dataset.delete_version`, `Dataset.delete_edition`, and
+  `Dataset.delete_distribution` for deleting dataset versions, editions, and
+  distributions respectively.
+
 ## 3.1.1 - 2024-04-11
 
 * Removed dependency on the vulnerable (and seemingly abandoned) python-jose
