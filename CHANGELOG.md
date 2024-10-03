@@ -1,4 +1,4 @@
-## ?.?.? - Unreleased
+## 3.2.0 - 2024-10-03
 
 * New methods `Dataset.delete_version`, `Dataset.delete_edition`, and
   `Dataset.delete_distribution` for deleting dataset versions, editions, and
