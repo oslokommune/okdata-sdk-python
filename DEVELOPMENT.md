@@ -6,7 +6,7 @@ Setup
 ```
 git clone git@github.com:oslokommune/okdata-sdk-python.git
 cd okdata-sdk-python
-python3.8 -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 make init
 ```
