@@ -140,7 +140,7 @@ class PipelineBase:
         raise NotImplementedError
 
     @classmethod
-    def list(cls, sdk: SDK):
+    def list(cls, sdk: SDK, params={}):
         """List instances of this pipeline resource
 
         Args:
@@ -150,7 +150,7 @@ class PipelineBase:
         """
         base_url = sdk.config.get("pipelineUrl")
         url = f"{base_url}/{cls.__resource_name__}"
-        return sdk.get(url=url).json()
+        return sdk.get(url=url, params=params).json()
 
     def update(self):
         """Update the pipeline resource
