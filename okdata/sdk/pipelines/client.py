@@ -19,14 +19,21 @@ class PipelineApiClient(SDK):
     def fetch(self, base: Type[PipelineBase], id):
         return base.from_id(self, id)
 
-    def list(self, base: Type[PipelineBase]):
-        return base.list(self)
+    def list(self, base: Type[PipelineBase], params={}):
+        return base.list(self, params)
 
     def get_pipelines(self) -> List[Pipeline]:
         return self.list(Pipeline)
 
-    def get_pipeline_instances(self) -> List[PipelineInstance]:
-        return self.list(PipelineInstance)
+    def get_pipeline_instances(self, dataset_id=None, version=None):
+        return self.list(
+            PipelineInstance,
+            (
+                {"dataset-id": dataset_id, "version": version}
+                if dataset_id and version
+                else {}
+            ),
+        )
 
     def get_schemas(self) -> List[Schema]:
         return self.list(Schema)
