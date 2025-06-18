@@ -23,7 +23,7 @@ setuptools.setup(
         # abandoned) python-jose library.
         "python-keycloak>=3.9.1,<4",
         "requests>=2.25,<3",
-        "urllib3>=1.26,<2",
+        "urllib3>=1.26,<3",
     ],
     data_files=[
         (

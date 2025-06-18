@@ -49,7 +49,7 @@ rpds-py==0.20.0
     #   referencing
 typing-extensions==4.12.2
     # via jwcrypto
-urllib3==1.26.20
+urllib3==2.5.0
     # via
     #   okdata-sdk (setup.py)
     #   requests
