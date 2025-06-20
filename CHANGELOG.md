@@ -1,10 +1,11 @@
-## ?.?.? - Unreleased
+## 3.3.0 - 2025-06-20
 
 * Added support for Python 3.13.
 * Dropped support for Python 3.8 which has reached end of life. Python 3.9+ is
   now required.
 * `PipelineApiClient.get_pipeline_instances` now supports querying pipeline
   instances by dataset ID and version.
+* Upgraded urllib3 to version 2.x.
 
 ## 3.2.0 - 2024-10-03
 
