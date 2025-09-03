@@ -1,5 +1,6 @@
 ## ?.?.? - Unreleased
 
+* Fixed binary file downloads.
 * Fixed credentials cache handling.
 
 ## 3.3.0 - 2025-06-20

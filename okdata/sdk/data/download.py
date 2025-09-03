@@ -28,10 +28,10 @@ class Download(SDK):
         downloaded_files = []
         for file in self.get_files(dataset_id, version, edition, retries=retries):
             file_name = file["key"].split("/")[-1]
-            file_content_response = requests.get(file["url"])
+            file_content_response = requests.get(file["url"], stream=True)
             file_content_response.raise_for_status()
 
-            write_file_content(file_name, output_path, file_content_response.text)
+            write_file_content(file_name, output_path, file_content_response.raw.read())
             downloaded_files.append(f"{output_path}/{file_name}")
 
         return {"files": downloaded_files}
