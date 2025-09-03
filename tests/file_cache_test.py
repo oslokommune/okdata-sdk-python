@@ -1,3 +1,5 @@
+import json
+
 from okdata.sdk.file_cache import FileCache
 from okdata.sdk.config import Config
 
@@ -8,14 +10,14 @@ def test_write_client_credentials():
     fc = FileCache(config)
     fc.credentials_cache_enabled = True
     cc = {"access_token": "yo", "refresh_token": "bro"}
-    fc.write_credentials(cc)
-    assert cc.__eq__(fc.read_credentials())
+    fc.write_credentials(json.dumps(cc))
+    assert cc == fc.read_credentials()
 
 
 def test_disable_cache():
     fc = FileCache(config)
     fc.credentials_cache_enabled = False
     cc = {"access_token": "yo-bro", "refresh_token": "zup-dawg"}
-    fc.write_credentials(cc)
+    fc.write_credentials(json.dumps(cc))
 
     assert fc.read_credentials() is None

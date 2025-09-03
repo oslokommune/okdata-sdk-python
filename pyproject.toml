@@ -1,5 +1,5 @@
 [tool.black]
-target-version = ["py39", "py310", "py311", "py312"]
+target-version = ["py39", "py310", "py311", "py312", "py313"]
 # Keep exclude in sync with flake8 config in tox.ini
 exclude = '''
 /(
@@ -7,12 +7,15 @@ exclude = '''
     | \.tox
     | node_modules
     | __pycache__
+    | libs
+    | \*\.pyc
+    | \.cache
     | \.eggs
     | .*\.egg
     | .*\.egg-info
     | env
     | venv
-    | \.venv
+    | \..*venv
     | \.serverless
 )/
 '''
