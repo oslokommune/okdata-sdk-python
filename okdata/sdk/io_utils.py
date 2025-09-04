@@ -42,5 +42,5 @@ def write_file_content(file_name, path, content):
     if not Path(path).exists():
         create_dir(path)
 
-    with open(f"{path}/{file_name}", "w+") as file:
+    with open(f"{path}/{file_name}", "wb") as file:
         file.write(content)
