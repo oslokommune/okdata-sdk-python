@@ -1,19 +1,55 @@
-.PHONY: all
-all: clean test bump-patch build publish-module
+GLOBAL_PY := python3
+BUILD_VENV ?= .build_venv
+BUILD_PY := $(BUILD_VENV)/bin/python
 
 .PHONY: init
-init:
-	python3 -m pip install tox black pip-tools wheel twine bumpversion
-	python3 -m piptools compile
-	python3 -m pip install -rrequirements.txt
+init: $(BUILD_VENV)
+
+$(BUILD_VENV):
+	$(GLOBAL_PY) -m venv $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip
+
+###
+# Development
+##
 
 .PHONY: format
-format:
-	python3 -m black .
+format: $(BUILD_VENV)/bin/black
+	$(BUILD_PY) -m black .
 
 .PHONY: test
-test:
-	python3 -m tox -p auto
+test: $(BUILD_VENV)/bin/tox
+	$(BUILD_PY) -m tox -p auto -o
+
+.PHONY: upgrade-deps
+upgrade-deps: $(BUILD_VENV)/bin/pip-compile
+	$(BUILD_VENV)/bin/pip-compile -U
+
+###
+# Releases
+##
+
+.PHONY: bump-version-patch
+bump-version-patch: $(BUILD_VENV)/bin/bump2version is-git-clean
+	$(BUILD_VENV)/bin/bump2version patch
+
+.PHONY: bump-version-minor
+bump-version-minor: $(BUILD_VENV)/bin/bump2version is-git-clean
+	$(BUILD_VENV)/bin/bump2version minor
+
+.PHONY: bump-version-major
+bump-version-major: $(BUILD_VENV)/bin/bump2version is-git-clean
+	$(BUILD_VENV)/bin/bump2version major
+
+.PHONY: build
+build: $(BUILD_VENV)/bin/setuptools $(BUILD_VENV)/bin/twine $(BUILD_VENV)/bin/wheel is-git-clean format test
+	$(BUILD_PY) setup.py sdist bdist_wheel
+
+.PHONY: publish
+publish: $(BUILD_VENV)/bin/twine
+	username=$$(op read op://Dataspeilet/pypi-upload-token/username) &&\
+	password=$$(op read op://Dataspeilet/pypi-upload-token/credential) &&\
+	$(BUILD_PY) -m twine upload -u $$username -p $$password dist/*
 
 .PHONY: is-git-clean
 is-git-clean:
@@ -31,16 +67,12 @@ clean:
 	rm -rf *.egg-info
 	rm -rf .tox
 
-.PHONY: bump-patch
-bump-patch: is-git-clean
-	bumpversion patch
+###
+# Python build dependencies
+##
 
-.PHONY: build
-build:
-	python3 setup.py sdist bdist_wheel
+$(BUILD_VENV)/bin/pip-compile: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip-tools
 
-.PHONY: publish-module
-publish-module:
-	username=$$(op read op://Dataspeilet/pypi-upload-token/username) &&\
-	password=$$(op read op://Dataspeilet/pypi-upload-token/credential) &&\
-	python -m twine upload -u $$username -p $$password dist/*
+$(BUILD_VENV)/bin/%: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U $*

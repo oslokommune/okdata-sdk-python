@@ -1,3 +1,7 @@
+## ?.?.? - Unreleased
+
+* Fixed credentials cache handling.
+
 ## 3.3.0 - 2025-06-20
 
 * Added support for Python 3.13.

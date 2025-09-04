@@ -11,11 +11,11 @@ class FileCache:
         self.credentials_cache_enabled = config.get("cacheCredentials")
         self.env = config.get("env")
 
-    def write_credentials(self, credentials):
+    def write_credentials(self, credentials: str):
         if self.credentials_cache_enabled:
             filename = f"client_credentials-{self.env}.json"
             log.debug(f"Writing credentials to cache: {filename}")
-            write_to_okdata_cache(content=str(credentials), filename=filename)
+            write_to_okdata_cache(content=credentials, filename=filename)
         else:
             log.debug("Skipping write_credentials: cache is not enabled")
 

@@ -93,7 +93,7 @@ class Authenticate:
             try:
                 tokens = self.token_provider.refresh_token(self._refresh_token)
             except TokenRefreshError as e:
-                log.warn(f"Error refreshing token: {e}")
+                log.warning(f"Error refreshing token: {e}")
 
         if not tokens:
             tokens = self.token_provider.new_token()
@@ -109,7 +109,7 @@ class Authenticate:
                 )
 
         self._access_token = tokens["access_token"]
-        self.file_cache.write_credentials(credentials=self)
+        self.file_cache.write_credentials(credentials=str(self))
 
     def __repr__(self):
         return json.dumps(
