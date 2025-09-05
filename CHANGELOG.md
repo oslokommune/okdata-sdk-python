@@ -2,6 +2,7 @@
 
 * Fixed binary file downloads.
 * Fixed credentials cache handling.
+* Added missing `env` init parameter to the `Upload` SDK class.
 
 ## 3.3.0 - 2025-06-20
 
