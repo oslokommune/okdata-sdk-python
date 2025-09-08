@@ -1,4 +1,4 @@
-## ?.?.? - Unreleased
+## 3.4.0 - 2025-09-08
 
 * Fixed binary file downloads.
 * Fixed credentials cache handling.
