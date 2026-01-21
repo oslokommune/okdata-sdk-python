@@ -2,7 +2,6 @@ import jwt
 from datetime import datetime
 from dateutil import parser
 
-
 utc_now = parser.parse("2019-11-01T10:00:30+00:00")
 not_expired_time = parser.parse("2019-11-01T10:00:41+00:00")
 expired_time = parser.parse("2019-11-01T10:00:39+00:00")

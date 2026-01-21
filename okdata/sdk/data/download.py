@@ -4,7 +4,6 @@ import logging
 from okdata.sdk import SDK
 from okdata.sdk.io_utils import write_file_content
 
-
 log = logging.getLogger()
 
 

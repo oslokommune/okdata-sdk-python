@@ -1,3 +1,9 @@
+## ?.?.? - Unreleased
+
+* Added support for Python 3.14.
+* Dropped support for Python 3.9 which has reached end of life. Python 3.10+ is
+  now required.
+
 ## 3.4.0 - 2025-09-08
 
 * Fixed binary file downloads.

@@ -8,7 +8,6 @@ from okdata.sdk.config import Config
 from okdata.sdk.file_cache import FileCache
 from tests.auth.client_credentials_test_utils import default_test_client_credentials
 
-
 config = Config()
 file_cache = FileCache(config)
 file_cache.credentials_cache_enabled = False
