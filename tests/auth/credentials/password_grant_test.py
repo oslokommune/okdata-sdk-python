@@ -4,7 +4,7 @@ import logging
 import pytest
 from okdata.sdk.auth.credentials.password_grant import TokenServiceProvider
 from okdata.sdk.config import Config
-from tests.auth.client_credentials_test_utils import from_cache_not_expired_token
+from tests.auth.client_credentials_test_utils import not_expired_token
 
 logging.basicConfig(level=logging.INFO)
 
@@ -15,8 +15,8 @@ def token_service_provider(requests_mock):
     config.config["tokenService"] = "http://localhost/token"
     response = json.dumps(
         {
-            "access_token": from_cache_not_expired_token,
-            "refresh_token": from_cache_not_expired_token,
+            "access_token": not_expired_token,
+            "refresh_token": not_expired_token,
         }
     )
     requests_mock.register_uri(
@@ -27,4 +27,4 @@ def token_service_provider(requests_mock):
 
 def test_token_service_get_token(token_service_provider):
     tokens = token_service_provider.new_token()
-    assert tokens["access_token"] == from_cache_not_expired_token
+    assert tokens["access_token"] == not_expired_token

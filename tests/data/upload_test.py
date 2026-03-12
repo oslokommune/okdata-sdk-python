@@ -2,17 +2,13 @@ import json
 import re
 from unittest.mock import patch, mock_open
 
-from okdata.sdk.data.upload import Upload
 from okdata.sdk.auth.auth import Authenticate
 from okdata.sdk.config import Config
-from okdata.sdk.file_cache import FileCache
+from okdata.sdk.data.upload import Upload
 from tests.auth.client_credentials_test_utils import default_test_client_credentials
 
 config = Config()
-file_cache = FileCache(config)
-file_cache.credentials_cache_enabled = False
-auth_default = Authenticate(config, file_cache=file_cache)
-
+auth_default = Authenticate(config)
 auth_default.client_credentials = default_test_client_credentials
 
 

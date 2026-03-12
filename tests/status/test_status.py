@@ -2,15 +2,12 @@ import json
 import re
 from requests.exceptions import HTTPError
 
-from okdata.sdk.status import Status
 from okdata.sdk.auth.auth import Authenticate
 from okdata.sdk.config import Config
-from okdata.sdk.file_cache import FileCache
+from okdata.sdk.status import Status
 
 config = Config()
-file_cache = FileCache(config)
-file_cache.credentials_cache_enabled = False
-auth_default = Authenticate(config, file_cache=file_cache)
+auth_default = Authenticate(config)
 
 
 get_status_response = [{"trace_event_id": "my-id"}, {"trace_event_id": "my-other-id"}]
