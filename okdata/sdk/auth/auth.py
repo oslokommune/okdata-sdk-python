@@ -9,7 +9,6 @@ from okdata.sdk.auth.credentials.common import (
 )
 from okdata.sdk.auth.credentials.password_grant import TokenServiceProvider
 from okdata.sdk.exceptions import ApiAuthenticateError
-from okdata.sdk.file_cache import FileCache
 
 log = logging.getLogger()
 
@@ -25,7 +24,15 @@ class Authenticate:
     _expires_at = None
     _refresh_expires_at = None
 
+    # TODO: Remove keyword argument `file_cache` in a later release.
     def __init__(self, config, token_provider=None, file_cache=None):
+        if file_cache is not None:
+            log.warning(
+                "Keyword argument `file_cache` to "
+                "`okdata.sdk.auth.auth.Authenticate` is deprecated and will "
+                "be removed in a later release of okdata-sdk."
+            )
+
         self.token_provider = token_provider
         if not self.token_provider:
             try:
@@ -35,10 +42,6 @@ class Authenticate:
                 )
             except StopIteration:
                 log.info("No valid auth strategies available")
-
-        self.file_cache = file_cache
-        if not self.file_cache:
-            self.file_cache = FileCache(config)
 
     def _resolve_token_provider(self, config):
         # Add more TokenProviders to accept different login methods
@@ -68,15 +71,6 @@ class Authenticate:
     def login(self, force=False):
         if not self.token_provider:
             return
-
-        cached = self.file_cache.read_credentials()
-        if cached:
-            self._access_token = cached["access_token"]
-            self._refresh_token = cached.get("refresh_token")
-            if expires_at := cached.get("expires_at"):
-                self._expires_at = datetime.fromisoformat(expires_at)
-            if refresh_expires_at := cached.get("refresh_expires_at"):
-                self._refresh_expires_at = datetime.fromisoformat(refresh_expires_at)
 
         if self._access_token and not _is_expired(self._expires_at):
             log.info("Token not expired, skipping")
@@ -109,7 +103,6 @@ class Authenticate:
                 )
 
         self._access_token = tokens["access_token"]
-        self.file_cache.write_credentials(credentials=str(self))
 
     def __repr__(self):
         return json.dumps(

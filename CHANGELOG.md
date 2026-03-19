@@ -1,3 +1,7 @@
+## ?.?.? - Unreleased
+
+* Removed support for file system credentials caching.
+
 ## 4.0.0 - 2026-01-22
 
 * Added support for Python 3.14.

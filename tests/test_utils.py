@@ -1,4 +1,4 @@
-from tests.auth.client_credentials_test_utils import from_cache_not_expired_token
+from tests.auth.client_credentials_test_utils import not_expired_token
 
 well_known_response = {
     "issuer": "https://localhost/auth/realms/api-catalog",
@@ -162,10 +162,10 @@ well_known_response = {
 
 
 client_credentials_response = {
-    "access_token": from_cache_not_expired_token,
+    "access_token": not_expired_token,
     "expires_in": 300,
     "refresh_expires_in": 1800,
-    "refresh_token": from_cache_not_expired_token,
+    "refresh_token": not_expired_token,
     "token_type": "bearer",
     "not-before-policy": 1563194597,
     "session_state": "28957acd-9d5d-44f1-9f3f-7900b63fb010",
@@ -173,7 +173,7 @@ client_credentials_response = {
 }
 
 client_credentials_response_no_refresh = {
-    "access_token": from_cache_not_expired_token,
+    "access_token": not_expired_token,
     "expires_in": 300,
     "token_type": "bearer",
     "not-before-policy": 1563194597,
