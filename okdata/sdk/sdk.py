@@ -9,7 +9,7 @@ from okdata.sdk.auth.auth import Authenticate
 log = logging.getLogger()
 
 
-class SDK(object):
+class SDK:
     def __init__(self, config=None, auth=None, env=None):
         self.config = config
         if self.config is None:

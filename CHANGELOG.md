@@ -1,6 +1,7 @@
 ## ?.?.? - Unreleased
 
 * Removed support for file system credentials caching.
+* S3 download URLs are now validated.
 
 ## 4.0.0 - 2026-01-22
 

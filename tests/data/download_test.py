@@ -1,6 +1,7 @@
-import os
-import pytest
 import json
+import os
+
+import pytest
 
 from okdata.sdk.data.download import Download
 
@@ -17,6 +18,7 @@ test_file_content = "kake;basilikum;laks;soyasaus"
 
 def test_download(mock_home_dir, mock_http_calls):
     data_downloader = Download()
+    data_downloader.config.config["s3DownloadBaseUrl"] = download_url
     output_path = f"{os.environ['HOME']}/my/path"
     result = data_downloader.download(
         dataset_id, version, edition, output_path=output_path
@@ -29,6 +31,7 @@ def test_download(mock_home_dir, mock_http_calls):
 
 def test_download_public(mock_home_dir, mock_http_calls_public):
     data_downloader = Download()
+    data_downloader.config.config["s3DownloadBaseUrl"] = download_url
     data_downloader.auth.token_provider = None
     output_path = f"{os.environ['HOME']}/my/path"
     result = data_downloader.download(
