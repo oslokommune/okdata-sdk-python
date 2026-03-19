@@ -41,7 +41,7 @@ class Download(SDK):
             if not file_url.startswith(base_url):
                 raise DownloadURLAssertionError(file_url, base_url)
 
-            file_content_response = requests.get(file_url, stream=True)
+            file_content_response = requests.get(file_url, stream=True, timeout=10)
             file_content_response.raise_for_status()
 
             write_file_content(file_name, output_path, file_content_response.raw.read())

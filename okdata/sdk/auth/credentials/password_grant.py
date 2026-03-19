@@ -35,5 +35,5 @@ class TokenServiceProvider(TokenProvider):
 
     def new_token(self):
         payload = {"username": self.username, "password": self.password}
-        response = requests.post(url=self.token_service_url, json=payload)
+        response = requests.post(url=self.token_service_url, json=payload, timeout=10)
         return response.json()
