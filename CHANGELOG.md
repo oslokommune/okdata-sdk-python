@@ -2,6 +2,7 @@
 
 * Removed support for file system credentials caching.
 * S3 download URLs are now validated.
+* Improved request timeout handling.
 
 ## 4.0.0 - 2026-01-22
 

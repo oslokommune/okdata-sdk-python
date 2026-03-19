@@ -9,6 +9,14 @@ from okdata.sdk.auth.auth import Authenticate
 log = logging.getLogger()
 
 
+class TimeoutHTTPAdapter(HTTPAdapter):
+    """HTTP adapter with a default timeout."""
+
+    def send(self, request, *args, **kwargs):
+        kwargs["timeout"] = 10  # Defualt timeout (seconds)
+        return super().send(request, *args, **kwargs)
+
+
 class SDK:
     def __init__(self, config=None, auth=None, env=None):
         self.config = config
@@ -72,7 +80,7 @@ class SDK:
                 "TRACE",
             ],
         )
-        adapter = HTTPAdapter(max_retries=retry_strategy)
+        adapter = TimeoutHTTPAdapter(max_retries=retry_strategy)
         session = requests.Session()
         session.mount("https://", adapter)
         session.mount("http://", adapter)
