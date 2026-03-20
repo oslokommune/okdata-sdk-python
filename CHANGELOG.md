@@ -1,4 +1,4 @@
-## ?.?.? - Unreleased
+## 4.1.0 - 2026-03-20
 
 * Removed support for file system credentials caching.
 * S3 download URLs are now validated.
