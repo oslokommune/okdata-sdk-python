@@ -18,7 +18,7 @@ cryptography==46.0.7
     # via jwcrypto
 deprecation==2.1.0
     # via python-keycloak
-idna==3.11
+idna==3.15
     # via requests
 jsonschema==4.26.0
     # via okdata-sdk (setup.py)
