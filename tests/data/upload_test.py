@@ -1,6 +1,7 @@
+import io
 import json
 import re
-from unittest.mock import patch, mock_open
+from unittest.mock import patch
 
 from okdata.sdk.auth.auth import Authenticate
 from okdata.sdk.config import Config
@@ -30,7 +31,7 @@ class TestUpload:
         s3matcher = re.compile(config.get("s3BucketUrl"))
         requests_mock.register_uri("POST", s3matcher, text=s3Response, status_code=204)
 
-        with patch("builtins.open", mock_open(read_data="file-name")):
+        with patch("builtins.open", return_value=io.BytesIO(b"file-name")):
             res = up.upload("file-name", "dataset-id", "version-id", "edition-id")
             assert res["result"] is True
             assert res["trace_id"] == "uu-ii-dd"

@@ -1,3 +1,9 @@
+## ?.?.? - Unreleased
+
+* Added support for Python 3.15.
+* Dropped support for Python 3.10 which has reached end of life. Python 3.11+ is
+  now required.
+
 ## 4.1.0 - 2026-03-20
 
 * Removed support for file system credentials caching.
