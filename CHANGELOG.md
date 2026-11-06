@@ -1,4 +1,4 @@
-## ?.?.? - Unreleased
+## 5.0.0 - 2026-11-12
 
 * Added support for Python 3.15.
 * Dropped support for Python 3.10 which has reached end of life. Python 3.11+ is
@@ -10,6 +10,7 @@
 * Removed the deprecated `file_cache` keyword argument to
   `okdata.sdk.auth.auth.Authenticate`.
 * `jsonschema` is no longer a dependency.
+* The `okdata` namespace is now an implicit (PEP 420) namespace package.
 
 ## 4.1.0 - 2026-03-20
 
