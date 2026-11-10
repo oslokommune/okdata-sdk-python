@@ -11,33 +11,17 @@ OKDATA_CONFIG = {}
 OKDATA_CONFIG["dev"] = {
     "client_id": None,
     "client_secret": None,
-    "cacheCredentials": False,
-    "dataExporterUrl": "https://api.data-dev.oslo.systems/data-exporter",
-    "datasetUrl": "https://api.data-dev.oslo.systems/metadata/datasets",
     "keycloakRealm": "api-catalog",
     "keycloakServerUrl": "https://login-test.oslo.kommune.no/auth",
-    "pipelineUrl": "https://api.data-dev.oslo.systems/pipeline",
-    "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-dev",
-    "s3DownloadBaseUrl": "https://ok-origo-dataplatform-dev.s3.amazonaws.com",
     "tokenService": "https://api.data-dev.oslo.systems/token-service/token",
-    "uploadUrl": "https://api.data-dev.oslo.systems/data-uploader",
-    "statusApiUrl": "https://api.data-dev.oslo.systems/status-api/status",
     "permissionApiUrl": "https://api.data-dev.oslo.systems/okdata-permission-api",
 }
 OKDATA_CONFIG["prod"] = {
     "client_id": None,
     "client_secret": None,
-    "cacheCredentials": False,
-    "dataExporterUrl": "https://api.data.oslo.systems/data-exporter",
-    "datasetUrl": "https://api.data.oslo.systems/metadata/datasets",
     "keycloakRealm": "api-catalog",
     "keycloakServerUrl": "https://login.oslo.kommune.no/auth",
-    "pipelineUrl": "https://api.data.oslo.systems/pipeline",
-    "s3BucketUrl": "https://s3.eu-west-1.amazonaws.com/ok-origo-dataplatform-prod",
-    "s3DownloadBaseUrl": "https://ok-origo-dataplatform-prod.s3.amazonaws.com",
     "tokenService": "https://api.data.oslo.systems/token-service/token",
-    "uploadUrl": "https://api.data.oslo.systems/data-uploader",
-    "statusApiUrl": "https://api.data.oslo.systems/status-api/status",
     "permissionApiUrl": "https://api.data.oslo.systems/okdata-permission-api",
 }
 

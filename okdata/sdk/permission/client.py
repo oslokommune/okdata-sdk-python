@@ -18,20 +18,20 @@ class PermissionClient(SDK):
     ):
         """Grant or revoke permissions for a resource.
 
-        `resource_name` must be given on the form "namespace:type:id", while
-        `scope` must be given on the form "namespace:type:permission".
+        `resource_name` must have the form "namespace:type:id", while `scope`
+        must have the form "namespace:type:permission".
 
         `add_users` and `remove_users` are iterables containing the users to
         give access to and to revoke access from, respectively. The users
         should be instances of the user types defined in
         `okdata.sdk.permission.user_types`.
 
-        Usage example giving read access to the dataset "my-dataset" to the
-        user "janedoe":
+        Usage example giving read access to the Maskinporten client
+        "my-client-id" to the user "janedoe":
 
           update_permission(
-              "okdata:dataset:my-dataset",
-              "okdata:dataset:read",
+              "maskinporten:client:my-client-id",
+              "maskinporten:client:read",
               add_users=[User("janedoe")],
           )
         """
@@ -47,7 +47,7 @@ class PermissionClient(SDK):
     def get_my_permissions(self, retries=0):
         """Return a dictionary of permissions associated with the current user.
 
-        The dictionary is on the form:
+        The dictionary has the form:
 
           {
             "resource-name-1": {"scopes": ["scope-1", "scope-2"]},

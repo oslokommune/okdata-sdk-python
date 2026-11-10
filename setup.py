@@ -6,9 +6,9 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="okdata-sdk",
     version="4.1.0",
-    author="Oslo Origo",
-    author_email="dataplattform@oslo.kommune.no",
-    description="SDK for origo dataplatform",
+    author="Oslo kommune",
+    author_email="dataspeilet@oslo.kommune.no",
+    description="SDK for data services provided by Oslo kommune",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/oslokommune/okdata-sdk-python",
@@ -18,23 +18,11 @@ setuptools.setup(
     ),
     namespace_packages=["okdata"],
     install_requires=[
-        "jsonschema",
         # Versions prior to 3.9.1 depends on the vulnerable (and seemingly
         # abandoned) python-jose library.
         "python-keycloak>=3.9.1,<4",
         "requests>=2.25,<3",
         "urllib3>=1.26,<3",
-    ],
-    data_files=[
-        (
-            "schema",
-            [
-                "okdata/sdk/pipelines/resources/schemas/pipelines.json",
-                "okdata/sdk/pipelines/resources/schemas/pipeline-instances.json",
-                "okdata/sdk/pipelines/resources/schemas/pipeline-inputs.json",
-                "okdata/sdk/pipelines/resources/schemas/schemas.json",
-            ],
-        )
     ],
     include_package_data=True,
     classifiers=[

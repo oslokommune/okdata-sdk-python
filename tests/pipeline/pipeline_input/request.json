@@ -1,5 +1,0 @@
-{
-    "pipelineInstanceId": "pipeline-instance-id",
-    "datasetUri": "input/dataset-id/1",
-    "stage": "raw"
-}
