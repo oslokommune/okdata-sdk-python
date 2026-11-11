@@ -24,15 +24,7 @@ class Authenticate:
     _expires_at = None
     _refresh_expires_at = None
 
-    # TODO: Remove keyword argument `file_cache` in a later release.
-    def __init__(self, config, token_provider=None, file_cache=None):
-        if file_cache is not None:
-            log.warning(
-                "Keyword argument `file_cache` to "
-                "`okdata.sdk.auth.auth.Authenticate` is deprecated and will "
-                "be removed in a later release of okdata-sdk."
-            )
-
+    def __init__(self, config, token_provider=None):
         self.token_provider = token_provider
         if not self.token_provider:
             try:

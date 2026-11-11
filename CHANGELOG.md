@@ -3,6 +3,13 @@
 * Added support for Python 3.15.
 * Dropped support for Python 3.10 which has reached end of life. Python 3.11+ is
   now required.
+* Removed the `okdata.sdk.data`, `okdata.sdk.pipelines`, `okdata.sdk.status`,
+  and `okdata.sdk.io_utils` modules, including the `Dataset`, `Upload`,
+  `Download`, `Status`, and `PipelineApiClient` classes.
+* Removed the unused `cacheCredentials` configuration key.
+* Removed the deprecated `file_cache` keyword argument to
+  `okdata.sdk.auth.auth.Authenticate`.
+* `jsonschema` is no longer a dependency.
 
 ## 4.1.0 - 2026-03-20
 
